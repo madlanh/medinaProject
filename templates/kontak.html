@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Kontak - SMA Medina Bandung{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <section>
+            <h2>Hubungi Kami</h2>
+            <div class="contact-info">
+                <p><strong>Alamat:</strong> Jl. KH. Ahmad Dahlan / Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung, Jawa Barat 40262</p>
+                <p><strong>Telepon:</strong> (022) 7322207</p>
+                <p><strong>Email:</strong> smamedinabdg@gmail.com</p>
+            </div>
+            <h3>Kirim Pesan</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subjek:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Pesan:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Kirim Pesan</button>
+            </form>
+            <p id="formStatus"></p>
+        </section>
+    </main>
+{% endblock %}

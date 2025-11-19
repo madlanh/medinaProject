@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - SMA Medina Bandung{% endblock %}
+
+{% block content %}
+    <div class="slider-container">
+        
+        <div class="slide fade">
+            <div class="slide-background" style="background-image: url('/static/images/sch-pic1.jpg');"></div>
+            <div class="slide-content">
+                <h2>Selamat Datang di Website Resmi SMA Medina Bandung</h2>
+                <p>Sekolah Menengah Atas Swasta di Jantung Kota Bandung.</p>
+                <a href="/sejarah" class="slide-btn">Jelahi Profil Kami</a>
+            </div>
+        </div>
+        
+        <div class="slide fade">
+            <div class="slide-background" style="background-image: url('/static/images/sch-pic2.jpg');"></div>
+            <div class="slide-content">
+                <h2>Penerimaan Siswa Baru</h2>
+                <p>Pendaftaran untuk tahun ajaran baru telah dibuka. Bergabunglah dengan kami!</p>
+                <a href="/kontak" class="slide-btn">Info Pendaftaran</a>
+            </div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <main class="container">
+        <section>
+            <h2>Tentang Kami</h2>
+            <p>Selamat datang di SMA Medina Bandung. Kami berdedikasi untuk memberikan pendidikan berkualitas yang berfokus pada pengembangan akademik dan karakter. Silakan jelajahi bagian <a href="/sejarah">Sejarah</a> dan <a href="/visi-misi">Visi & Misi</a> kami untuk mempelajari lebih lanjut tentang nilai-nilai yang kami anut.</p>
+        </section>
+    </main>
+{% endblock %}

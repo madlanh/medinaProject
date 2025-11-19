@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block title %}SMA Medina Bandung{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <img src="/static/images/logo.png" alt="Logo SMA Medina" class="header-logo">
+                SMA Medina Bandung
+            </h1>
+            <nav>
+                <a href="/">Beranda</a>
+                
+                <div class="dropdown">
+                    <button class="dropbtn">Profil Sekolah
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/sejarah">Sejarah</a>
+                        <a href="/visi-misi">Visi & Misi</a>
+                    </div>
+                </div>
+                
+                <a href="/kontak">Kontak</a>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SMA Medina Bandung. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
