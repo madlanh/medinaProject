@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Berita Terbaru - SMA Medina Bandung{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">Daftar Berita dan Informasi</h2>
+        
+        <div class="news-layout">
+            
+            <!-- KOLOM KIRI: DAFTAR BERITA -->
+            <div class="news-main-content">
+                {% if all_berita %}
+                    {% for item in all_berita %}
+                        <article class="news-item-full">
+                            
+                            <!-- Foto Berita Placeholder -->
+                            <div class="news-image-container">
+                                <img src="/static/images/sch-pic{{ item.id }}.jpg"
+     alt="Gambar Berita" class="news-thumbnail">
+                                <!-- Tanggal yang menonjol -->
+                                <div class="news-date-overlay">
+                                    <span class="day">{{ item.tanggal.split(' ')[0] }}</span>
+                                    <span class="month">{{ item.tanggal.split(' ')[1] }}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Detail Berita -->
+                            <h3 class="news-title">{{ item.judul }}</h3>
+                            
+                            <p class="news-meta">
+                                <span class="news-meta-icon">👤 ADMIN</span> 
+                                <span class="news-meta-icon">📰 BERITA SEKOLAH</span>
+                            </p>
+                            
+                            <p class="news-summary">{{ item.ringkasan }}...</p>
+                            
+                            <a href="#" class="read-more-btn">READ MORE &raquo;</a>
+                            
+                            <hr class="news-separator">
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <p>Saat ini belum ada daftar berita lengkap.</p>
+                {% endif %}
+            </div>
+
+            <!-- KOLOM KANAN: SIDEBAR -->
+            <aside class="news-sidebar">
+                
+                <!-- Search Box -->
+                <div class="sidebar-box search-box">
+                    <h3>SEARCH</h3>
+                    <div class="search-form-group">
+                        <input type="text" placeholder="Masukkan Kata Kunci" class="search-input">
+                        <button class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <!-- Kategori -->
+                <div class="sidebar-box category-box">
+                    <h3>CATEGORY</h3>
+                    <ul class="category-list">
+                        <li><a href="#">Berita Sekolah</a></li>
+                        <li><a href="/info-sekolah">Info Sekolah</a></li>
+                        <li><a href="/agenda">Agenda Sekolah</a></li>
+                    </ul>
+                </div>
+
+                <!-- Arsip (Tahun) -->
+                <div class="sidebar-box archive-box">
+                    <h3>ARCHIVES</h3>
+                    <ul class="archive-list">
+                        <li><a href="#">2025</a></li>
+                        <li><a href="#">2024</a></li>
+                        <li><a href="#">2023</a></li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+{% endblock %}

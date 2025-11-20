@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Info Sekolah - SMA Medina Bandung{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">Informasi Pelayanan dan Pengumuman</h2>
+        
+        <div class="news-layout">
+            
+            <!-- KOLOM KIRI: DAFTAR INFORMASI STATIS -->
+            <div class="news-main-content">
+                
+                <article class="news-item-full">
+                    
+                    <!-- Foto Info Sekolah Placeholder -->
+                    <div class="news-image-container">
+                        <!-- Menggunakan sch-pic1.jpg sebagai gambar umum info -->
+                        <img src="/static/images/sch-pic1.jpg" alt="Gambar Informasi Sekolah" class="news-thumbnail">
+                        
+                        <!-- Tanggal yang menonjol (Contoh: Nov, 2025) -->
+                        <div class="news-date-overlay">
+                            <span class="day">05</span>
+                            <span class="month">Nov</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Detail Info -->
+                    <h3 class="news-title">INFO PELAYANAN SMA MEDINA BANDUNG</h3>
+                    
+                    <p class="news-meta">
+                        <span class="news-meta-icon">👤 ADMIN</span> 
+                        <span class="news-meta-icon">📰 INFORMASI PELAYANAN</span>
+                    </p>
+                    
+                    <p class="news-summary">Dengan hormat, kami sampaikan beberapa informasi terkait Pelayanan SMA Medina Bandung: Rancangan Akhir Renstra Dll...</p>
+                    
+                    <a href="#" class="read-more-btn">READ MORE &raquo;</a>
+                    
+                    <hr class="news-separator">
+                </article>
+
+                <article class="news-item-full">
+                    <div class="news-image-container">
+                        <img src="/static/images/sch-pic3.jpg" alt="Gambar Informasi Sekolah" class="news-thumbnail">
+                        <div class="news-date-overlay">
+                            <span class="day">20</span>
+                            <span class="month">Okt</span>
+                        </div>
+                    </div>
+                    <h3 class="news-title">PANDUAN PEMBAYARAN SPP TAHUN AJARAN 2025/2026</h3>
+                    <p class="news-meta">
+                        <span class="news-meta-icon">👤 ADMIN</span> 
+                        <span class="news-meta-icon">📰 INFORMASI KEUANGAN</span>
+                    </p>
+                    <p class="news-summary">Informasi lengkap mengenai tata cara dan jadwal pembayaran SPP untuk seluruh siswa SMA Medina Bandung tahun ajaran baru.</p>
+                    <a href="#" class="read-more-btn">READ MORE &raquo;</a>
+                    <hr class="news-separator">
+                </article>
+                
+            </div>
+
+            <!-- KOLOM KANAN: SIDEBAR (Sama seperti Berita Terbaru) -->
+            <aside class="news-sidebar">
+                
+                <!-- Search Box -->
+                <div class="sidebar-box search-box">
+                    <h3>SEARCH</h3>
+                    <div class="search-form-group">
+                        <input type="text" placeholder="Masukkan Kata Kunci" class="search-input">
+                        <button class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <!-- Kategori -->
+                <div class="sidebar-box category-box">
+                    <h3>CATEGORY</h3>
+                    <ul class="category-list">
+                        <li><a href="/berita-terbaru">Berita Sekolah</a></li>
+                        <li><a href="#">Info Sekolah</a></li>
+                        <li><a href="/agenda">Agenda Sekolah</a></li>
+                    </ul>
+                </div>
+
+                <!-- Arsip (Tahun) -->
+                <div class="sidebar-box archive-box">
+                    <h3>ARCHIVES</h3>
+                    <ul class="archive-list">
+                        <li><a href="#">2025</a></li>
+                        <li><a href="#">2024</a></li>
+                        <li><a href="#">2023</a></li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+{% endblock %}

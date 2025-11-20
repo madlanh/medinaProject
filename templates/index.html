@@ -10,7 +10,7 @@
             <div class="slide-content">
                 <h2>Selamat Datang di Website Resmi SMA Medina Bandung</h2>
                 <p>Sekolah Menengah Atas Swasta di Jantung Kota Bandung.</p>
-                <a href="/sejarah" class="slide-btn">Jelahi Profil Kami</a>
+                <a href="/#prestasi" class="slide-btn">Lihat Prestasi</a>
             </div>
         </div>
         
@@ -19,17 +19,107 @@
             <div class="slide-content">
                 <h2>Penerimaan Siswa Baru</h2>
                 <p>Pendaftaran untuk tahun ajaran baru telah dibuka. Bergabunglah dengan kami!</p>
-                <a href="/kontak" class="slide-btn">Info Pendaftaran</a>
+                <a href="/#kontak" class="slide-btn">Info Pendaftaran</a>
             </div>
         </div>
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
+
     <main class="container">
+        <!-- Bagian Tentang Kami -->
         <section>
             <h2>Tentang Kami</h2>
             <p>Selamat datang di SMA Medina Bandung. Kami berdedikasi untuk memberikan pendidikan berkualitas yang berfokus pada pengembangan akademik dan karakter. Silakan jelajahi bagian <a href="/sejarah">Sejarah</a> dan <a href="/visi-misi">Visi & Misi</a> kami untuk mempelajari lebih lanjut tentang nilai-nilai yang kami anut.</p>
+        </section>
+
+        <!-- Bagian Berita Terbaru (Loop data dari app.py) -->
+        <hr>
+        <section id="berita-terbaru-section">
+            <h2>Berita Terbaru</h2>
+            <div class="news-list">
+                {% if berita %}
+                    {% for item in berita %}
+                        <article class="news-item" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">
+                            <h3>{{ item.judul }}</h3>
+                            <p class="news-date" style="font-size: 0.9em; color: #555;">🗓️ {{ item.tanggal }}</p>
+                            <p>{{ item.ringkasan }}</p>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <p>Tidak ada berita terbaru saat ini.</p>
+                {% endif %}
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/berita-terbaru" class="slide-btn">Lihat Semua Berita Selengkapnya &raquo;</a>
+            </div>
+        </section>
+
+        <!-- Bagian Prestasi (Loop data dari app.py) -->
+        <hr>
+        <section id="prestasi">
+            <h2>Prestasi Terbaru</h2>
+            {% if prestasi %}
+                {% for item in prestasi %}
+                <div class="prestasi-item" style="margin-bottom: 15px; border-left: 3px solid #F0B429; padding-left: 15px;">
+                    <h4>🏆 {{ item.nama }}</h4>
+                    <p>Skala: <strong>{{ item.skala }}</strong>, Tanggal: {{ item.tanggal }}</p>
+                    <p style="font-size: 0.9em;">Diselenggarakan oleh: {{ item.penyelenggara }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Belum ada data prestasi saat ini.</p>
+            {% endif %}
+        </section>
+
+        <!-- Bagian Profil Alumni (Loop data dari app.py) -->
+        <hr>
+        <section id="profil-alumni">
+            <h2>Profil Alumni</h2>
+            {% if alumni %}
+                {% for alumni_item in alumni %}
+                <div class="alumni-testimoni" style="margin-bottom: 25px; padding: 15px; border: 1px solid #eee; border-radius: 5px;">
+                    <p style="font-style: italic;">"{{ alumni_item.testimoni }}"</p>
+                    <p style="text-align: right; margin-top: 10px;">- **{{ alumni_item.nama }}** ({{ alumni_item.status }})</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Belum ada testimoni alumni saat ini.</p>
+            {% endif %}
+        </section>
+
+        <!-- Bagian Kontak -->
+        <hr>
+        <section id="kontak">
+            <h2>Hubungi Kami</h2>
+            <div class="contact-info">
+                <p><strong>Alamat:</strong> Jl. KH. Ahmad Dahlan / Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung, Jawa Barat 40262</p>
+                <p><strong>Telepon:</strong> (022) 7322207</p>
+                <p><strong>Email:</strong> smamedinabdg@gmail.com</p>
+            </div>
+            <h3>Kirim Pesan</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subjek:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Pesan:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Kirim Pesan</button>
+            </form>
+            <p id="formStatus"></p>
         </section>
     </main>
 {% endblock %}

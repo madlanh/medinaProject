@@ -14,8 +14,7 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>
+        <div class="container header-content"> <h1>
                 <img src="/static/images/logo.png" alt="Logo SMA Medina" class="header-logo">
                 SMA Medina Bandung
             </h1>
@@ -27,15 +26,45 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
+                        <a href="/sambutan">Sambutan Kepala Sekolah</a>
                         <a href="/sejarah">Sejarah</a>
                         <a href="/visi-misi">Visi & Misi</a>
+                        <a href="/organisasi">Struktur Organisasi</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Berita
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/berita-terbaru">Berita Terbaru</a>
+                        <a href="/info-sekolah">Info Sekolah</a>
+                        <a href="/agenda">Agenda</a>
+                        <a href="/galeri">Galeri</a>
                     </div>
                 </div>
                 
-                <a href="/kontak">Kontak</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Layanan
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/ekstrakurikuler">Ekstrakurikuler</a>
+                        <a href="/laboratorium">Laboratorium</a>
+                        <a href="/perpustakaan">Perpustakaan</a>
+                    </div>
+                </div>
+
+                <a href="/#prestasi">Prestasi</a>
+                <a href="/#profil-alumni">Profil Alumni</a>
+                <a href="/#kontak">Kontak</a>
+
             </nav>
         </div>
     </header>
+    
+    <div style="height: 130px;"></div> 
 
     {% block content %}
     {% endblock %}

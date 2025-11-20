@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Agenda Sekolah - SMA Medina Bandung{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">{{ title }}</h2>
+        
+        <div class="news-layout">
+            
+            <!-- KOLOM KIRI: DAFTAR AGENDA (Tiga Bagian) -->
+            <div class="news-main-content">
+                
+                {% set categories = [
+                    ('Agenda yang Sedang Berlangsung (Hari Ini)', today_agenda, 'agenda-today'),
+                    ('Agenda yang Akan Datang', future_agenda, 'agenda-future'),
+                    ('Agenda yang Telah Lalu', past_agenda, 'agenda-past')
+                ] %}
+
+                {% for title, agenda_list, class_name in categories %}
+                    <div class="agenda-category-box {{ class_name }}">
+                        <h3 class="category-heading">{{ title }}</h3>
+                        
+                        {% if agenda_list %}
+                            {% for item in agenda_list %}
+                                <article class="agenda-item">
+                                    <div class="agenda-date-box">
+                                        <span class="day">{{ item.day }}</span>
+                                        <span class="month-year">{{ item.month }} {{ item.tanggal.year }}</span>
+                                    </div>
+                                    <div class="agenda-detail">
+                                        <h4>{{ item.judul }}</h4>
+                                        <p>{{ item.deskripsi }}</p>
+                                        <p class="agenda-meta">
+                                            <span class="agenda-meta-icon">🕒 Pukul: 08:00 WIB</span> 
+                                            <span class="agenda-meta-icon">📍 Lokasi: Aula Sekolah</span>
+                                        </p>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        {% else %}
+                            <p style="padding: 10px; font-style: italic;">Tidak ada agenda dalam kategori ini saat ini.</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
+            </div>
+
+            <!-- KOLOM KANAN: SIDEBAR (Sama seperti halaman berita) -->
+            <aside class="news-sidebar">
+                
+                <!-- Search Box -->
+                <div class="sidebar-box search-box">
+                    <h3>SEARCH</h3>
+                    <div class="search-form-group">
+                        <input type="text" placeholder="Masukkan Kata Kunci" class="search-input">
+                        <button class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <!-- Kategori Agenda -->
+                <div class="sidebar-box category-box">
+                    <h3>CATEGORY</h3>
+                    <ul class="category-list">
+                        <li><a href="#agenda-today">Sedang Berlangsung</a></li>
+                        <li><a href="#agenda-future">Akan Datang</a></li>
+                        <li><a href="#agenda-past">Telah Lalu</a></li>
+                    </ul>
+                </div>
+
+                <!-- Arsip (Tahun) -->
+                <div class="sidebar-box archive-box">
+                    <h3>ARCHIVES</h3>
+                    <ul class="archive-list">
+                        <li><a href="#">2025</a></li>
+                        <li><a href="#">2024</a></li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+{% endblock %}
