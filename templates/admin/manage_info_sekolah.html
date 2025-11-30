@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Kelola Info Sekolah{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; margin-top: 50px;">
+    <h1 style="color: #343a40;">Kelola Info Sekolah <span style="font-size: 0.7em; font-weight: normal; color: #6c757d;">(Mode Dummy)</span></h1>
+    <p><a href="{{ url_for('admin_dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Dashboard</a></p>
+    <hr style="margin-bottom: 30px;">
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" style="padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 0.9em; {% if category == 'success' %}background-color: #d4edda; color: #155724;{% else %}background-color: #f8d7da; color: #721c24;{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; color: #007bff;">Informasi Umum</h3>
+        
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="nama" style="display: block; margin-bottom: 5px; font-weight: bold;">Nama Sekolah</label>
+            <input type="text" id="nama" name="nama" required 
+                   value="{{ info.nama }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div class="form-group">
+                <label for="npsn" style="display: block; margin-bottom: 5px; font-weight: bold;">NPSN</label>
+                <input type="text" id="npsn" name="npsn" required 
+                       value="{{ info.npsn }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="akreditasi" style="display: block; margin-bottom: 5px; font-weight: bold;">Akreditasi</label>
+                <select id="akreditasi" name="akreditasi" required 
+                        style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="A" {% if info.akreditasi == 'A' %}selected{% endif %}>A</option>
+                    <option value="B" {% if info.akreditasi == 'B' %}selected{% endif %}>B</option>
+                    <option value="C" {% if info.akreditasi == 'C' %}selected{% endif %}>C</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="alamat" style="display: block; margin-bottom: 5px; font-weight: bold;">Alamat Lengkap</label>
+            <textarea id="alamat" name="alamat" required rows="3"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{{ info.alamat }}</textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div class="form-group">
+                <label for="telepon" style="display: block; margin-bottom: 5px; font-weight: bold;">Telepon</label>
+                <input type="text" id="telepon" name="telepon" required 
+                       value="{{ info.telepon }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email</label>
+                <input type="email" id="email" name="email" required 
+                       value="{{ info.email }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div class="form-group">
+                <label for="website" style="display: block; margin-bottom: 5px; font-weight: bold;">Website</label>
+                <input type="text" id="website" name="website" required 
+                       value="{{ info.website }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="kepala_sekolah" style="display: block; margin-bottom: 5px; font-weight: bold;">Kepala Sekolah</label>
+                <input type="text" id="kepala_sekolah" name="kepala_sekolah" required 
+                       value="{{ info.kepala_sekolah }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+        </div>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px; color: #007bff;">Statistik</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+            <div class="form-group">
+                <label for="jumlah_siswa" style="display: block; margin-bottom: 5px; font-weight: bold;">Jumlah Siswa</label>
+                <input type="number" id="jumlah_siswa" name="jumlah_siswa" required 
+                       value="{{ info.jumlah_siswa }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="jumlah_guru" style="display: block; margin-bottom: 5px; font-weight: bold;">Jumlah Guru</label>
+                <input type="number" id="jumlah_guru" name="jumlah_guru" required 
+                       value="{{ info.jumlah_guru }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="jumlah_kelas" style="display: block; margin-bottom: 5px; font-weight: bold;">Jumlah Kelas</label>
+                <input type="number" id="jumlah_kelas" name="jumlah_kelas" required 
+                       value="{{ info.jumlah_kelas }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="tahun_berdiri" style="display: block; margin-bottom: 5px; font-weight: bold;">Tahun Berdiri</label>
+                <input type="number" id="tahun_berdiri" name="tahun_berdiri" required 
+                       value="{{ info.tahun_berdiri }}"
+                       style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+        </div>
+
+        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
+            Perbarui Info Sekolah
+        </button>
+    </form>
+</div>
+{% endblock %}

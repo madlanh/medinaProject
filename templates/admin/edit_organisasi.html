@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <p><a href="{{ url_for('manage_profil_sekolah') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Profil Sekolah</a></p>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; border: 1px solid #dee2e6;">
+        <h3 style="color: #007bff; margin-top: 0;">Edit Struktur Organisasi</h3>
+        
+        {% for i, org in organisasi|enumerate %}
+        <div style="background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #dee2e6;">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px;">
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #343a40;">Jabatan</label>
+                    <input type="text" name="jabatan_{{ i }}" value="{{ org.jabatan }}" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #343a40;">Nama</label>
+                    <input type="text" name="nama_{{ i }}" value="{{ org.nama }}" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" style="padding: 12px 30px; background-color: #17a2b8; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold; margin-top: 10px;">
+            Simpan Perubahan
+        </button>
+    </form>
+</div>
+{% endblock %}

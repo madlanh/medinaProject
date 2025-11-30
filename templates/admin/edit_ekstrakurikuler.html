@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="nama" style="display: block; margin-bottom: 5px; font-weight: bold;">Nama Ekstrakurikuler</label>
+            <input type="text" id="nama" name="nama" required 
+                   value="{{ ekskul.nama if ekskul else '' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="kategori" style="display: block; margin-bottom: 5px; font-weight: bold;">Kategori</label>
+            <select id="kategori" name="kategori" required 
+                    style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="Baris-Berbaris" {% if ekskul and ekskul.kategori == 'Baris-Berbaris' %}selected{% endif %}>Baris-Berbaris</option>
+                <option value="Kepramukaan" {% if ekskul and ekskul.kategori == 'Kepramukaan' %}selected{% endif %}>Kepramukaan</option>
+                <option value="Olahraga" {% if ekskul and ekskul.kategori == 'Olahraga' %}selected{% endif %}>Olahraga</option>
+                <option value="Sains & Teknologi" {% if ekskul and ekskul.kategori == 'Sains & Teknologi' %}selected{% endif %}>Sains & Teknologi</option>
+                <option value="Bahasa" {% if ekskul and ekskul.kategori == 'Bahasa' %}selected{% endif %}>Bahasa</option>
+                <option value="Seni" {% if ekskul and ekskul.kategori == 'Seni' %}selected{% endif %}>Seni</option>
+                <option value="Lainnya" {% if ekskul and ekskul.kategori == 'Lainnya' %}selected{% endif %}>Lainnya</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="pembina" style="display: block; margin-bottom: 5px; font-weight: bold;">Pembina</label>
+            <input type="text" id="pembina" name="pembina" required 
+                   value="{{ ekskul.pembina if ekskul else '' }}"
+                   placeholder="contoh: Bpk. Ahmad Fauzi, S.Pd"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="jadwal" style="display: block; margin-bottom: 5px; font-weight: bold;">Jadwal</label>
+            <input type="text" id="jadwal" name="jadwal" required 
+                   value="{{ ekskul.jadwal if ekskul else '' }}"
+                   placeholder="contoh: Selasa & Kamis, 15.30-17.30"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="deskripsi" style="display: block; margin-bottom: 5px; font-weight: bold;">Deskripsi</label>
+            <textarea id="deskripsi" name="deskripsi" required rows="5"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{{ ekskul.deskripsi if ekskul else '' }}</textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="image_num" style="display: block; margin-bottom: 5px; font-weight: bold;">Nomor Gambar (1-10)</label>
+            <input type="number" id="image_num" name="image_num" min="1" max="10"
+                   value="{{ ekskul.image_num if ekskul else '1' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
+            {% if ekskul %}Perbarui Ekstrakurikuler{% else %}Tambah Ekstrakurikuler{% endif %}
+        </button>
+    </form>
+    <p style="margin-top: 20px;"><a href="{{ url_for('manage_ekstrakurikuler') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Ekstrakurikuler</a></p>
+</div>
+{% endblock %}

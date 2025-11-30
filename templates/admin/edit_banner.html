@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="judul" style="display: block; margin-bottom: 5px; font-weight: bold;">Judul Banner</label>
+            <input type="text" id="judul" name="judul" required 
+                   value="{{ banner.judul if banner else '' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="subjudul" style="display: block; margin-bottom: 5px; font-weight: bold;">Subjudul</label>
+            <input type="text" id="subjudul" name="subjudul" required 
+                   value="{{ banner.subjudul if banner else '' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="image_num" style="display: block; margin-bottom: 5px; font-weight: bold;">Nomor Gambar (1-10)</label>
+            <input type="number" id="image_num" name="image_num" min="1" max="10"
+                   value="{{ banner.image_num if banner else '1' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="checkbox" name="aktif" {% if banner and banner.aktif %}checked{% endif %}
+                       style="margin-right: 10px; width: 18px; height: 18px; cursor: pointer;">
+                <span style="font-weight: bold;">Banner Aktif (tampilkan di beranda)</span>
+            </label>
+        </div>
+
+        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
+            {% if banner %}Perbarui Banner{% else %}Tambah Banner{% endif %}
+        </button>
+    </form>
+    <p style="margin-top: 20px;"><a href="{{ url_for('manage_banner') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Banner</a></p>
+</div>
+{% endblock %}

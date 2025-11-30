@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <p><a href="{{ url_for('manage_profil_sekolah') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Profil Sekolah</a></p>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; border: 1px solid #dee2e6;">
+        <div style="margin-bottom: 20px;">
+            <label for="konten" style="display: block; margin-bottom: 10px; font-weight: bold; color: #343a40; font-size: 1.1em;">Konten</label>
+            <textarea id="konten" name="konten" required rows="20" style="width: 100%; padding: 15px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-family: Arial, sans-serif; font-size: 1em; line-height: 1.6;">{{ konten }}</textarea>
+            <small style="color: #6c757d; display: block; margin-top: 5px;">Tulis konten dalam format paragraf. Tekan Enter dua kali untuk membuat paragraf baru.</small>
+        </div>
+
+        <button type="submit" style="padding: 12px 30px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold;">
+            Simpan Perubahan
+        </button>
+    </form>
+</div>
+{% endblock %}

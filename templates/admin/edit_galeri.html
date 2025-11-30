@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="judul" style="display: block; margin-bottom: 5px; font-weight: bold;">Judul Foto</label>
+            <input type="text" id="judul" name="judul" required 
+                   value="{% if galeri %}{{ galeri.judul }}{% endif %}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="kategori" style="display: block; margin-bottom: 5px; font-weight: bold;">Kategori</label>
+            <select id="kategori" name="kategori" required 
+                    style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="Kegiatan" {% if galeri and galeri.kategori == 'Kegiatan' %}selected{% endif %}>Kegiatan</option>
+                <option value="Prestasi" {% if galeri and galeri.kategori == 'Prestasi' %}selected{% endif %}>Prestasi</option>
+                <option value="Fasilitas" {% if galeri and galeri.kategori == 'Fasilitas' %}selected{% endif %}>Fasilitas</option>
+                <option value="Lainnya" {% if galeri and galeri.kategori == 'Lainnya' %}selected{% endif %}>Lainnya</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="tanggal" style="display: block; margin-bottom: 5px; font-weight: bold;">Tanggal</label>
+            <input type="date" id="tanggal" name="tanggal" required 
+                   value="{% if galeri %}{{ galeri.tanggal.strftime('%Y-%m-%d') }}{% endif %}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="deskripsi" style="display: block; margin-bottom: 5px; font-weight: bold;">Deskripsi</label>
+            <textarea id="deskripsi" name="deskripsi" required rows="4"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{% if galeri %}{{ galeri.deskripsi }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="image_num" style="display: block; margin-bottom: 5px; font-weight: bold;">Nomor Gambar (1-10)</label>
+            <input type="number" id="image_num" name="image_num" min="1" max="10"
+                   value="{% if galeri %}{{ galeri.image_num }}{% else %}1{% endif %}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em;">
+            {% if galeri %}Perbarui Foto{% else %}Tambah Foto{% endif %}
+        </button>
+    </form>
+    <p style="margin-top: 20px;"><a href="{{ url_for('manage_galeri') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Galeri</a></p>
+</div>
+{% endblock %}

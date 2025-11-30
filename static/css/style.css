@@ -1,7 +1,7 @@
 /* =============== GLOBAL =============== */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 140px; /* Jarak untuk auto-scroll agar tidak tertutup header */
+    scroll-padding-top: 140px;
 }
 
 body {
@@ -41,28 +41,27 @@ header {
     gap: 20px;
 }
 
-.header-left {
+/* FIX: Header h1 dengan logo alignment yang sempurna */
+header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 12px;
-    flex-shrink: 0;
 }
 
 .header-logo {
     height: 55px;
     width: auto;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 1.6rem;
-    white-space: nowrap;
+    display: block;
+    vertical-align: middle;
 }
 
 header nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px; /* Dikurangi dari 20px ke 15px agar muat */
 }
 
 header nav a,
@@ -70,12 +69,14 @@ header nav .dropbtn {
     color: #ecf0f1;
     font-weight: bold;
     text-decoration: none;
-    padding: 8px 0;
+    padding: 8px 10px; /* Dikurangi dari 12px ke 10px */
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 1em;
-    transition: color .25s;
+    font-size: 0.95em; /* Dikurangi sedikit dari 1em */
+    transition: color 0.25s ease;
+    cursor: pointer;
+    white-space: nowrap; /* Mencegah text wrap */
 }
 
 header nav a:hover,
@@ -84,44 +85,68 @@ header nav a.active,
     color: #F0B429;
 }
 
-/* DROPDOWN */
+/* =============== DROPDOWN - BUG FIX dengan Hover Zone =============== */
 .dropdown {
     position: relative;
+    display: inline-block;
 }
 
 .dropbtn {
     background: none;
     border: none;
     cursor: pointer;
+    font-family: inherit;
+}
+
+/* Hover Zone - Area invisible untuk menjaga dropdown tetap muncul */
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 15px; /* Gap antara button dan dropdown */
+    background: transparent;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    top: calc(100% + 5px);
+    top: 100%;
+    left: 0;
     background: #fff;
-    min-width: 180px;
+    min-width: 220px;
     border-radius: 6px;
-    padding: 0;
+    padding: 8px 0;
+    margin-top: 15px; /* Sama dengan height hover zone */
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    overflow: hidden;
-    z-index: 999;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .dropdown-content a {
     display: block;
-    padding: 10px 15px;
+    padding: 12px 20px;
     color: #0D2A4C;
     font-weight: 600;
     text-decoration: none;
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
 }
 
 .dropdown-content a:hover {
-    background: #eee;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+    background: #f0f0f0;
+    padding-left: 25px;
 }
 
 /* =============== RESPONSIVE HEADER =============== */
@@ -135,11 +160,19 @@ header nav a.active,
     header nav {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
+        gap: 10px;
     }
+    
+    header nav a,
+    header nav .dropbtn {
+        font-size: 0.9em;
+        padding: 6px 8px;
+    }
+    
     .header-logo {
         height: 45px;
     }
+    
     header h1 {
         font-size: 1.3rem;
     }
@@ -155,7 +188,6 @@ header nav a.active,
 
 main {
     padding: 2rem 0;
-    /* Margin sudah final, 180px untuk clearance estetika */
     margin-top: 180px; 
 }
 
@@ -184,6 +216,7 @@ section h2 {
 .contact-info strong {
     color: #0D2A4C;
 }
+
 #contactForm {
     margin-top: 30px;
     background-color: #f9f9f9;
@@ -211,6 +244,7 @@ section h2 {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
+    box-sizing: border-box;
 }
 
 .form-group textarea {
@@ -251,6 +285,7 @@ section h2 {
     background-color: #f8d7da;
     color: #721c24;
 }
+
 /* =============== FOOTER =============== */
 footer {
     background-color: #0D2A4C;
@@ -259,6 +294,7 @@ footer {
     padding: 1.5rem 0;
     margin-top: 30px;
 }
+
 footer p {
     margin: 0;
 }
@@ -267,18 +303,19 @@ footer p {
 .slider-container {
     max-width: 100%;
     position: relative;
-    /* Margin disamakan dengan main */
     margin: 180px auto 0;
     height: 500px;
     overflow: hidden;
     background-color: #333;
 }
+
 .slide {
     display: none;
     width: 100%;
     height: 100%;
     position: absolute;
 }
+
 .slide-background {
     width: 100%;
     height: 100%;
@@ -286,6 +323,7 @@ footer p {
     background-position: center;
     filter: brightness(0.7);
 }
+
 .slide-content {
     position: absolute;
     top: 50%;
@@ -314,6 +352,7 @@ footer p {
     font-size: 1em;
     font-weight: bold;
     text-decoration: none;
+    display: inline-block;
 }
 
 /* Slider Navigation Buttons */
@@ -329,7 +368,14 @@ footer p {
     user-select: none;
     border-radius: 3px;
     transform: translateY(-50%);
+    transition: background-color 0.3s ease;
 }
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
 .next {
     right: 0;
 }
@@ -341,8 +387,8 @@ footer p {
 }
 
 @keyframes fade {
-    from { opacity: .4 }
-    to   { opacity: 1 }
+    from { opacity: 0.4; }
+    to { opacity: 1; }
 }
 
 /* Styling untuk Halaman Sambutan (Dua Kolom) */
@@ -447,8 +493,8 @@ footer p {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    background-color: #F0B429; /* Warna Emas */
-    color: #0D2A4C; /* Warna Biru Navy */
+    background-color: #F0B429;
+    color: #0D2A4C;
     width: 60px;
     height: 60px;
     display: flex;
@@ -550,6 +596,11 @@ footer p {
     padding: 8px 15px;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #0a1f35;
 }
 
 /* Sidebar Lists (Category/Archive) */
@@ -578,18 +629,15 @@ footer p {
     color: #F0B429;
 }
 
-
 /* Responsive adjustments for News Page */
 @media (max-width: 900px) {
     .news-layout {
         flex-direction: column;
     }
     .news-sidebar {
-        flex-basis: 100%; /* Sidebar mengambil lebar penuh di mobile */
+        flex-basis: 100%;
     }
 }
-
-Dengan kode ini, halaman `/berita-terbaru` Anda akan memiliki tampilan profesional dua kolom dengan *dummy data* berita yang lengkap.
 
 /* Styling Khusus untuk Halaman AGENDA */
 
@@ -603,7 +651,7 @@ Dengan kode ini, halaman `/berita-terbaru` Anda akan memiliki tampilan profesion
 
 .category-heading {
     color: #0D2A4C;
-    border-bottom: 3px double #F0B429; /* Garis pemisah ganda */
+    border-bottom: 3px double #F0B429;
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 1.5em;
@@ -626,7 +674,7 @@ Dengan kode ini, halaman `/berita-terbaru` Anda akan memiliki tampilan profesion
     flex-shrink: 0;
     width: 65px;
     height: 65px;
-    background-color: #F0B429; /* Warna Emas */
+    background-color: #F0B429;
     color: #0D2A4C;
     display: flex;
     flex-direction: column;

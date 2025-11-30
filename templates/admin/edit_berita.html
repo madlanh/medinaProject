@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="judul" style="display: block; margin-bottom: 5px; font-weight: bold;">Judul Berita</label>
+            <input type="text" id="judul" name="judul" required 
+                   value="{% if berita %}{{ berita.judul }}{% endif %}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="tanggal" style="display: block; margin-bottom: 5px; font-weight: bold;">Tanggal Publikasi</label>
+            <input type="date" id="tanggal" name="tanggal" required 
+                   value="{% if berita %}{{ berita.tanggal.strftime('%Y-%m-%d') }}{% endif %}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="ringkasan" style="display: block; margin-bottom: 5px; font-weight: bold;">Ringkasan (Maks 200 Karakter)</label>
+            <textarea id="ringkasan" name="ringkasan" required rows="3" maxlength="200"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{% if berita %}{{ berita.ringkasan }}{% endif %}</textarea>
+            <small style="color: #6c757d;">Karakter tersisa: <span id="char-count">{% if berita %}{{ 200 - (berita.ringkasan|length) }}{% else %}200{% endif %}</span></small>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="konten_lengkap" style="display: block; margin-bottom: 5px; font-weight: bold;">Konten Lengkap Berita</label>
+            <textarea id="konten_lengkap" name="konten_lengkap" required rows="10"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{% if berita %}{{ berita.konten_lengkap }}{% endif %}</textarea>
+        </div>
+
+        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em;">
+            {% if berita %}Perbarui Berita{% else %}Buat Berita{% endif %}
+        </button>
+    </form>
+    <p style="margin-top: 20px;"><a href="{{ url_for('manage_berita') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Berita</a></p>
+</div>
+
+<script>
+const ringkasanInput = document.getElementById('ringkasan');
+const charCount = document.getElementById('char-count');
+
+if (ringkasanInput && charCount) {
+    ringkasanInput.addEventListener('input', function() {
+        const remaining = 200 - this.value.length;
+        charCount.textContent = remaining;
+    });
+}
+</script>
+{% endblock %}

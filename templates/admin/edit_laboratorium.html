@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="nama" style="display: block; margin-bottom: 5px; font-weight: bold;">Nama Laboratorium</label>
+            <input type="text" id="nama" name="nama" required 
+                   value="{{ lab.nama if lab else '' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="deskripsi" style="display: block; margin-bottom: 5px; font-weight: bold;">Deskripsi</label>
+            <textarea id="deskripsi" name="deskripsi" required rows="4"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{{ lab.deskripsi if lab else '' }}</textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="fasilitas" style="display: block; margin-bottom: 5px; font-weight: bold;">Fasilitas (pisahkan dengan koma)</label>
+            <textarea id="fasilitas" name="fasilitas" required rows="4"
+                   placeholder="contoh: Mikroskop Digital, Lemari Asam, Safety Equipment"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{% if lab %}{{ lab.fasilitas | join(', ') }}{% endif %}</textarea>
+            <small style="color: #6c757d;">Pisahkan setiap fasilitas dengan koma (,)</small>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="image_num" style="display: block; margin-bottom: 5px; font-weight: bold;">Nomor Gambar (1-10)</label>
+            <input type="number" id="image_num" name="image_num" min="1" max="10"
+                   value="{{ lab.image_num if lab else '1' }}"
+                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
+            {% if lab %}Perbarui Laboratorium{% else %}Tambah Laboratorium{% endif %}
+        </button>
+    </form>
+    <p style="margin-top: 20px;"><a href="{{ url_for('manage_laboratorium') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Laboratorium</a></p>
+</div>
+{% endblock %}

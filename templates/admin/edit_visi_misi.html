@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; margin-top: 50px;">
+    <h1 style="color: #343a40;">{{ title }}</h1>
+    <p><a href="{{ url_for('manage_profil_sekolah') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Profil Sekolah</a></p>
+    <hr style="margin-bottom: 30px;">
+
+    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; border: 1px solid #dee2e6;">
+        <div style="margin-bottom: 20px;">
+            <label for="visi" style="display: block; margin-bottom: 10px; font-weight: bold; color: #343a40; font-size: 1.1em;">Visi Sekolah</label>
+            <textarea id="visi" name="visi" required rows="5" style="width: 100%; padding: 15px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-family: Arial, sans-serif; font-size: 1em; line-height: 1.6;">{{ visi }}</textarea>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label for="misi" style="display: block; margin-bottom: 10px; font-weight: bold; color: #343a40; font-size: 1.1em;">Misi Sekolah</label>
+            <textarea id="misi" name="misi" required rows="15" style="width: 100%; padding: 15px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-family: Arial, sans-serif; font-size: 1em; line-height: 1.6;">{{ misi }}</textarea>
+            <small style="color: #6c757d; display: block; margin-top: 5px;">Tulis setiap poin misi di baris baru.</small>
+        </div>
+
+        <button type="submit" style="padding: 12px 30px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold;">
+            Simpan Perubahan
+        </button>
+    </form>
+</div>
+{% endblock %}
