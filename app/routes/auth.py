@@ -4,6 +4,8 @@ from app.utils.decorators import login_required
 
 auth_bp = Blueprint('auth', __name__)
 
+from werkzeug.security import check_password_hash
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
@@ -13,10 +15,9 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         
-        # In a real app, use password hashing!
         user = User.query.filter_by(username=username).first()
         
-        if user and user.password_hash == password:
+        if user and check_password_hash(user.password_hash, password):
             session['user_id'] = user.id
             session['username'] = user.username
             flash('Login berhasil!', 'success')

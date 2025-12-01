@@ -5,77 +5,90 @@
 {% block content %}
 <div class="container" style="max-width: 800px; margin: 50px auto 100px; padding: 0 15px;">
     <h1 style="color: #343a40;">{{ title }}</h1>
-    <p><a href="{{ url_for('manage_galeri') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Daftar Galeri</a></p>
+    <p><a href="{{ url_for('admin.manage_galeri') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Daftar
+            Galeri</a></p>
     <hr style="margin-bottom: 30px;">
 
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                {% if category == 'success' %}
-                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
-                        {{ message }}
-                    </div>
-                {% else %}
-                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
-                        {{ message }}
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'success' %}
+    <div
+        style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+        {{ message }}
+    </div>
+    {% else %}
+    <div
+        style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     {% endwith %}
 
-    <form method="POST" enctype="multipart/form-data" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dee2e6;">
-        
+    <form method="POST" enctype="multipart/form-data"
+        style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dee2e6;">
+
         <h3 style="margin-top: 0; color: #ffc107; margin-bottom: 25px;">📸 Informasi Foto</h3>
 
         <div style="margin-bottom: 20px;">
-            <label for="judul" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Judul Foto</label>
-            <input type="text" id="judul" name="judul" required 
-                   value="{% if galeri %}{{ galeri.judul }}{% endif %}"
-                   placeholder="Contoh: Pentas Seni Tahun Ajaran 2025"
-                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+            <label for="judul" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Judul
+                Foto</label>
+            <input type="text" id="judul" name="judul" required value="{% if galeri %}{{ galeri.judul }}{% endif %}"
+                placeholder="Contoh: Pentas Seni Tahun Ajaran 2025"
+                style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
             <div>
-                <label for="kategori" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Kategori</label>
-                <select id="kategori" name="kategori" required 
-                        style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
-                    <option value="Kegiatan" {% if galeri and galeri.kategori == 'Kegiatan' %}selected{% endif %}>Kegiatan</option>
-                    <option value="Prestasi" {% if galeri and galeri.kategori == 'Prestasi' %}selected{% endif %}>Prestasi</option>
-                    <option value="Fasilitas" {% if galeri and galeri.kategori == 'Fasilitas' %}selected{% endif %}>Fasilitas</option>
-                    <option value="Lainnya" {% if galeri and galeri.kategori == 'Lainnya' %}selected{% endif %}>Lainnya</option>
+                <label for="kategori"
+                    style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Kategori</label>
+                <select id="kategori" name="kategori" required
+                    style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+                    <option value="Kegiatan" {% if galeri and galeri.kategori=='Kegiatan' %}selected{% endif %}>Kegiatan
+                    </option>
+                    <option value="Prestasi" {% if galeri and galeri.kategori=='Prestasi' %}selected{% endif %}>Prestasi
+                    </option>
+                    <option value="Fasilitas" {% if galeri and galeri.kategori=='Fasilitas' %}selected{% endif %}>
+                        Fasilitas</option>
+                    <option value="Lainnya" {% if galeri and galeri.kategori=='Lainnya' %}selected{% endif %}>Lainnya
+                    </option>
                 </select>
             </div>
 
             <div>
-                <label for="tanggal" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Tanggal</label>
-                <input type="date" id="tanggal" name="tanggal" required 
-                       value="{% if galeri %}{{ galeri.tanggal.strftime('%Y-%m-%d') }}{% endif %}"
-                       style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+                <label for="tanggal"
+                    style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Tanggal</label>
+                <input type="date" id="tanggal" name="tanggal" required
+                    value="{% if galeri %}{{ galeri.tanggal.strftime('%Y-%m-%d') }}{% endif %}"
+                    style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
             </div>
         </div>
 
         <div style="margin-bottom: 25px;">
-            <label for="deskripsi" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Deskripsi</label>
+            <label for="deskripsi"
+                style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Deskripsi</label>
             <textarea id="deskripsi" name="deskripsi" required rows="4"
-                   placeholder="Deskripsikan foto ini secara singkat..."
-                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if galeri %}{{ galeri.deskripsi }}{% endif %}</textarea>
+                placeholder="Deskripsikan foto ini secara singkat..."
+                style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if galeri %}{{ galeri.deskripsi }}{% endif %}</textarea>
         </div>
 
         <h3 style="margin-top: 30px; margin-bottom: 20px; color: #ffc107;">🖼️ Upload Gambar</h3>
 
         <div style="margin-bottom: 25px;">
             <label for="foto" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">
-                Pilih Gambar 
+                Pilih Gambar
                 <span style="color: #6c757d; font-weight: normal; font-size: 0.9em;">(JPG, PNG, max 5MB)</span>
             </label>
-            
+
             <!-- Preview gambar saat ini (jika edit) -->
             {% if galeri %}
-            <div style="margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 2px dashed #dee2e6;">
+            <div
+                style="margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 2px dashed #dee2e6;">
                 <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #6c757d;">📷 Gambar saat ini:</p>
-                <img src="/static/images/sch-pic{{ galeri.image_num }}.jpg" alt="Preview" style="max-width: 200px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <img src="/static/images/sch-pic{{ galeri.image_num }}.jpg" alt="Preview"
+                    style="max-width: 200px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                 <p style="margin: 10px 0 0 0; font-size: 0.85em; color: #999;">ID Gambar: {{ galeri.image_num }}</p>
             </div>
             {% endif %}
@@ -83,7 +96,7 @@
             <!-- Input file upload -->
             <div style="position: relative;">
                 <input type="file" id="foto" name="foto" accept="image/jpeg,image/png,image/jpg"
-                       style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; cursor: pointer; transition: border-color 0.3s ease;">
+                    style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; cursor: pointer; transition: border-color 0.3s ease;">
                 <small style="display: block; margin-top: 8px; color: #6c757d;">
                     💡 Upload gambar baru atau biarkan kosong untuk menggunakan gambar yang ada
                 </small>
@@ -91,25 +104,29 @@
         </div>
 
         <!-- Fallback: Input nomor gambar (untuk mode dummy) -->
-        <div style="margin-bottom: 30px; padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 8px;">
+        <div
+            style="margin-bottom: 30px; padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 8px;">
             <p style="margin: 0 0 10px 0; font-weight: bold; color: #856404;">
                 ⚙️ Mode Dummy - Nomor Gambar Placeholder
             </p>
-            <label for="image_num" style="display: block; margin-bottom: 8px; color: #856404;">Nomor Gambar (1-10)</label>
+            <label for="image_num" style="display: block; margin-bottom: 8px; color: #856404;">Nomor Gambar
+                (1-10)</label>
             <input type="number" id="image_num" name="image_num" min="1" max="10"
-                   value="{% if galeri %}{{ galeri.image_num }}{% else %}1{% endif %}"
-                   style="width: 150px; padding: 10px; box-sizing: border-box; border: 2px solid #ffc107; border-radius: 8px; font-size: 1em;">
+                value="{% if galeri %}{{ galeri.image_num }}{% else %}1{% endif %}"
+                style="width: 150px; padding: 10px; box-sizing: border-box; border: 2px solid #ffc107; border-radius: 8px; font-size: 1em;">
             <small style="display: block; margin-top: 5px; color: #856404;">
                 Gambar akan menggunakan: <code>/static/images/sch-pic[nomor].jpg</code>
             </small>
         </div>
 
         <div style="display: flex; gap: 15px; align-items: center;">
-            <button type="submit" style="padding: 14px 35px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(255,193,7,0.3); transition: all 0.3s ease;">
+            <button type="submit"
+                style="padding: 14px 35px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(255,193,7,0.3); transition: all 0.3s ease;">
                 {% if galeri %}💾 Perbarui Foto{% else %}➕ Tambah Foto{% endif %}
             </button>
-            
-            <a href="{{ url_for('manage_galeri') }}" style="padding: 14px 35px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
+
+            <a href="{{ url_for('admin.manage_galeri') }}"
+                style="padding: 14px 35px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
                 ❌ Batal
             </a>
         </div>
@@ -117,16 +134,18 @@
 </div>
 
 <style>
-    input:focus, textarea:focus, select:focus {
+    input:focus,
+    textarea:focus,
+    select:focus {
         outline: none;
         border-color: #ffc107 !important;
-        box-shadow: 0 0 0 3px rgba(255,193,7,0.1);
+        box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
     }
-    
+
     button[type="submit"]:hover {
         background: linear-gradient(135deg, #ff9800, #f57c00) !important;
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(255,193,7,0.4) !important;
+        box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4) !important;
     }
 
     input[type="file"]::-webkit-file-upload-button {

@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>{% block title %}SMA Medina Bandung{% endblock %}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/static/css/style.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <header>
         <div class="container header-content">
             <h1>
-                <img src="/static/images/logo.png" alt="Logo SMA Medina" class="header-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina"
+                    class="header-logo">
                 SMA Medina Bandung
             </h1>
             <nav>
-                <a href="/">Beranda</a>
-                
+                <a href="{{ url_for('public.index') }}">Beranda</a>
+
                 <div class="dropdown">
                     <button class="dropbtn">Profil Sekolah
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="/sambutan">Sambutan Kepala Sekolah</a>
-                        <a href="/sejarah">Sejarah</a>
-                        <a href="/visi-misi">Visi & Misi</a>
-                        <a href="/organisasi">Struktur Organisasi</a>
+                        <a href="{{ url_for('public.sambutan') }}">Sambutan Kepala Sekolah</a>
+                        <a href="{{ url_for('public.sejarah') }}">Sejarah</a>
+                        <a href="{{ url_for('public.visi_misi') }}">Visi & Misi</a>
+                        <a href="{{ url_for('public.organisasi') }}">Struktur Organisasi</a>
                     </div>
                 </div>
 
@@ -39,33 +42,33 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="/berita-terbaru">Berita Terbaru</a>
-                        <a href="/info-sekolah">Info Sekolah</a>
-                        <a href="/agenda">Agenda</a>
-                        <a href="/galeri">Galeri</a>
+                        <a href="{{ url_for('public.berita_terbaru') }}">Berita Terbaru</a>
+                        <a href="{{ url_for('public.info_sekolah') }}">Info Sekolah</a>
+                        <a href="{{ url_for('public.agenda') }}">Agenda</a>
+                        <a href="{{ url_for('public.galeri') }}">Galeri</a>
                     </div>
                 </div>
-                
+
                 <div class="dropdown">
                     <button class="dropbtn">Layanan
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="/ekstrakurikuler">Ekstrakurikuler</a>
-                        <a href="/laboratorium">Laboratorium</a>
-                        <a href="/perpustakaan">Perpustakaan</a>
+                        <a href="{{ url_for('public.ekstrakurikuler') }}">Ekstrakurikuler</a>
+                        <a href="{{ url_for('public.laboratorium') }}">Laboratorium</a>
+                        <a href="{{ url_for('public.perpustakaan') }}">Perpustakaan</a>
                     </div>
                 </div>
 
-                <a href="/#prestasi">Prestasi</a>
-                <a href="/#profil-alumni">Profil Alumni</a>
-                <a href="/#kontak">Kontak</a>
+                <a href="{{ url_for('public.index', _anchor='prestasi') }}">Prestasi</a>
+                <a href="{{ url_for('public.index', _anchor='profil-alumni') }}">Profil Alumni</a>
+                <a href="{{ url_for('public.index', _anchor='kontak') }}">Kontak</a>
 
             </nav>
         </div>
     </header>
-    
-    <div style="height: 130px;"></div> 
+
+    <div style="height: 130px;"></div>
 
     {% block content %}
     {% endblock %}
@@ -79,6 +82,7 @@
         </div>
     </footer>
 
-    <script src="/static/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>

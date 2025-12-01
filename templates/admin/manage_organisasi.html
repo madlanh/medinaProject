@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Kelola Ekstrakurikuler{% endblock %}
+{% block title %}Kelola Organisasi{% endblock %}
 
 {% block content %}
 <div class="container" style="margin-top: 30px; margin-bottom: 100px;">
-    <h1 style="color: #343a40;">Kelola Ekstrakurikuler <span
+    <h1 style="color: #343a40;">Kelola Organisasi <span
             style="font-size: 0.7em; font-weight: normal; color: #6c757d;">(Mode Dummy)</span></h1>
-    <p><a href="{{ url_for('admin.dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke
-            Dashboard</a></p>
+    <p><a href="{{ url_for('admin.manage_profil_sekolah') }}" style="color: #007bff; text-decoration: none;">← Kembali
+            ke
+            Profil Sekolah</a></p>
     <hr style="margin-bottom: 20px;">
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -29,64 +30,45 @@
     {% endwith %}
 
     <p>
-        <a href="{{ url_for('admin.create_ekstrakurikuler') }}"
+        <a href="{{ url_for('admin.create_organisasi') }}"
             style="display: inline-block; padding: 12px 25px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 25px; margin-bottom: 30px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-            + Tambah Ekstrakurikuler
+            + Tambah Anggota Organisasi
         </a>
     </p>
 
-    {% if ekskul_list %}
+    {% if org_list %}
     <div
         style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 40px;">
-        {% for ekskul in ekskul_list %}
+        {% for org in org_list %}
         <div
             style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 5px solid #17a2b8; display: flex; flex-direction: column;">
 
             <div style="margin-bottom: 15px;">
                 <span
                     style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">
-                    ⚽ ID: {{ ekskul.id }}
+                    🏛️ Level: {{ org.level }}
                 </span>
             </div>
 
-            <h3
-                style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.2em; line-height: 1.4; height: 67px; overflow: hidden; text-overflow: ellipsis;">
-                {{ ekskul.nama }}
+            <h3 style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.2em; line-height: 1.4;">
+                {{ org.nama }}
             </h3>
-
-            <div style="margin-bottom: 15px;">
-                <span
-                    style="display: inline-block; background-color: #e7f3ff; color: #0056b3; padding: 5px 12px; border-radius: 15px; font-size: 0.85em; font-weight: bold;">
-                    🏷️ {{ ekskul.kategori }}
-                </span>
-            </div>
 
             <div style="margin-bottom: 15px; flex-grow: 1;">
                 <p style="color: #666; margin: 0 0 8px 0; font-size: 0.9em;">
-                    <strong>👨‍🏫 Pembina:</strong> {{ ekskul.pembina }}
-                </p>
-                <p style="color: #666; margin: 0 0 8px 0; font-size: 0.9em;">
-                    <strong>📅 Jadwal:</strong> {{ ekskul.jadwal }}
-                </p>
-                <p
-                    style="color: #666; margin: 0; line-height: 1.6; font-size: 0.95em; height: 76px; overflow: hidden; text-overflow: ellipsis;">
-                    {% if ekskul.deskripsi|length > 120 %}
-                    {{ ekskul.deskripsi[:120] }}...
-                    {% else %}
-                    {{ ekskul.deskripsi }}
-                    {% endif %}
+                    <strong>💼 Jabatan:</strong> {{ org.jabatan }}
                 </p>
             </div>
 
             <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #eee; margin-top: auto;">
-                <a href="{{ url_for('admin.edit_ekstrakurikuler', ekskul_id=ekskul.id) }}"
+                <a href="{{ url_for('admin.edit_organisasi_member', org_id=org.id) }}"
                     style="flex: 1; text-align: center; padding: 10px 0; background: linear-gradient(135deg, #007bff, #0056b3); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,123,255,0.3);">
                     ✏️ Edit
                 </a>
 
-                <form method="POST" action="{{ url_for('admin.delete_ekstrakurikuler', ekskul_id=ekskul.id) }}"
+                <form method="POST" action="{{ url_for('admin.delete_organisasi', org_id=org.id) }}"
                     style="flex: 1; margin: 0;">
-                    <button type="submit" onclick="return confirm('Yakin ingin menghapus ekstrakurikuler ini?')"
+                    <button type="submit" onclick="return confirm('Yakin ingin menghapus anggota ini?')"
                         style="width: 100%; padding: 10px 0; background: linear-gradient(135deg, #dc3545, #c82333); color: white; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(220,53,69,0.3);">
                         🗑️ Hapus
                     </button>
@@ -99,12 +81,12 @@
     {% else %}
     <div
         style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; text-align: center; border: 2px dashed #dee2e6;">
-        <div style="font-size: 4em; margin-bottom: 20px;">⚽</div>
-        <h3 style="color: #6c757d; margin: 0 0 10px 0;">Belum Ada Ekstrakurikuler</h3>
-        <p style="color: #adb5bd; margin: 0 0 25px 0;">Tambahkan ekstrakurikuler pertama!</p>
-        <a href="{{ url_for('admin.create_ekstrakurikuler') }}"
+        <div style="font-size: 4em; margin-bottom: 20px;">🏛️</div>
+        <h3 style="color: #6c757d; margin: 0 0 10px 0;">Belum Ada Anggota Organisasi</h3>
+        <p style="color: #adb5bd; margin: 0 0 25px 0;">Tambahkan anggota pertama!</p>
+        <a href="{{ url_for('admin.create_organisasi') }}"
             style="display: inline-block; padding: 12px 30px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; box-shadow: 0 2px 8px rgba(23,162,184,0.3);">
-            + Tambah Ekstrakurikuler Pertama
+            + Tambah Anggota Pertama
         </a>
     </div>
     {% endif %}
