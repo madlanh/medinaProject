@@ -3,43 +3,82 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 800px; margin-top: 50px;">
+<div class="container" style="max-width: 800px; margin: 50px auto 100px; padding: 0 15px;">
     <h1 style="color: #343a40;">{{ title }}</h1>
+    <p><a href="{{ url_for('manage_laboratorium') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Daftar Laboratorium</a></p>
     <hr style="margin-bottom: 30px;">
 
-    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="nama" style="display: block; margin-bottom: 5px; font-weight: bold;">Nama Laboratorium</label>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dee2e6;">
+        
+        <h3 style="margin-top: 0; color: #6610f2; margin-bottom: 25px;">🔬 Informasi Laboratorium</h3>
+
+        <div style="margin-bottom: 20px;">
+            <label for="nama" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Nama Laboratorium</label>
             <input type="text" id="nama" name="nama" required 
-                   value="{{ lab.nama if lab else '' }}"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                   value="{% if lab %}{{ lab.nama }}{% endif %}"
+                   placeholder="Contoh: Laboratorium Kimia"
+                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
         </div>
 
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="deskripsi" style="display: block; margin-bottom: 5px; font-weight: bold;">Deskripsi</label>
+        <div style="margin-bottom: 20px;">
+            <label for="deskripsi" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Deskripsi</label>
             <textarea id="deskripsi" name="deskripsi" required rows="4"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{{ lab.deskripsi if lab else '' }}</textarea>
+                   placeholder="Deskripsikan laboratorium ini..."
+                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if lab %}{{ lab.deskripsi }}{% endif %}</textarea>
         </div>
 
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="fasilitas" style="display: block; margin-bottom: 5px; font-weight: bold;">Fasilitas (pisahkan dengan koma)</label>
-            <textarea id="fasilitas" name="fasilitas" required rows="4"
-                   placeholder="contoh: Mikroskop Digital, Lemari Asam, Safety Equipment"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">{% if lab %}{{ lab.fasilitas | join(', ') }}{% endif %}</textarea>
-            <small style="color: #6c757d;">Pisahkan setiap fasilitas dengan koma (,)</small>
+        <div style="margin-bottom: 25px;">
+            <label for="fasilitas" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Fasilitas</label>
+            <textarea id="fasilitas" name="fasilitas" required rows="6"
+                   placeholder="Tulis setiap fasilitas di baris baru, contoh:&#10;Mikroskop digital&#10;Set alat praktikum lengkap&#10;Komputer untuk analisis data"
+                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if lab %}{{ lab.fasilitas | join('\n') }}{% endif %}</textarea>
+            <small style="color: #6c757d; display: block; margin-top: 8px;">💡 Tulis setiap fasilitas di baris baru (Enter)</small>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label for="image_num" style="display: block; margin-bottom: 5px; font-weight: bold;">Nomor Gambar (1-10)</label>
-            <input type="number" id="image_num" name="image_num" min="1" max="10"
-                   value="{{ lab.image_num if lab else '1' }}"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button type="submit" style="padding: 14px 35px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(102,16,242,0.3); transition: all 0.3s ease;">
+                {% if lab %}💾 Perbarui Laboratorium{% else %}➕ Tambah Laboratorium{% endif %}
+            </button>
+            
+            <a href="{{ url_for('manage_laboratorium') }}" style="padding: 14px 35px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
+                ❌ Batal
+            </a>
         </div>
-
-        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
-            {% if lab %}Perbarui Laboratorium{% else %}Tambah Laboratorium{% endif %}
-        </button>
     </form>
-    <p style="margin-top: 20px;"><a href="{{ url_for('manage_laboratorium') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Laboratorium</a></p>
 </div>
+
+<style>
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #6610f2 !important;
+        box-shadow: 0 0 0 3px rgba(102,16,242,0.1);
+    }
+    
+    button[type="submit"]:hover {
+        background: linear-gradient(135deg, #5a0fc7, #4e0aa8) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(102,16,242,0.4) !important;
+    }
+
+    a[style*="background-color: #6c757d"]:hover {
+        background-color: #5a6268 !important;
+        transform: translateY(-2px);
+    }
+</style>
 {% endblock %}

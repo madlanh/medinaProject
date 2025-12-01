@@ -3,8 +3,8 @@
 {% block title %}Kelola Laboratorium{% endblock %}
 
 {% block content %}
-<div class="container" style="margin-top: 30px;">
-    <h1 style="color: #343a40;">Kelola Laboratorium</h1>
+<div class="container" style="margin-top: 30px; margin-bottom: 100px;">
+    <h1 style="color: #343a40;">Kelola Laboratorium <span style="font-size: 0.7em; font-weight: normal; color: #6c757d;">(Mode Dummy)</span></h1>
     <p><a href="{{ url_for('admin_dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Dashboard</a></p>
     <hr style="margin-bottom: 20px;">
     
@@ -25,35 +25,72 @@
     {% endwith %}
 
     <p>
-        <a href="{{ url_for('create_laboratorium') }}" style="display: inline-block; padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">
+        <a href="{{ url_for('create_laboratorium') }}" style="display: inline-block; padding: 12px 25px; background-color: #6610f2; color: white; text-decoration: none; border-radius: 25px; margin-bottom: 30px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
             + Tambah Laboratorium
         </a>
     </p>
 
     {% if lab_list %}
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 40px;">
         {% for lab in lab_list %}
-        <div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: white;">
-            <h3 style="margin-top: 0; color: #007bff;">{{ lab.nama }}</h3>
-            <p style="color: #6c757d; margin-bottom: 10px;">{{ lab.deskripsi }}</p>
-            <p style="font-weight: bold; margin-bottom: 5px; color: #343a40;">Fasilitas:</p>
-            <ul style="color: #6c757d; padding-left: 20px; margin-bottom: 15px;">
-                {% for fasilitas in lab.fasilitas %}
-                <li>{{ fasilitas }}</li>
-                {% endfor %}
-            </ul>
-            <div style="display: flex; gap: 10px;">
-                <a href="{{ url_for('edit_laboratorium', lab_id=lab.id) }}" style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Edit</a>
-                <form method="POST" action="{{ url_for('delete_laboratorium', lab_id=lab.id) }}" style="display: inline; margin: 0;">
-                    <button type="submit" onclick="return confirm('Yakin ingin menghapus laboratorium ini?')" style="padding: 8px 15px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Hapus</button>
+        <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 5px solid #6610f2; display: flex; flex-direction: column;">
+            
+            <div style="margin-bottom: 15px;">
+                <span style="background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">
+                    🔬 ID: {{ lab.id }}
+                </span>
+            </div>
+
+            <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.2em; line-height: 1.4; height: 67px; overflow: hidden; text-overflow: ellipsis;">
+                {{ lab.nama }}
+            </h3>
+
+            <p style="color: #666; margin-bottom: 15px; line-height: 1.6; font-size: 0.95em; height: 76px; overflow: hidden; text-overflow: ellipsis;">
+                {% if lab.deskripsi|length > 120 %}
+                    {{ lab.deskripsi[:120] }}...
+                {% else %}
+                    {{ lab.deskripsi }}
+                {% endif %}
+            </p>
+
+            <div style="flex-grow: 1; margin-bottom: 15px;">
+                <p style="font-weight: bold; margin-bottom: 8px; color: #0D2A4C; font-size: 0.9em;">📋 Fasilitas:</p>
+                <ul style="color: #666; padding-left: 20px; margin: 0; font-size: 0.9em; height: 95px; overflow: hidden;">
+                    {% for fasilitas in lab.fasilitas[:4] %}
+                    <li>{{ fasilitas }}</li>
+                    {% endfor %}
+                    {% if lab.fasilitas|length > 4 %}
+                    <li style="color: #999; font-style: italic;">+{{ lab.fasilitas|length - 4 }} lainnya...</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #eee; margin-top: auto;">
+                <a href="{{ url_for('edit_laboratorium', lab_id=lab.id) }}" 
+                   style="flex: 1; text-align: center; padding: 10px 0; background: linear-gradient(135deg, #007bff, #0056b3); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,123,255,0.3);">
+                    ✏️ Edit
+                </a>
+                
+                <form method="POST" action="{{ url_for('delete_laboratorium', lab_id=lab.id) }}" style="flex: 1; margin: 0;">
+                    <button type="submit" 
+                            onclick="return confirm('Yakin ingin menghapus laboratorium ini?')"
+                            style="width: 100%; padding: 10px 0; background: linear-gradient(135deg, #dc3545, #c82333); color: white; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(220,53,69,0.3);">
+                        🗑️ Hapus
+                    </button>
                 </form>
             </div>
         </div>
         {% endfor %}
     </div>
+
     {% else %}
-    <div style="padding: 20px; background-color: #f8f9fa; border-radius: 5px; text-align: center; border: 1px solid #dee2e6;">
-        <p style="color: #6c757d; margin: 0;">Belum ada laboratorium. Tambahkan laboratorium pertama!</p>
+    <div style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; text-align: center; border: 2px dashed #dee2e6;">
+        <div style="font-size: 4em; margin-bottom: 20px;">🔬</div>
+        <h3 style="color: #6c757d; margin: 0 0 10px 0;">Belum Ada Laboratorium</h3>
+        <p style="color: #adb5bd; margin: 0 0 25px 0;">Tambahkan laboratorium pertama!</p>
+        <a href="{{ url_for('create_laboratorium') }}" style="display: inline-block; padding: 12px 30px; background-color: #6610f2; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; box-shadow: 0 2px 8px rgba(102,16,242,0.3);">
+            + Tambah Laboratorium Pertama
+        </a>
     </div>
     {% endif %}
 </div>

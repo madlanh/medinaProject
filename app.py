@@ -22,32 +22,104 @@ dummy_db = {
     'berita': [
         {
             'id': 1,
-            'judul': 'Juara 1 Lomba Cerdas Cermat Pancasila',
-            'tanggal': date(2025, 10, 31),
-            'ringkasan': 'SMA Medina berhasil meraih juara 1 dalam Lomba Cerdas Cermat Pancasila tingkat nasional yang diselenggarakan oleh UNY.',
-            'konten_lengkap': 'SMA Medina Bandung kembali mengharumkan nama sekolah dengan meraih juara 1 dalam Lomba Cerdas Cermat Pancasila tingkat nasional. Tim yang terdiri dari 3 siswa terbaik berhasil mengalahkan puluhan sekolah dari seluruh Indonesia dalam kompetisi yang berlangsung selama 3 hari di UNY Yogyakarta.'
+            'tanggal': date(2025, 11, 15),
+            'judul': 'Peringatan Hari Guru Nasional 2025',
+            'ringkasan': 'SMA Medina Bandung menggelar peringatan Hari Guru Nasional dengan berbagai kegiatan menarik yang diikuti oleh seluruh siswa dan guru.',
+            'konten_lengkap': 'Dalam rangka memperingati Hari Guru Nasional, SMA Medina Bandung mengadakan serangkaian kegiatan...'
         },
         {
             'id': 2,
-            'judul': 'Peringatan Hari Guru Nasional 2025',
-            'tanggal': date(2025, 11, 25),
-            'ringkasan': 'SMA Medina mengadakan peringatan Hari Guru Nasional dengan berbagai kegiatan menarik dan penuh makna.',
-            'konten_lengkap': 'Dalam rangka memperingati Hari Guru Nasional, SMA Medina mengadakan serangkaian acara yang melibatkan seluruh civitas akademika. Acara dimulai dengan upacara bendera yang khidmat, dilanjutkan dengan pemberian penghargaan kepada guru berprestasi, dan diakhiri dengan pentas seni dari siswa-siswi.'
+            'tanggal': date(2025, 11, 10),
+            'judul': 'Juara 1 Olimpiade Matematika Tingkat Kota',
+            'ringkasan': 'Siswa SMA Medina Bandung berhasil meraih juara 1 dalam Olimpiade Matematika tingkat Kota Bandung yang diselenggarakan oleh Dinas Pendidikan.',
+            'konten_lengkap': 'Prestasi membanggakan kembali diraih oleh siswa SMA Medina Bandung...'
         },
         {
             'id': 3,
-            'judul': 'Program Studi Tur ke Museum Geologi',
+            'tanggal': date(2025, 11, 5),
+            'judul': 'Pelaksanaan Ujian Tengah Semester Ganjil',
+            'ringkasan': 'Ujian Tengah Semester (UTS) ganjil tahun ajaran 2025/2026 telah dilaksanakan dengan lancar dan tertib di seluruh kelas.',
+            'konten_lengkap': 'Ujian Tengah Semester Ganjil telah dilaksanakan mulai tanggal...'
+        },
+        {
+            'id': 4,
+            'tanggal': date(2025, 10, 28),
+            'judul': 'Workshop Digital Marketing untuk Siswa',
+            'ringkasan': 'Kegiatan workshop digital marketing diadakan untuk membekali siswa dengan keterampilan yang relevan di era digital.',
+            'konten_lengkap': 'Workshop digital marketing yang diadakan di aula sekolah...'
+        },
+        {
+            'id': 5,
             'tanggal': date(2025, 10, 20),
-            'ringkasan': 'Siswa kelas X IPA melaksanakan studi tur edukatif ke Museum Geologi Bandung untuk memperdalam pemahaman materi pembelajaran.',
-            'konten_lengkap': 'Siswa-siswi kelas X IPA SMA Medina mengikuti kegiatan studi tur ke Museum Geologi Bandung. Kegiatan ini bertujuan untuk memberikan pengalaman belajar langsung dan memperdalam pemahaman siswa tentang geologi Indonesia. Para siswa sangat antusias mengikuti penjelasan dari pemandu museum.'
+            'judul': 'Kunjungan Industri ke PT Telkom Indonesia',
+            'ringkasan': 'Siswa kelas XII melakukan kunjungan industri ke PT Telkom Indonesia untuk mempelajari dunia kerja profesional.',
+            'konten_lengkap': 'Sebanyak 45 siswa kelas XII mengikuti kegiatan kunjungan industri...'
+        },
+        {
+            'id': 6,
+            'tanggal': date(2025, 10, 15),
+            'judul': 'Pentas Seni Tahun Ajaran 2025',
+            'ringkasan': 'Pentas seni yang menampilkan berbagai bakat siswa dalam bidang musik, tari, dan teater berhasil memukau penonton.',
+            'konten_lengkap': 'Acara pentas seni tahunan SMA Medina Bandung kembali digelar...'
         }
     ],
     'agenda': [
-        {'id': 1, 'judul': 'Peringatan Hari Guru Nasional', 'tanggal': datetime(2025, 11, 25), 'deskripsi': 'Upacara dan berbagai perlombaan untuk memperingati Hari Guru.', 'lokasi': 'Aula Sekolah', 'waktu': '08.00 - 14.00', 'image_num': 1},
-        {'id': 2, 'judul': 'Rapat Kerja Komite Sekolah', 'tanggal': datetime(2025, 11, 19), 'deskripsi': 'Rapat internal komite sekolah untuk evaluasi semester ganjil.', 'lokasi': 'Ruang Rapat', 'waktu': '13.00 - 16.00', 'image_num': 2},
-        {'id': 3, 'judul': 'Lomba Debat Bahasa Inggris', 'tanggal': datetime(2025, 11, 15), 'deskripsi': 'Pelaksanaan lomba debat antar kelas di aula utama sekolah.', 'lokasi': 'Aula Utama', 'waktu': '09.00 - 15.00', 'image_num': 3},
-        {'id': 4, 'judul': 'Open House & Pendaftaran Gel. 2', 'tanggal': datetime(2025, 12, 10), 'deskripsi': 'Acara promosi sekolah dan pembukaan pendaftaran gelombang kedua.', 'lokasi': 'Seluruh Area Sekolah', 'waktu': '08.00 - 16.00', 'image_num': 4},
-        {'id': 5, 'judul': 'Studi Tur Museum Geologi', 'tanggal': datetime(2025, 10, 20), 'deskripsi': 'Kunjungan ke Museum Geologi Bandung untuk kelas IPA.', 'lokasi': 'Museum Geologi Bandung', 'waktu': '08.00 - 15.00', 'image_num': 5},
+        {
+            'id': 1,
+            'tanggal': datetime(2025, 12, 10),
+            'waktu': '08.00 - 14.00 WIB',
+            'lokasi': 'Aula Sekolah',
+            'judul': 'Peringatan Hari Pahlawan',
+            'deskripsi': 'Upacara bendera dan lomba-lomba dalam rangka memperingati Hari Pahlawan. Seluruh siswa wajib mengikuti.'
+        },
+        {
+            'id': 2,
+            'tanggal': datetime(2025, 12, 15),
+            'waktu': '13.00 - 16.00 WIB',
+            'lokasi': 'Lapangan Basket',
+            'judul': 'Turnamen Basket Antar Kelas',
+            'deskripsi': 'Kompetisi basket antar kelas untuk mempererat tali persaudaraan dan sportivitas siswa. Pendaftaran dibuka untuk semua kelas.'
+        },
+        {
+            'id': 3,
+            'tanggal': datetime(2025, 12, 18),
+            'waktu': '07.30 - 15.00 WIB',
+            'lokasi': 'Ruang Kelas Masing-masing',
+            'judul': 'Ujian Akhir Semester Ganjil',
+            'deskripsi': 'Pelaksanaan Ujian Akhir Semester (UAS) ganjil untuk semua tingkat kelas. Siswa diharapkan datang tepat waktu dan membawa perlengkapan ujian.'
+        },
+        {
+            'id': 4,
+            'tanggal': datetime(2025, 12, 20),
+            'waktu': '08.00 - 12.00 WIB',
+            'lokasi': 'Laboratorium Komputer',
+            'judul': 'Workshop Coding untuk Pemula',
+            'deskripsi': 'Kegiatan workshop coding dasar untuk siswa yang tertarik belajar pemrograman. Dibimbing oleh praktisi IT profesional.'
+        },
+        {
+            'id': 5,
+            'tanggal': datetime(2025, 12, 22),
+            'waktu': '09.00 - 14.00 WIB',
+            'lokasi': 'Perpustakaan Sekolah',
+            'judul': 'Pembagian Rapor Semester Ganjil',
+            'deskripsi': 'Pembagian rapor hasil belajar semester ganjil kepada orang tua/wali murid. Kehadiran orang tua sangat diharapkan.'
+        },
+        {
+            'id': 6,
+            'tanggal': datetime(2026, 1, 5),
+            'waktu': '07.00 - 09.00 WIB',
+            'lokasi': 'Halaman Sekolah',
+            'judul': 'Upacara Bendera Hari Senin',
+            'deskripsi': 'Upacara bendera rutin hari Senin. Seluruh siswa wajib mengikuti dengan mengenakan seragam lengkap dan rapi.'
+        },
+        {
+            'id': 7,
+            'tanggal': datetime(2026, 1, 8),
+            'waktu': '13.00 - 15.00 WIB',
+            'lokasi': 'Aula Sekolah',
+            'judul': 'Sosialisasi Perguruan Tinggi',
+            'deskripsi': 'Kegiatan sosialisasi berbagai perguruan tinggi untuk siswa kelas XII yang akan melanjutkan pendidikan ke jenjang universitas.'
+        }
     ],
     'galeri': [
         {'id': 1, 'judul': 'Upacara Hari Kemerdekaan 2025', 'kategori': 'Kegiatan', 'tanggal': date(2025, 8, 17), 'deskripsi': 'Pelaksanaan upacara peringatan HUT RI ke-80', 'image_num': 1},
@@ -163,8 +235,8 @@ Kepala SMA Medina Bandung'''
 
 # Counter untuk ID auto-increment
 id_counters = {
-    'berita': 4,
-    'agenda': 6,
+    'berita': 7,
+    'agenda': 8,
     'galeri': 7,
     'ekstrakurikuler': 7,
     'laboratorium': 6,
@@ -248,8 +320,8 @@ def organisasi():
 
 @app.route('/berita-terbaru')
 def berita_terbaru():
-    all_berita = sorted(dummy_db['berita'], key=lambda x: x['tanggal'], reverse=True)
-    return render_template('berita_terbaru.html', title='Berita Terbaru', all_berita=all_berita)
+    berita_sorted = sorted(dummy_db['berita'], key=lambda x: x['tanggal'], reverse=True)
+    return render_template('berita_terbaru.html', berita_list=berita_sorted)
 
 @app.route('/info-sekolah')
 def info_sekolah():
@@ -258,12 +330,8 @@ def info_sekolah():
 
 @app.route('/agenda')
 def agenda():
-    past, today, future = categorize_agenda(dummy_db['agenda'].copy())
-    return render_template('agenda.html', 
-                           title='Agenda Sekolah',
-                           past_agenda=past,
-                           today_agenda=today,
-                           future_agenda=future)
+    agenda_sorted = sorted(dummy_db['agenda'], key=lambda x: x['tanggal'])
+    return render_template('agenda.html', agenda_list=agenda_sorted)
 
 @app.route('/galeri')
 def galeri():
@@ -414,8 +482,7 @@ def create_agenda():
                 'tanggal': datetime.strptime(request.form['tanggal'], '%Y-%m-%d'),
                 'deskripsi': request.form['deskripsi'],
                 'lokasi': request.form['lokasi'],
-                'waktu': request.form['waktu'],
-                'image_num': int(request.form.get('image_num', 1))
+                'waktu': request.form['waktu']
             }
             dummy_db['agenda'].append(new_agenda)
             id_counters['agenda'] += 1
@@ -440,7 +507,6 @@ def edit_agenda(agenda_id):
             agenda['deskripsi'] = request.form['deskripsi']
             agenda['lokasi'] = request.form['lokasi']
             agenda['waktu'] = request.form['waktu']
-            agenda['image_num'] = int(request.form.get('image_num', 1))
             flash('Agenda berhasil diperbarui!', 'success')
             return redirect(url_for('manage_agenda'))
         except Exception as e:

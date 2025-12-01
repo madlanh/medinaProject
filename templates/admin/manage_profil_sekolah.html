@@ -3,10 +3,10 @@
 {% block title %}Kelola Profil Sekolah{% endblock %}
 
 {% block content %}
-<div class="container" style="margin-top: 30px;">
-    <h1 style="color: #343a40;">Kelola Profil Sekolah</h1>
+<div class="container" style="margin-top: 30px; margin-bottom: 100px; padding: 0 20px;">
+    <h1 style="color: #343a40;">Kelola Profil Sekolah <span style="font-size: 0.7em; font-weight: normal; color: #6c757d;">(Mode Dummy)</span></h1>
     <p><a href="{{ url_for('admin_dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Dashboard</a></p>
-    <hr style="margin-bottom: 20px;">
+    <hr style="margin-bottom: 30px;">
     
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -24,40 +24,96 @@
         {% endif %}
     {% endwith %}
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto 50px;">
         
-        <div style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: white;">
-            <h3 style="margin-top: 0; color: #007bff;">📜 Sejarah Sekolah</h3>
-            <p style="color: #6c757d; margin-bottom: 20px;">Edit konten sejarah dan perjalanan SMA Medina Bandung.</p>
-            <a href="{{ url_for('edit_sejarah') }}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
-                Edit Sejarah
+        <!-- Card Sejarah -->
+        <div style="background: white; border-radius: 15px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 5px solid #007bff;">
+            <div style="margin-bottom: 20px;">
+                <span style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 10px 18px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">
+                    📜 SEJARAH
+                </span>
+            </div>
+            
+            <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.4em;">Sejarah Sekolah</h3>
+            
+            <p style="color: #666; margin-bottom: 25px; line-height: 1.6; font-size: 0.95em; min-height: 50px;">
+                Edit konten sejarah dan perjalanan SMA Medina Bandung dari tahun ke tahun.
+            </p>
+
+            <a href="{{ url_for('edit_sejarah') }}" 
+               style="display: block; text-align: center; padding: 14px 0; background: linear-gradient(135deg, #007bff, #0056b3); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,123,255,0.3);">
+                ✏️ Edit Sejarah
             </a>
         </div>
 
-        <div style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: white;">
-            <h3 style="margin-top: 0; color: #28a745;">🎯 Visi & Misi</h3>
-            <p style="color: #6c757d; margin-bottom: 20px;">Edit visi dan misi sekolah untuk masa depan.</p>
-            <a href="{{ url_for('edit_visi_misi') }}" style="display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">
-                Edit Visi & Misi
+        <!-- Card Visi & Misi -->
+        <div style="background: white; border-radius: 15px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 5px solid #28a745;">
+            <div style="margin-bottom: 20px;">
+                <span style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 10px 18px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">
+                    🎯 VISI & MISI
+                </span>
+            </div>
+            
+            <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.4em;">Visi & Misi</h3>
+            
+            <p style="color: #666; margin-bottom: 25px; line-height: 1.6; font-size: 0.95em; min-height: 50px;">
+                Edit visi dan misi sekolah untuk masa depan yang lebih baik.
+            </p>
+
+            <a href="{{ url_for('edit_visi_misi') }}" 
+               style="display: block; text-align: center; padding: 14px 0; background: linear-gradient(135deg, #28a745, #20c997); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(40,167,69,0.3);">
+                ✏️ Edit Visi & Misi
             </a>
         </div>
 
-        <div style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: white;">
-            <h3 style="margin-top: 0; color: #ffc107;">👔 Sambutan Kepala Sekolah</h3>
-            <p style="color: #6c757d; margin-bottom: 20px;">Edit sambutan dari Kepala Sekolah.</p>
-            <a href="{{ url_for('edit_sambutan') }}" style="display: inline-block; padding: 10px 20px; background-color: #ffc107; color: white; text-decoration: none; border-radius: 5px;">
-                Edit Sambutan
+        <!-- Card Sambutan -->
+        <div style="background: white; border-radius: 15px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 5px solid #ffc107;">
+            <div style="margin-bottom: 20px;">
+                <span style="background: linear-gradient(135deg, #ffc107, #ff9800); color: white; padding: 10px 18px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">
+                    👔 SAMBUTAN
+                </span>
+            </div>
+            
+            <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.4em;">Sambutan Kepala Sekolah</h3>
+            
+            <p style="color: #666; margin-bottom: 25px; line-height: 1.6; font-size: 0.95em; min-height: 50px;">
+                Edit sambutan dari Kepala Sekolah untuk seluruh civitas akademika.
+            </p>
+
+            <a href="{{ url_for('edit_sambutan') }}" 
+               style="display: block; text-align: center; padding: 14px 0; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(255,193,7,0.3);">
+                ✏️ Edit Sambutan
             </a>
         </div>
 
-        <div style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: white;">
-            <h3 style="margin-top: 0; color: #17a2b8;">🏛️ Struktur Organisasi</h3>
-            <p style="color: #6c757d; margin-bottom: 20px;">Edit struktur organisasi dan jabatan.</p>
-            <a href="{{ url_for('edit_organisasi') }}" style="display: inline-block; padding: 10px 20px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 5px;">
-                Edit Organisasi
+        <!-- Card Organisasi -->
+        <div style="background: white; border-radius: 15px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 5px solid #17a2b8;">
+            <div style="margin-bottom: 20px;">
+                <span style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; padding: 10px 18px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">
+                    🏛️ ORGANISASI
+                </span>
+            </div>
+            
+            <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.4em;">Struktur Organisasi</h3>
+            
+            <p style="color: #666; margin-bottom: 25px; line-height: 1.6; font-size: 0.95em; min-height: 50px;">
+                Edit struktur organisasi sekolah dan jabatan-jabatan penting.
+            </p>
+
+            <a href="{{ url_for('edit_organisasi') }}" 
+               style="display: block; text-align: center; padding: 14px 0; background: linear-gradient(135deg, #17a2b8, #138496); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(23,162,184,0.3);">
+                ✏️ Edit Organisasi
             </a>
         </div>
 
     </div>
 </div>
+
+<style>
+    /* Hover effects */
+    div[style*="border-left: 5px solid"]:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+    }
+</style>
 {% endblock %}

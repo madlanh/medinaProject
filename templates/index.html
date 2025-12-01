@@ -3,123 +3,398 @@
 {% block title %}Beranda - SMA Medina Bandung{% endblock %}
 
 {% block content %}
-    <div class="slider-container">
-        
-        <div class="slide fade">
-            <div class="slide-background" style="background-image: url('/static/images/sch-pic1.jpg');"></div>
-            <div class="slide-content">
-                <h2>Selamat Datang di Website Resmi SMA Medina Bandung</h2>
-                <p>Sekolah Menengah Atas Swasta di Jantung Kota Bandung.</p>
-                <a href="/#prestasi" class="slide-btn">Lihat Prestasi</a>
-            </div>
-        </div>
-        
-        <div class="slide fade">
-            <div class="slide-background" style="background-image: url('/static/images/sch-pic2.jpg');"></div>
-            <div class="slide-content">
-                <h2>Penerimaan Siswa Baru</h2>
-                <p>Pendaftaran untuk tahun ajaran baru telah dibuka. Bergabunglah dengan kami!</p>
-                <a href="/#kontak" class="slide-btn">Info Pendaftaran</a>
+    <!-- Hero Banner Slider (Modern + Auto Slide) -->
+    <div class="slider-container" style="position: relative; height: 500px; overflow: hidden; margin-bottom: 30px;">
+        <!-- Slide 1 -->
+        <div class="slide fade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(13,42,76,0.9), rgba(23,162,184,0.8)), url('/static/images/sch-pic1.jpg') center/cover; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
+                    <h1 style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">Selamat Datang di Website Resmi SMA Medina Bandung</h1>
+                    <p style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">Sekolah Menengah Atas Swasta di Jantung Kota Bandung</p>
+                    <a href="/#prestasi" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(255,193,7,0.4); transition: all 0.3s ease; animation: fadeInUp 1.4s ease;">
+                        🏆 Lihat Prestasi
+                    </a>
+                </div>
             </div>
         </div>
 
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <!-- Slide 2 -->
+        <div class="slide fade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(40,167,69,0.9), rgba(32,201,151,0.8)), url('/static/images/sch-pic2.jpg') center/cover; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
+                    <h1 style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">Penerimaan Siswa Baru</h1>
+                    <p style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">Pendaftaran untuk tahun ajaran baru telah dibuka. Bergabunglah dengan kami!</p>
+                    <a href="/#kontak" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #28a745, #20c997); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(40,167,69,0.4); transition: all 0.3s ease; animation: fadeInUp 1.4s ease;">
+                        📝 Info Pendaftaran
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide fade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(102,16,242,0.9), rgba(90,15,199,0.8)), url('/static/images/sch-pic3.jpg') center/cover; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
+                    <h1 style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">Membentuk Generasi Unggul</h1>
+                    <p style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">Berakhlak Mulia dan Berprestasi</p>
+                    <a href="/sejarah" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(102,16,242,0.4); transition: all 0.3s ease; animation: fadeInUp 1.4s ease;">
+                        📖 Kenali Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <a class="prev" onclick="plusSlides(-1)" style="position: absolute; top: 50%; left: 20px; transform: translateY(-50%); background-color: rgba(0,0,0,0.5); color: white; padding: 16px; text-decoration: none; font-size: 24px; font-weight: bold; border-radius: 50%; cursor: pointer; user-select: none; z-index: 100; transition: background-color 0.3s ease; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+            &#10094;
+        </a>
+        <a class="next" onclick="plusSlides(1)" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); background-color: rgba(0,0,0,0.5); color: white; padding: 16px; text-decoration: none; font-size: 24px; font-weight: bold; border-radius: 50%; cursor: pointer; user-select: none; z-index: 100; transition: background-color 0.3s ease; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+            &#10095;
+        </a>
+
+        <!-- Dots Indicator -->
+        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100;">
+            <span class="dot" onclick="currentSlide(1)" style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
+            <span class="dot" onclick="currentSlide(2)" style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
+            <span class="dot" onclick="currentSlide(3)" style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
+        </div>
     </div>
 
-    <main class="container">
-        <!-- Bagian Tentang Kami -->
-        <section>
-            <h2>Tentang Kami</h2>
-            <p>Selamat datang di SMA Medina Bandung. Kami berdedikasi untuk memberikan pendidikan berkualitas yang berfokus pada pengembangan akademik dan karakter. Silakan jelajahi bagian <a href="/sejarah">Sejarah</a> dan <a href="/visi-misi">Visi & Misi</a> kami untuk mempelajari lebih lanjut tentang nilai-nilai yang kami anut.</p>
-        </section>
-
-        <!-- Bagian Berita Terbaru (Loop data dari app.py) -->
-        <hr>
-        <section id="berita-terbaru-section">
-            <h2>Berita Terbaru</h2>
-            <div class="news-list">
-                {% if berita %}
-                    {% for item in berita %}
-                        <article class="news-item" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">
-                            <h3>{{ item.judul }}</h3>
-                            <p class="news-date" style="font-size: 0.9em; color: #555;">🗓️ {{ item.tanggal }}</p>
-                            <p>{{ item.ringkasan }}</p>
-                        </article>
-                    {% endfor %}
-                {% else %}
-                    <p>Tidak ada berita terbaru saat ini.</p>
-                {% endif %}
-            </div>
-            
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="/berita-terbaru" class="slide-btn">Lihat Semua Berita Selengkapnya &raquo;</a>
+    <main class="container" style="margin-top: 0; margin-bottom: 100px;">
+        
+        <!-- Bagian Tentang Kami (Style Baru) -->
+        <section style="margin-bottom: 50px;">
+            <div style="padding: 40px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; border-left: 5px solid #007bff; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h2 style="color: #0D2A4C; margin: 0 0 20px 0; font-size: 2em;">
+                    <span style="font-size: 1.2em;">🏫</span> Tentang Kami
+                </h2>
+                <p style="color: #666; line-height: 1.8; font-size: 1.05em; margin: 0;">
+                    Selamat datang di SMA Medina Bandung. Kami berdedikasi untuk memberikan pendidikan berkualitas yang berfokus pada pengembangan akademik dan karakter. Silakan jelajahi bagian <a href="/sejarah" style="color: #007bff; text-decoration: none; font-weight: bold;">Sejarah</a> dan <a href="/visi-misi" style="color: #007bff; text-decoration: none; font-weight: bold;">Visi & Misi</a> kami untuk mempelajari lebih lanjut tentang nilai-nilai yang kami anut.
+                </p>
             </div>
         </section>
 
-        <!-- Bagian Prestasi (Loop data dari app.py) -->
-        <hr>
-        <section id="prestasi">
-            <h2>Prestasi Terbaru</h2>
+        <!-- Bagian Berita Terbaru (Style Baru) -->
+        <section id="berita-terbaru-section" style="margin-bottom: 50px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="color: #0D2A4C; font-size: 2.5em; margin: 0 0 10px 0;">📰 Berita Terbaru</h2>
+                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #28a745, #20c997); margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+
+            {% if berita %}
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                {% for item in berita %}
+                <article style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; border-top: 5px solid #28a745;">
+                    <div style="height: 180px; background: linear-gradient(135deg, #28a745, #20c997); display: flex; align-items: center; justify-content: center; color: white; font-size: 3.5em;">
+                        📰
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="background-color: #e7f3ff; color: #0056b3; padding: 6px 12px; border-radius: 15px; font-size: 0.85em; display: inline-block; margin-bottom: 15px;">
+                            📅 {{ item.tanggal.strftime('%d %B %Y') if item.tanggal is defined and item.tanggal.strftime else item.tanggal }}
+                        </div>
+                        <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.3em; line-height: 1.4; height: 65px; overflow: hidden;">
+                            {{ item.judul }}
+                        </h3>
+                        <p style="color: #666; margin: 0; line-height: 1.6; font-size: 0.95em; height: 75px; overflow: hidden;">
+                            {{ item.ringkasan }}
+                        </p>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <div style="text-align: center;">
+                <a href="/berita-terbaru" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #28a745, #20c997); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: all 0.3s ease;">
+                    Lihat Semua Berita →
+                </a>
+            </div>
+            {% else %}
+            <div style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
+                <div style="font-size: 4em; margin-bottom: 20px;">📰</div>
+                <p style="color: #6c757d; margin: 0; font-size: 1.2em;">Tidak ada berita terbaru saat ini.</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Bagian Prestasi (Style Baru dengan Scroll) -->
+        <section id="prestasi" style="margin-bottom: 50px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="color: #0D2A4C; font-size: 2.5em; margin: 0 0 10px 0;">🏆 Prestasi Terbaru</h2>
+                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #ffc107, #ff9800); margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+
             {% if prestasi %}
-                {% for item in prestasi %}
-                <div class="prestasi-item" style="margin-bottom: 15px; border-left: 3px solid #F0B429; padding-left: 15px;">
-                    <h4>🏆 {{ item.nama }}</h4>
-                    <p>Skala: <strong>{{ item.skala }}</strong>, Tanggal: {{ item.tanggal }}</p>
-                    <p style="font-size: 0.9em;">Diselenggarakan oleh: {{ item.penyelenggara }}</p>
+            <!-- Carousel Container -->
+            <div class="prestasi-carousel" style="position: relative; overflow: hidden; padding: 20px 0;">
+                <div class="prestasi-track" style="display: flex; gap: 30px; animation: scrollPrestasi 20s linear infinite;">
+                    {% for item in prestasi %}
+                    {% for _ in range(2) %} <!-- Duplicate untuk seamless loop -->
+                    <div class="prestasi-card" style="min-width: 350px; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #ffc107; flex-shrink: 0;">
+                        <div style="font-size: 3em; margin-bottom: 15px; text-align: center;">🏆</div>
+                        <h4 style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.3em; text-align: center;">{{ item.nama }}</h4>
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <span style="background-color: #fff3cd; color: #856404; padding: 6px 12px; border-radius: 15px; font-size: 0.85em; font-weight: bold;">
+                                {{ item.skala }}
+                            </span>
+                        </div>
+                        <p style="color: #666; margin: 0 0 8px 0; text-align: center; font-size: 0.9em;">📅 {{ item.tanggal }}</p>
+                        <p style="color: #666; margin: 0; text-align: center; font-size: 0.85em;">📍 {{ item.penyelenggara }}</p>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            {% else %}
-                <p>Belum ada data prestasi saat ini.</p>
-            {% endif %}
-        </section>
-
-        <!-- Bagian Profil Alumni (Loop data dari app.py) -->
-        <hr>
-        <section id="profil-alumni">
-            <h2>Profil Alumni</h2>
-            {% if alumni %}
-                {% for alumni_item in alumni %}
-                <div class="alumni-testimoni" style="margin-bottom: 25px; padding: 15px; border: 1px solid #eee; border-radius: 5px;">
-                    <p style="font-style: italic;">"{{ alumni_item.testimoni }}"</p>
-                    <p style="text-align: right; margin-top: 10px;">- **{{ alumni_item.nama }}** ({{ alumni_item.status }})</p>
-                </div>
-                {% endfor %}
-            {% else %}
-                <p>Belum ada testimoni alumni saat ini.</p>
-            {% endif %}
-        </section>
-
-        <!-- Bagian Kontak -->
-        <hr>
-        <section id="kontak">
-            <h2>Hubungi Kami</h2>
-            <div class="contact-info">
-                <p><strong>Alamat:</strong> Jl. KH. Ahmad Dahlan / Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung, Jawa Barat 40262</p>
-                <p><strong>Telepon:</strong> (022) 7322207</p>
-                <p><strong>Email:</strong> smamedinabdg@gmail.com</p>
             </div>
-            <h3>Kirim Pesan</h3>
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="name">Nama:</label>
-                    <input type="text" id="name" name="name" required>
+            {% else %}
+            <div style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
+                <div style="font-size: 4em; margin-bottom: 20px;">🏆</div>
+                <p style="color: #6c757d; margin: 0; font-size: 1.2em;">Belum ada data prestasi saat ini.</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Bagian Profil Alumni (Style Baru dengan Scroll) -->
+        <section id="profil-alumni" style="margin-bottom: 50px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="color: #0D2A4C; font-size: 2.5em; margin: 0 0 10px 0;">🎓 Profil Alumni</h2>
+                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #6610f2, #5a0fc7); margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+
+            {% if alumni %}
+            <!-- Carousel Container -->
+            <div class="alumni-carousel" style="position: relative; overflow: hidden; padding: 20px 0;">
+                <div class="alumni-track" style="display: flex; gap: 30px; animation: scrollAlumni 25s linear infinite;">
+                    {% for alumni_item in alumni %}
+                    {% for _ in range(2) %} <!-- Duplicate untuk seamless loop -->
+                    <div class="alumni-card" style="min-width: 400px; background: white; border-radius: 20px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #6610f2; flex-shrink: 0;">
+                        <div style="font-size: 3em; margin-bottom: 15px; text-align: center;">💬</div>
+                        <p style="font-style: italic; color: #666; margin: 0 0 20px 0; line-height: 1.7; text-align: center; font-size: 1.05em;">
+                            "{{ alumni_item.testimoni }}"
+                        </p>
+                        <div style="text-align: center; padding-top: 15px; border-top: 2px solid #f0f0f0;">
+                            <p style="margin: 0; color: #0D2A4C; font-weight: bold; font-size: 1.1em;">{{ alumni_item.nama }}</p>
+                            <p style="margin: 5px 0 0 0; color: #6610f2; font-size: 0.9em;">{{ alumni_item.status }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
                 </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+            </div>
+            {% else %}
+            <div style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
+                <div style="font-size: 4em; margin-bottom: 20px;">🎓</div>
+                <p style="color: #6c757d; margin: 0; font-size: 1.2em;">Belum ada testimoni alumni saat ini.</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Bagian Kontak (Style Baru) -->
+        <section id="kontak" style="margin-bottom: 50px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="color: #0D2A4C; font-size: 2.5em; margin: 0 0 10px 0;">📞 Hubungi Kami</h2>
+                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #17a2b8, #138496); margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+
+            <!-- Info Kontak -->
+            <div style="background: linear-gradient(135deg, #e9f7fe, #d4edfc); border-radius: 20px; padding: 35px; margin-bottom: 40px; border-left: 5px solid #17a2b8; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5em; margin-bottom: 10px;">📍</div>
+                        <h4 style="margin: 0 0 10px 0; color: #0D2A4C;">Alamat</h4>
+                        <p style="color: #666; margin: 0; line-height: 1.6; font-size: 0.95em;">
+                            Jl. KH. Ahmad Dahlan / Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung, Jawa Barat 40262
+                        </p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5em; margin-bottom: 10px;">📞</div>
+                        <h4 style="margin: 0 0 10px 0; color: #0D2A4C;">Telepon</h4>
+                        <p style="color: #666; margin: 0; font-size: 1.1em; font-weight: bold;">(022) 7322207</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5em; margin-bottom: 10px;">✉️</div>
+                        <h4 style="margin: 0 0 10px 0; color: #0D2A4C;">Email</h4>
+                        <p style="color: #666; margin: 0; font-size: 1.1em; font-weight: bold;">smamedinabdg@gmail.com</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="subject">Subjek:</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Pesan:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Kirim Pesan</button>
-            </form>
-            <p id="formStatus"></p>
+            </div>
+
+            <!-- Form Kontak -->
+            <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 5px solid #17a2b8;">
+                <h3 style="color: #0D2A4C; margin: 0 0 25px 0; text-align: center; font-size: 1.8em;">💌 Kirim Pesan</h3>
+                <form id="contactForm">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="name" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Nama</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Email</label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="subject" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Subjek</label>
+                        <input type="text" id="subject" name="subject" required style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label for="message" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Pesan</label>
+                        <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; resize: vertical; transition: border-color 0.3s ease;"></textarea>
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #17a2b8, #138496); color: white; border: none; border-radius: 30px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(23,162,184,0.3);">
+                        📤 Kirim Pesan
+                    </button>
+                </form>
+                <p id="formStatus" style="margin-top: 15px; text-align: center; font-weight: bold;"></p>
+            </div>
         </section>
     </main>
+
+    <style>
+        /* Slider Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.active {
+            opacity: 1 !important;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8) !important;
+        }
+
+        .dot.active {
+            background-color: white !important;
+        }
+
+        /* Prestasi Carousel */
+        @keyframes scrollPrestasi {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .prestasi-carousel:hover .prestasi-track {
+            animation-play-state: paused;
+        }
+
+        .prestasi-card {
+            transition: transform 0.3s ease;
+        }
+
+        .prestasi-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Alumni Carousel */
+        @keyframes scrollAlumni {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .alumni-carousel:hover .alumni-track {
+            animation-play-state: paused;
+        }
+
+        .alumni-card {
+            transition: transform 0.3s ease;
+        }
+
+        .alumni-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Form Focus States */
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #17a2b8 !important;
+            box-shadow: 0 0 0 3px rgba(23,162,184,0.1);
+        }
+
+        /* Button Hover */
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #138496, #117a8b) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(23,162,184,0.4) !important;
+        }
+
+        /* Link Hover */
+        a[style*="background: linear-gradient"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
+        }
+
+        /* Card Hover */
+        article[style*="transition"]:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+        }
+    </style>
+
+    <script>
+        let slideIndex = 1;
+        let autoSlideTimer;
+
+        // Initialize
+        showSlides(slideIndex);
+        startAutoSlide();
+
+        // Next/previous controls
+        function plusSlides(n) {
+            clearInterval(autoSlideTimer);
+            showSlides(slideIndex += n);
+            startAutoSlide();
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            clearInterval(autoSlideTimer);
+            showSlides(slideIndex = n);
+            startAutoSlide();
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            
+            if (slides[slideIndex-1]) {
+                slides[slideIndex-1].classList.add("active");
+            }
+            if (dots[slideIndex-1]) {
+                dots[slideIndex-1].classList.add("active");
+            }
+        }
+
+        // Auto slide every 5 seconds
+        function startAutoSlide() {
+            autoSlideTimer = setInterval(function() {
+                slideIndex++;
+                showSlides(slideIndex);
+            }, 5000);
+        }
+
+        // Pause on hover
+        document.querySelector('.slider-container').addEventListener('mouseenter', function() {
+            clearInterval(autoSlideTimer);
+        });
+
+        document.querySelector('.slider-container').addEventListener('mouseleave', function() {
+            startAutoSlide();
+        });
+    </script>
 {% endblock %}

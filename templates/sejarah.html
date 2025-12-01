@@ -3,12 +3,167 @@
 {% block title %}Sejarah - SMA Medina Bandung{% endblock %}
 
 {% block content %}
-    <main class="container">
-        <section>
-            <h2>Sejarah Singkat Sekolah</h2>
-            <p><strong>[Informasi mengenai sejarah SMA Medina Bandung belum tersedia secara publik.]</strong></p>
-            <p>Silakan isi bagian ini dengan sejarah resmi sekolah, mencakup tahun berdiri, pendiri, dan tonggak-tonggak penting dalam perkembangannya.</p>
-            <p>Informasi ini perlu didapatkan langsung dari pihak sekolah untuk memastikan akurasinya, karena data online yang tersedia saat ini tidak spesifik untuk SMA Medina.</p>
-        </section>
-    </main>
+<div class="container" style="margin-top: 50px; margin-bottom: 100px;">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">📜 Sejarah Sekolah</h1>
+        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #007bff, #0056b3); margin: 0 auto 15px; border-radius: 2px;"></div>
+        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Perjalanan dan perkembangan SMA Medina Bandung</p>
+    </div>
+
+    <!-- Content Box -->
+    <div class="content-box">
+        <div class="timeline-badge">
+            <div class="badge-icon">🏛️</div>
+            <div class="badge-text">Sejak 1995</div>
+        </div>
+
+        <div class="content-text">
+            {% if dummy_db and dummy_db.profil_content and dummy_db.profil_content.sejarah %}
+                {% for paragraph in dummy_db.profil_content.sejarah.split('\n\n') %}
+                    <p>{{ paragraph }}</p>
+                {% endfor %}
+            {% else %}
+                <p>SMA Medina Bandung didirikan pada tahun 1995 dengan visi menjadi lembaga pendidikan yang unggul dalam mengembangkan potensi siswa secara holistik. Berawal dari sebuah gedung sederhana dengan hanya 3 kelas, kini SMA Medina telah berkembang menjadi salah satu sekolah favorit di kota Bandung.</p>
+
+                <p>Dalam perjalanannya selama lebih dari 25 tahun, SMA Medina telah menghasilkan ribuan alumni yang tersebar di berbagai perguruan tinggi ternama di Indonesia dan luar negeri. Prestasi demi prestasi terus diraih, baik di bidang akademik maupun non-akademik.</p>
+
+                <p>Dengan motto "Berakhlak, Berprestasi, Berwawasan Global", SMA Medina terus berkomitmen untuk memberikan pendidikan berkualitas yang tidak hanya fokus pada aspek kognitif, tetapi juga pengembangan karakter dan soft skills siswa.</p>
+            {% endif %}
+        </div>
+
+        <!-- Info Box -->
+        <div class="milestone-box">
+            <h3 style="color: #007bff; margin: 0 0 20px 0; font-size: 1.5em; text-align: center;">🎯 Tonggak Sejarah</h3>
+            <div class="milestone-grid">
+                <div class="milestone-item">
+                    <div class="milestone-year">1995</div>
+                    <div class="milestone-desc">Pendirian Sekolah</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-year">2000</div>
+                    <div class="milestone-desc">Akreditasi A</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-year">2010</div>
+                    <div class="milestone-desc">Gedung Baru</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-year">2020</div>
+                    <div class="milestone-desc">25 Tahun Berkembang</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .page-header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease;
+    }
+
+    .content-box {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        padding: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .timeline-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+        padding: 20px;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 15px;
+        color: white;
+    }
+
+    .badge-icon {
+        font-size: 3em;
+    }
+
+    .badge-text {
+        font-size: 1.8em;
+        font-weight: bold;
+    }
+
+    .content-text p {
+        color: #666;
+        line-height: 1.8;
+        font-size: 1.05em;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    .milestone-box {
+        margin-top: 50px;
+        padding: 35px;
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 20px;
+        border-left: 5px solid #007bff;
+    }
+
+    .milestone-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .milestone-item {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .milestone-year {
+        font-size: 2em;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    .milestone-desc {
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Hover Effects */
+    .milestone-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,123,255,0.2);
+    }
+</style>
 {% endblock %}

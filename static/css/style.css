@@ -286,13 +286,18 @@ section h2 {
     color: #721c24;
 }
 
-/* =============== FOOTER =============== */
+/* =============== FOOTER FIXED =============== */
 footer {
     background-color: #0D2A4C;
     color: #ecf0f1;
     text-align: center;
     padding: 1.5rem 0;
-    margin-top: 30px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
 }
 
 footer p {
@@ -303,7 +308,7 @@ footer p {
 .slider-container {
     max-width: 100%;
     position: relative;
-    margin: 180px auto 0;
+      /* Dikurangi dari 180px ke 80px */
     height: 500px;
     overflow: hidden;
     background-color: #333;

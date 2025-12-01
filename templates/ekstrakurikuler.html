@@ -3,20 +3,231 @@
 {% block title %}Ekstrakurikuler - SMA Medina Bandung{% endblock %}
 
 {% block content %}
-    <main class="container">
-        <section>
-            <h2 style="text-align: center;">Ekstrakurikuler</h2>
-            
-            <p>Konten untuk halaman **Ekstrakurikuler** akan dimuat di sini. Anda bisa menampilkan daftar kegiatan, jadwal, dan foto-foto terkait.</p>
-            
-            <!-- Contoh Konten -->
-            <h3>Daftar Kegiatan</h3>
-            <ul>
-                <li>Futsal & Basket</li>
-                <li>Pramuka & PMR</li>
-                <li>Klub Bahasa Inggris (English Club)</li>
-                <li>Seni Tari & Musik</li>
-            </ul>
-        </section>
-    </main>
+<div class="container" style="margin-top: 50px; margin-bottom: 100px;">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">⚽ Ekstrakurikuler</h1>
+        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #17a2b8, #138496); margin: 0 auto 15px; border-radius: 2px;"></div>
+        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Kembangkan bakat dan minat melalui berbagai kegiatan ekstrakurikuler</p>
+    </div>
+
+    {% if ekstrakurikuler %}
+    <div class="ekskul-grid">
+        {% for ekskul in ekstrakurikuler %}
+        <div class="ekskul-card">
+            <!-- Icon Header -->
+            <div class="ekskul-header">
+                <div class="ekskul-icon">
+                    {% if ekskul.kategori == 'Olahraga' %}⚽
+                    {% elif ekskul.kategori == 'Seni' %}🎨
+                    {% elif ekskul.kategori == 'Sains' %}🔬
+                    {% elif ekskul.kategori == 'Bahasa' %}📖
+                    {% elif ekskul.kategori == 'Kepramukaan' %}🏕️
+                    {% elif ekskul.kategori == 'Baris-Berbaris' %}🎖️
+                    {% else %}⭐
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="ekskul-content">
+                <span class="ekskul-category">{{ ekskul.kategori }}</span>
+                <h3 class="ekskul-title">{{ ekskul.nama }}</h3>
+                
+                <div class="ekskul-meta">
+                    <div class="meta-row">
+                        <span class="meta-icon">👨‍🏫</span>
+                        <span class="meta-text">{{ ekskul.pembina }}</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-icon">📅</span>
+                        <span class="meta-text">{{ ekskul.jadwal }}</span>
+                    </div>
+                </div>
+
+                <p class="ekskul-desc">{{ ekskul.deskripsi }}</p>
+
+                <button class="ekskul-btn">Daftar Sekarang</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">⚽</div>
+        <h3>Belum Ada Ekstrakurikuler</h3>
+        <p>Data ekstrakurikuler akan segera ditambahkan</p>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .page-header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease;
+    }
+
+    .ekskul-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+    }
+
+    .ekskul-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: all 0.4s ease;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .ekskul-header {
+        height: 180px;
+        background: linear-gradient(135deg, #17a2b8, #138496);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ekskul-icon {
+        font-size: 5em;
+        transition: transform 0.3s ease;
+    }
+
+    .ekskul-content {
+        padding: 25px;
+    }
+
+    .ekskul-category {
+        display: inline-block;
+        padding: 6px 15px;
+        background: linear-gradient(135deg, #17a2b8, #138496);
+        color: white;
+        border-radius: 15px;
+        font-size: 0.85em;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .ekskul-title {
+        margin: 0 0 20px 0;
+        color: #0D2A4C;
+        font-size: 1.4em;
+    }
+
+    .ekskul-meta {
+        margin-bottom: 20px;
+    }
+
+    .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .meta-icon {
+        font-size: 1.2em;
+    }
+
+    .meta-text {
+        flex: 1;
+    }
+
+    .ekskul-desc {
+        color: #666;
+        margin: 0 0 20px 0;
+        line-height: 1.6;
+        font-size: 0.95em;
+        height: 60px;
+        overflow: hidden;
+    }
+
+    .ekskul-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #17a2b8, #138496);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .empty-state {
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 20px;
+        text-align: center;
+        border: 2px dashed #dee2e6;
+    }
+
+    .empty-icon {
+        font-size: 5em;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+    }
+
+    .empty-state h3 {
+        color: #6c757d;
+        margin: 0 0 10px 0;
+    }
+
+    .empty-state p {
+        color: #adb5bd;
+        margin: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    /* Hover Effects */
+    .ekskul-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    .ekskul-card:hover .ekskul-icon {
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    .ekskul-btn:hover {
+        background: linear-gradient(135deg, #138496, #117a8b);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(23,162,184,0.4);
+    }
+</style>
 {% endblock %}

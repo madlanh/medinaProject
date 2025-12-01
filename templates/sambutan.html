@@ -1,41 +1,204 @@
 {% extends "base.html" %}
 
-{% block title %}Sambutan Kepala Sekolah{% endblock %}
+{% block title %}Sambutan Kepala Sekolah - SMA Medina Bandung{% endblock %}
 
 {% block content %}
-    <main class="container">
-        <section class="sambutan-section">
-            <h2 class="section-title">Sambutan Kepala Sekolah</h2>
+<div class="container" style="margin-top: 50px; margin-bottom: 100px;">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">💬 Sambutan Kepala Sekolah</h1>
+        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #ffc107, #ff9800); margin: 0 auto 15px; border-radius: 2px;"></div>
+        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Pesan dan harapan dari Kepala SMA Medina Bandung</p>
+    </div>
 
-            <div class="sambutan-wrapper">
-                
-                <div class="sambutan-kolom-kiri">
-                    <img src="/static/images/kepala_sekolah.jpg" alt="Foto Kepala Sekolah" class="kepala-sekolah-foto">
-                    
-                    <div class="video-sambutan-area">
-                        <h3 class="video-title">Video Sambutan</h3>
-                        <div class="video-placeholder">
-                            <iframe width="100%" height="200" src="https://www.youtube.com/embed/placeholder" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sambutan-kolom-kanan">
-                    <p class="salam">Bismillahirrohmanirrahim</p>
-                    <p class="salam">Assalamualaikum Wr. Wb.</p>
-
-                    <p>Segala puji hanya untuk Allah SWT dan shalawat serta salam semoga tercurah atas nabi yang terakhir, yaitu nabi Muhammad SAW, begitu pula atas keluarga, para sahabat dan para pengikutnya.</p>
-
-                    <p>Alhamdulillah robbil alamin kami panjatkan kehadirat Tuhan Allah SWT, bahwasannya dengan rahmat dan karunia-Nya lah akhirnya Website sekolah ini dengan domain **smasomething.sch.id** dapat kami perbaharui dan kembangkan. Kami mengucapkan selamat datang di Website kami SMA Medina Bandung. Dalam perkembangan era globalisasi dan pesatnya kemajuan teknologi dan informasi ini, tidak dapat dipungkiri bahwa keberadaan sebuah website untuk dunia pendidikan khususnya sekolah, sangatlah penting. Media website dapat digunakan sebagai penyedia sarana dalam menyebarluaskan informasi dan perkembangan terkini dari sekolah, yang memang harus diketahui oleh setiap stakeholder secara riil.</p>
-
-                    <p>Disamping itu, website juga dapat menjadi ajang promosi sekolah yang cukup efektif. Berbagai kegiatan kemajuan sekolah dapat disampaikan dan di upload, disertai data maupun gambar yang relevan, sehingga masyarakat dapat mengetahui prestasi-prestasi yang telah berhasil diraih oleh SMA Medina Bandung.</p>
-
-                    <p>Kami selaku pimpinan sekolah mengucapkan terima kasih kepada tim pembuat dan pengelola Website ini yang telah berusaha untuk dapat lebih memperkenalkan segala perihal yang dimiliki oleh sekolah. Dan tentunya Website sekolah kami masih terdapat banyak kekurangan, oleh karena itu kepada seluruh civitas akademika dan masyarakat umum dapat memberikan saran dan kritik yang membangun demi kemajuan Website sekolah kami.</p>
-
-                    <p>Wassalamualaikum Wr. Wb.</p>
-                </div>
-
+    <!-- Content Box -->
+    <div class="sambutan-container">
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="profile-image">
+                <div class="image-placeholder">👨‍💼</div>
             </div>
-        </section>
-    </main>
+            <h3 class="profile-name">Dr. H. Abdullah Rahman, M.Pd</h3>
+            <p class="profile-title">Kepala Sekolah</p>
+            <div class="profile-quote">"Pendidikan adalah investasi terbaik untuk masa depan"</div>
+        </div>
+
+        <!-- Message Content -->
+        <div class="message-content">
+            <div class="greeting">Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
+            
+            <div class="message-text">
+                {% if dummy_db and dummy_db.profil_content and dummy_db.profil_content.sambutan %}
+                    {% for paragraph in dummy_db.profil_content.sambutan.split('\n\n') %}
+                        {% if paragraph.strip() %}
+                            <p>{{ paragraph }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>Puji syukur kehadirat Allah SWT atas segala rahmat dan karunia-Nya. Shalawat serta salam semoga tercurah kepada Nabi Muhammad SAW, keluarga, dan para sahabatnya.</p>
+
+                    <p>Selamat datang di website resmi SMA Medina Bandung. Sebagai Kepala Sekolah, saya merasa bangga dapat memimpin lembaga pendidikan yang telah memiliki reputasi baik dalam mencetak generasi unggul.</p>
+
+                    <p>SMA Medina tidak hanya fokus pada pencapaian akademik, tetapi juga pada pembentukan karakter dan akhlak mulia siswa. Kami percaya bahwa pendidikan sejati adalah yang mampu menyeimbangkan kecerdasan intelektual, emosional, dan spiritual.</p>
+
+                    <p>Kepada seluruh siswa, orang tua, dan masyarakat, mari bersama-sama kita wujudkan visi SMA Medina untuk menjadi sekolah yang unggul dan berkarakter. Semoga Allah SWT senantiasa memberkahi setiap langkah kita.</p>
+                {% endif %}
+            </div>
+
+            <div class="closing">
+                <p>Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+                <div class="signature">
+                    <strong>Dr. H. Abdullah Rahman, M.Pd</strong><br>
+                    Kepala SMA Medina Bandung
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .page-header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease;
+    }
+
+    .sambutan-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 40px;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .profile-card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        text-align: center;
+        height: fit-content;
+        position: sticky;
+        top: 100px;
+    }
+
+    .profile-image {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ffc107, #ff9800);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 25px rgba(255,193,7,0.3);
+    }
+
+    .image-placeholder {
+        font-size: 5em;
+        color: white;
+    }
+
+    .profile-name {
+        margin: 0 0 10px 0;
+        color: #0D2A4C;
+        font-size: 1.3em;
+    }
+
+    .profile-title {
+        margin: 0 0 20px 0;
+        color: #ffc107;
+        font-weight: bold;
+    }
+
+    .profile-quote {
+        padding: 20px;
+        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+        border-radius: 15px;
+        color: #666;
+        font-style: italic;
+        line-height: 1.6;
+        border-left: 4px solid #ffc107;
+    }
+
+    .message-content {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .greeting {
+        font-size: 1.3em;
+        color: #ffc107;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+        font-style: italic;
+    }
+
+    .message-text p {
+        color: #666;
+        line-height: 1.8;
+        font-size: 1.05em;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    .closing {
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .closing p {
+        font-size: 1.1em;
+        color: #ffc107;
+        font-weight: bold;
+        font-style: italic;
+        margin-bottom: 20px;
+    }
+
+    .signature {
+        text-align: right;
+        color: #0D2A4C;
+        line-height: 1.8;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sambutan-container {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-card {
+            position: relative;
+            top: 0;
+        }
+    }
+</style>
 {% endblock %}

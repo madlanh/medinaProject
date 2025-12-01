@@ -1,13 +1,326 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }} - SMA Medina Bandung{% endblock %}
+{% block title %}Struktur Organisasi - SMA Medina Bandung{% endblock %}
 
 {% block content %}
-    <main class="container">
-        <section>
-            <h2>{{ title }}</h2>
-            <p>Konten untuk halaman **{{ title }}** akan ditampilkan di sini. Silakan isi dengan detail yang relevan.</p>
-            <p>Anda dapat menghapus atau mengganti paragraf ini dengan konten asli halaman, seperti teks Sambutan Kepala Sekolah, daftar Ekstrakurikuler, atau denah Laboratorium.</p>
-        </section>
-    </main>
+<div class="container" style="margin-top: 50px; margin-bottom: 100px;">
+    <h1 style="text-align: center; color: #0D2A4C; margin-bottom: 10px;">Struktur Organisasi</h1>
+    <p style="text-align: center; color: #6c757d; margin-bottom: 50px; font-size: 1.1em;">SMA Medina Bandung</p>
+
+    <!-- Organization Chart Container -->
+    <div class="org-chart">
+        
+        <!-- Level 1: Kepala Sekolah -->
+        <div class="org-level">
+            <div class="org-box ceo">
+                <div class="org-icon">👨‍💼</div>
+                <div class="org-title">Kepala Sekolah</div>
+                <div class="org-name">Dr. Ahmad Hidayat, M.Pd</div>
+            </div>
+        </div>
+
+        <!-- Connector Line -->
+        <div class="connector-line vertical"></div>
+
+        <!-- Level 2: Wakil Kepala Sekolah (3 Bidang) -->
+        <div class="org-level">
+            <div class="connector-line horizontal"></div>
+            <div class="org-row">
+                <div class="org-box-wrapper">
+                    <div class="connector-line vertical-short"></div>
+                    <div class="org-box wakil">
+                        <div class="org-icon">👔</div>
+                        <div class="org-title">Wakasek Kurikulum</div>
+                        <div class="org-name">Drs. Budi Santoso, M.Pd</div>
+                    </div>
+                </div>
+
+                <div class="org-box-wrapper">
+                    <div class="connector-line vertical-short"></div>
+                    <div class="org-box wakil">
+                        <div class="org-icon">👔</div>
+                        <div class="org-title">Wakasek Kesiswaan</div>
+                        <div class="org-name">Siti Nurhaliza, S.Pd</div>
+                    </div>
+                </div>
+
+                <div class="org-box-wrapper">
+                    <div class="connector-line vertical-short"></div>
+                    <div class="org-box wakil">
+                        <div class="org-icon">👔</div>
+                        <div class="org-title">Wakasek Humas</div>
+                        <div class="org-name">Andi Wijaya, S.Sos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 3: Koordinator -->
+        <div class="org-level">
+            <div class="org-row">
+                <!-- Koordinator Akademik -->
+                <div class="org-group">
+                    <div class="connector-line vertical-medium"></div>
+                    <div class="org-box koordinator">
+                        <div class="org-icon">📚</div>
+                        <div class="org-title">Koordinator Akademik</div>
+                        <div class="org-name">Dewi Lestari, M.Pd</div>
+                    </div>
+                </div>
+
+                <!-- Koordinator Ekstrakurikuler -->
+                <div class="org-group">
+                    <div class="connector-line vertical-medium"></div>
+                    <div class="org-box koordinator">
+                        <div class="org-icon">⚽</div>
+                        <div class="org-title">Koordinator Ekstrakurikuler</div>
+                        <div class="org-name">Rudi Hartono, S.Pd</div>
+                    </div>
+                </div>
+
+                <!-- Koordinator Sarana -->
+                <div class="org-group">
+                    <div class="connector-line vertical-medium"></div>
+                    <div class="org-box koordinator">
+                        <div class="org-icon">🏢</div>
+                        <div class="org-title">Koordinator Sarana</div>
+                        <div class="org-name">Agus Setiawan, S.T</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 4: Staff Pendukung -->
+        <div class="org-level">
+            <div class="org-row staff-row">
+                <div class="org-box staff">
+                    <div class="org-icon">👨‍🏫</div>
+                    <div class="org-title">Guru Mata Pelajaran</div>
+                    <div class="org-count">45 Orang</div>
+                </div>
+
+                <div class="org-box staff">
+                    <div class="org-icon">👨‍💻</div>
+                    <div class="org-title">Staff TU</div>
+                    <div class="org-count">8 Orang</div>
+                </div>
+
+                <div class="org-box staff">
+                    <div class="org-icon">📖</div>
+                    <div class="org-title">Pustakawan</div>
+                    <div class="org-count">2 Orang</div>
+                </div>
+
+                <div class="org-box staff">
+                    <div class="org-icon">🔬</div>
+                    <div class="org-title">Laboran</div>
+                    <div class="org-count">3 Orang</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Info Box -->
+    <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; border-left: 5px solid #17a2b8;">
+        <h3 style="margin-top: 0; color: #0D2A4C;">📋 Informasi Struktur Organisasi</h3>
+        <p style="color: #666; line-height: 1.8; margin-bottom: 10px;">
+            Struktur organisasi SMA Medina Bandung dirancang untuk mendukung visi dan misi sekolah dalam menciptakan lingkungan belajar yang kondusif dan profesional.
+        </p>
+        <p style="color: #666; line-height: 1.8; margin: 0;">
+            Setiap bagian memiliki tugas dan tanggung jawab yang jelas untuk memastikan terlaksananya proses pendidikan yang berkualitas.
+        </p>
+    </div>
+</div>
+
+<style>
+    /* Organization Chart Styles */
+    .org-chart {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .org-level {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .org-row {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        position: relative;
+    }
+
+    .staff-row {
+        gap: 25px;
+    }
+
+    .org-box-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .org-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Box Styles */
+    .org-box {
+        background: white;
+        border-radius: 15px;
+        padding: 25px 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        text-align: center;
+        min-width: 220px;
+        transition: all 0.3s ease;
+        border: 3px solid;
+    }
+
+    .org-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Different Levels Colors */
+    .org-box.ceo {
+        border-color: #dc3545;
+        background: linear-gradient(135deg, #fff, #ffe5e5);
+        min-width: 280px;
+    }
+
+    .org-box.wakil {
+        border-color: #007bff;
+        background: linear-gradient(135deg, #fff, #e5f2ff);
+    }
+
+    .org-box.koordinator {
+        border-color: #28a745;
+        background: linear-gradient(135deg, #fff, #e5ffe5);
+        min-width: 200px;
+    }
+
+    .org-box.staff {
+        border-color: #ffc107;
+        background: linear-gradient(135deg, #fff, #fff9e5);
+        min-width: 160px;
+        padding: 20px;
+    }
+
+    /* Icon */
+    .org-icon {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .org-box.staff .org-icon {
+        font-size: 2em;
+    }
+
+    /* Title */
+    .org-title {
+        font-weight: bold;
+        font-size: 1em;
+        color: #0D2A4C;
+        margin-bottom: 8px;
+    }
+
+    .org-box.staff .org-title {
+        font-size: 0.9em;
+    }
+
+    /* Name */
+    .org-name {
+        color: #666;
+        font-size: 0.95em;
+        font-weight: 500;
+    }
+
+    /* Count for Staff */
+    .org-count {
+        color: #ffc107;
+        font-size: 0.9em;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    /* Connector Lines */
+    .connector-line {
+        background-color: #cbd5e0;
+    }
+
+    .connector-line.vertical {
+        width: 3px;
+        height: 40px;
+        margin: 0 auto;
+    }
+
+    .connector-line.vertical-short {
+        width: 3px;
+        height: 30px;
+        margin: 0 auto;
+    }
+
+    .connector-line.vertical-medium {
+        width: 3px;
+        height: 35px;
+        margin: 0 auto;
+    }
+
+    .connector-line.horizontal {
+        height: 3px;
+        width: 700px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .org-row {
+            gap: 20px;
+        }
+
+        .org-box {
+            min-width: 180px;
+            padding: 20px;
+        }
+
+        .connector-line.horizontal {
+            width: 600px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .org-row {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .staff-row {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .connector-line.horizontal {
+            display: none;
+        }
+
+        .org-box {
+            min-width: 250px;
+        }
+
+        .org-box.staff {
+            min-width: 140px;
+        }
+    }
+</style>
 {% endblock %}

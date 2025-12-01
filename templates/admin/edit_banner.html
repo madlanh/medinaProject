@@ -3,44 +3,122 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 800px; margin-top: 50px;">
+<div class="container" style="max-width: 800px; margin: 50px auto 100px; padding: 0 15px;">
     <h1 style="color: #343a40;">{{ title }}</h1>
+    <p><a href="{{ url_for('manage_banner') }}" style="color: #007bff; text-decoration: none;">← Kembali ke Daftar Banner</a></p>
     <hr style="margin-bottom: 30px;">
 
-    <form method="POST" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="judul" style="display: block; margin-bottom: 5px; font-weight: bold;">Judul Banner</label>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dee2e6;">
+        
+        <h3 style="margin-top: 0; color: #e83e8c; margin-bottom: 25px;">🎨 Informasi Banner</h3>
+
+        <div style="margin-bottom: 20px;">
+            <label for="judul" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Judul Banner</label>
             <input type="text" id="judul" name="judul" required 
-                   value="{{ banner.judul if banner else '' }}"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+                   value="{% if banner %}{{ banner.judul }}{% endif %}"
+                   placeholder="Contoh: Selamat Datang di SMA Medina"
+                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
         </div>
 
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="subjudul" style="display: block; margin-bottom: 5px; font-weight: bold;">Subjudul</label>
-            <input type="text" id="subjudul" name="subjudul" required 
-                   value="{{ banner.subjudul if banner else '' }}"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        <div style="margin-bottom: 20px;">
+            <label for="subjudul" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Sub Judul</label>
+            <textarea id="subjudul" name="subjudul" required rows="3"
+                   placeholder="Deskripsi singkat untuk banner"
+                   style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if banner %}{{ banner.subjudul }}{% endif %}</textarea>
         </div>
 
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="image_num" style="display: block; margin-bottom: 5px; font-weight: bold;">Nomor Gambar (1-10)</label>
-            <input type="number" id="image_num" name="image_num" min="1" max="10"
-                   value="{{ banner.image_num if banner else '1' }}"
-                   style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Status Banner</label>
+            <div style="display: flex; gap: 20px;">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="radio" name="aktif" value="true" {% if not banner or banner.aktif %}checked{% endif %} style="margin-right: 8px;">
+                    <span style="color: #155724;">✅ Aktif</span>
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="radio" name="aktif" value="false" {% if banner and not banner.aktif %}checked{% endif %} style="margin-right: 8px;">
+                    <span style="color: #721c24;">❌ Nonaktif</span>
+                </label>
+            </div>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label style="display: flex; align-items: center; cursor: pointer;">
-                <input type="checkbox" name="aktif" {% if banner and banner.aktif %}checked{% endif %}
-                       style="margin-right: 10px; width: 18px; height: 18px; cursor: pointer;">
-                <span style="font-weight: bold;">Banner Aktif (tampilkan di beranda)</span>
+        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #e83e8c;">🖼️ Gambar Banner</h3>
+
+        <div style="margin-bottom: 25px;">
+            <label for="foto" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">
+                Pilih Gambar Banner
+                <span style="color: #6c757d; font-weight: normal; font-size: 0.9em;">(JPG, PNG, ukuran 1920x600px optimal)</span>
             </label>
+            
+            {% if banner %}
+            <div style="margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 2px dashed #dee2e6;">
+                <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #6c757d;">📷 Banner saat ini:</p>
+                <img src="/static/images/banner{{ banner.id }}.jpg" alt="Preview" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            {% endif %}
+
+            <div style="position: relative;">
+                <input type="file" id="foto" name="foto" accept="image/jpeg,image/png,image/jpg"
+                       style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; cursor: pointer; transition: border-color 0.3s ease;">
+                <small style="display: block; margin-top: 8px; color: #6c757d;">
+                    💡 Upload gambar baru atau biarkan kosong untuk menggunakan gambar yang ada
+                </small>
+            </div>
         </div>
 
-        <button type="submit" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
-            {% if banner %}Perbarui Banner{% else %}Tambah Banner{% endif %}
-        </button>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button type="submit" style="padding: 14px 35px; background: linear-gradient(135deg, #e83e8c, #c2185b); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(232,62,140,0.3); transition: all 0.3s ease;">
+                {% if banner %}💾 Perbarui Banner{% else %}➕ Tambah Banner{% endif %}
+            </button>
+            
+            <a href="{{ url_for('manage_banner') }}" style="padding: 14px 35px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
+                ❌ Batal
+            </a>
+        </div>
     </form>
-    <p style="margin-top: 20px;"><a href="{{ url_for('manage_banner') }}" style="color: #6c757d; text-decoration: none;">← Kembali ke Daftar Banner</a></p>
 </div>
+
+<style>
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #e83e8c !important;
+        box-shadow: 0 0 0 3px rgba(232,62,140,0.1);
+    }
+    
+    button[type="submit"]:hover {
+        background: linear-gradient(135deg, #c2185b, #a0155f) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(232,62,140,0.4) !important;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 8px 15px;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button:hover {
+        background: linear-gradient(135deg, #0056b3, #004085);
+    }
+</style>
 {% endblock %}
