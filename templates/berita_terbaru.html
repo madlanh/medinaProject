@@ -45,8 +45,8 @@
 
                 <div class="news-footer">
                     <span class="news-date">📖 {{ item.tanggal.strftime('%d %B %Y') }}</span>
-                    <a href="#" class="read-more-link">
-                        Baca <span class="arrow">→</span>
+                    <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}" class="read-more-link">
+                        Baca Selengkapnya <span class="arrow">→</span>
                     </a>
                 </div>
             </div>
