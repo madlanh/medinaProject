@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template
-from app.models.models import Berita, Banner, Prestasi, AlumniTestimoni, SekolahInfo, Organisasi, Agenda, Galeri, Ekstrakurikuler, Laboratorium, PerpustakaanInfo
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from app.models.models import Berita, Banner, Prestasi, AlumniTestimoni, SekolahInfo, Organisasi, Agenda, Galeri, Ekstrakurikuler, Laboratorium, PerpustakaanInfo, LaboratoriumFasilitas
 from app.utils.helpers import categorize_agenda
 
 public_bp = Blueprint('public', __name__)
@@ -109,3 +109,27 @@ def perpustakaan():
     }
     
     return render_template('perpustakaan.html', title='Perpustakaan', perpustakaan=perpus_data)
+
+@public_bp.route('/berita/<int:berita_id>')
+def berita_detail(berita_id):
+    berita = Berita.query.get_or_404(berita_id)
+    berita_lain = Berita.query.filter(Berita.id != berita_id).order_by(Berita.tanggal.desc()).limit(5).all()
+    return render_template('berita_detail.html', title=berita.judul, berita=berita, berita_lain=berita_lain)
+
+@public_bp.route('/ekstrakurikuler/daftar/<int:ekskul_id>', methods=['GET', 'POST'])
+def daftar_ekskul(ekskul_id):
+    ekskul = Ekstrakurikuler.query.get_or_404(ekskul_id)
+    
+    if request.method == 'POST':
+        nama_siswa = request.form.get('nama')
+        kelas = request.form.get('kelas')
+        
+        flash(f'Terima kasih {nama_siswa}! Formulir pendaftaran {ekskul.nama} berhasil dikirim. Pembina akan segera menghubungi Anda.', 'success')
+        return redirect(url_for('public.ekstrakurikuler'))
+        
+    return render_template('daftar_ekskul.html', title=f'Daftar {ekskul.nama}', ekskul=ekskul)
+
+@public_bp.route('/laboratorium/<int:lab_id>')
+def laboratorium_detail(lab_id):
+    lab = Laboratorium.query.get_or_404(lab_id)
+    return render_template('laboratorium_detail.html', title=lab.nama, lab=lab)
