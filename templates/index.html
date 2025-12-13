@@ -117,9 +117,10 @@
                         📅 {{ item.tanggal.strftime('%d %B %Y') if item.tanggal is defined and item.tanggal.strftime
                         else item.tanggal }}
                     </div>
-                    <h3
-                        style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.3em; line-height: 1.4; height: 65px; overflow: hidden;">
-                        {{ item.judul }}
+                    <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.3em; line-height: 1.4; height: 65px; overflow: hidden;">
+                            <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}" style="text-decoration: none; color: inherit;">
+                                {{ item.judul }}
+                            </a>
                     </h3>
                     <p
                         style="color: #666; margin: 0; line-height: 1.6; font-size: 0.95em; height: 75px; overflow: hidden;">
