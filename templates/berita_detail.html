@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ berita.judul }} - SMA Medina Bandung{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 50px; margin-bottom: 80px;">
+    <div class="news-layout" style="display: flex; gap: 40px; flex-wrap: wrap;">
+        
+        <div class="main-content" style="flex: 3; min-width: 300px;">
+            <div style="margin-bottom: 20px;">
+                <span style="background-color: #e7f3ff; color: #0056b3; padding: 5px 12px; border-radius: 15px; font-size: 0.9em;">
+                    📅 {{ berita.tanggal.strftime('%d %B %Y') }}
+                </span>
+            </div>
+            
+            <h1 style="color: #0D2A4C; margin-bottom: 20px; font-size: 2.2em;">{{ berita.judul }}</h1>
+            
+            <div style="width: 100%; height: 400px; background-color: #eee; border-radius: 15px; margin-bottom: 30px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                {% if berita.image_url %}
+                    <img src="{{ url_for('static', filename='images/sch-pic' ~ berita.image_url ~ '.jpg') }}" alt="{{ berita.judul }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <span style="font-size: 5em;">📰</span>
+                {% endif %}
+            </div>
+
+            <div class="news-body" style="line-height: 1.8; color: #444; font-size: 1.1em; text-align: justify;">
+                {{ berita.konten_lengkap | safe }}
+            </div>
+            
+            <hr style="margin: 40px 0;">
+            <a href="{{ url_for('public.berita_terbaru') }}" style="text-decoration: none; font-weight: bold; color: #28a745;">← Kembali ke Daftar Berita</a>
+        </div>
+
+        <div class="sidebar" style="flex: 1; min-width: 250px;">
+            <h3 style="color: #0D2A4C; border-bottom: 3px solid #28a745; padding-bottom: 10px; margin-bottom: 20px;">Berita Lainnya</h3>
+            <div class="sidebar-list">
+                {% for item in berita_lain %}
+                <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd;">
+                    <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}" style="text-decoration: none; color: #333; font-weight: bold; display: block; margin-bottom: 5px; transition: color 0.3s;">
+                        {{ item.judul }}
+                    </a>
+                    <small style="color: #888;">{{ item.tanggal.strftime('%d %b %Y') }}</small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
