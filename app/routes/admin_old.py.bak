@@ -3,7 +3,7 @@ from app import db
 from app.models.models import (
     Berita, Agenda, Galeri, Ekstrakurikuler, Laboratorium, LaboratoriumFasilitas,
     Banner, SekolahInfo, PerpustakaanInfo, PerpustakaanFasilitas, PerpustakaanLayanan,
-    Organisasi
+    Organisasi, Prestasi, AlumniTestimoni
 )
 from app.utils.decorators import login_required
 from datetime import datetime
@@ -17,7 +17,9 @@ def dashboard():
         'total_berita': Berita.query.count(),
         'total_agenda': Agenda.query.count(),
         'total_galeri': Galeri.query.count(),
-        'total_ekstrakurikuler': Ekstrakurikuler.query.count()
+        'total_ekstrakurikuler': Ekstrakurikuler.query.count(),
+        'total_prestasi': Prestasi.query.count(),
+        'total_alumni': AlumniTestimoni.query.count()
     }
     return render_template('admin_dashboard.html', stats=stats)
 
@@ -698,3 +700,141 @@ def delete_organisasi(org_id):
         db.session.rollback()
         flash(f'Gagal menghapus anggota: {e}', 'danger')
     return redirect(url_for('admin.manage_organisasi'))
+
+# =================================================================
+#           CRUD PRESTASI
+# =================================================================
+
+@admin_bp.route('/prestasi')
+@login_required
+def manage_prestasi():
+    prestasi_list = Prestasi.query.order_by(Prestasi.tanggal.desc()).all()
+    return render_template('admin/manage_prestasi.html', prestasi_list=prestasi_list)
+
+@admin_bp.route('/prestasi/create', methods=['GET', 'POST'])
+@login_required
+def create_prestasi():
+    if request.method == 'POST':
+        try:
+            tanggal_str = request.form.get('tanggal')
+            tanggal = datetime.strptime(tanggal_str, '%Y-%m-%d').date() if tanggal_str else None
+            
+            new_prestasi = Prestasi(
+                nama_prestasi=request.form['nama_prestasi'],
+                skala=request.form['skala'],
+                tanggal=tanggal,
+                penyelenggara=request.form['penyelenggara'],
+                keterangan=request.form.get('keterangan', '')
+            )
+            db.session.add(new_prestasi)
+            db.session.commit()
+            flash('Prestasi baru berhasil ditambahkan!', 'success')
+            return redirect(url_for('admin.manage_prestasi'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Gagal menambahkan prestasi: {e}', 'danger')
+    return render_template('admin/edit_prestasi.html', title='Tambah Prestasi', prestasi=None)
+
+@admin_bp.route('/prestasi/edit/<int:prestasi_id>', methods=['GET', 'POST'])
+@login_required
+def edit_prestasi(prestasi_id):
+    prestasi = Prestasi.query.get_or_404(prestasi_id)
+    
+    if request.method == 'POST':
+        try:
+            tanggal_str = request.form.get('tanggal')
+            prestasi.nama_prestasi = request.form['nama_prestasi']
+            prestasi.skala = request.form['skala']
+            prestasi.tanggal = datetime.strptime(tanggal_str, '%Y-%m-%d').date() if tanggal_str else None
+            prestasi.penyelenggara = request.form['penyelenggara']
+            prestasi.keterangan = request.form.get('keterangan', '')
+            db.session.commit()
+            flash('Prestasi berhasil diperbarui!', 'success')
+            return redirect(url_for('admin.manage_prestasi'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Gagal memperbarui prestasi: {e}', 'danger')
+
+    return render_template('admin/edit_prestasi.html', title=f'Edit Prestasi: {prestasi.nama_prestasi}', prestasi=prestasi)
+
+@admin_bp.route('/prestasi/delete/<int:prestasi_id>', methods=['POST'])
+@login_required
+def delete_prestasi(prestasi_id):
+    prestasi = Prestasi.query.get_or_404(prestasi_id)
+    try:
+        db.session.delete(prestasi)
+        db.session.commit()
+        flash(f'Prestasi "{prestasi.nama_prestasi}" berhasil dihapus.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Gagal menghapus prestasi: {e}', 'danger')
+    return redirect(url_for('admin.manage_prestasi'))
+
+# =================================================================
+#           CRUD ALUMNI TESTIMONI
+# =================================================================
+
+@admin_bp.route('/alumni')
+@login_required
+def manage_alumni():
+    alumni_list = AlumniTestimoni.query.order_by(AlumniTestimoni.tahun_lulus.desc()).all()
+    return render_template('admin/manage_alumni.html', alumni_list=alumni_list)
+
+@admin_bp.route('/alumni/create', methods=['GET', 'POST'])
+@login_required
+def create_alumni():
+    if request.method == 'POST':
+        try:
+            tahun_lulus_str = request.form.get('tahun_lulus')
+            new_alumni = AlumniTestimoni(
+                nama=request.form['nama'],
+                tahun_lulus=int(tahun_lulus_str) if tahun_lulus_str else None,
+                testimoni=request.form['testimoni'],
+                status_saat_ini=request.form['status_saat_ini'],
+                image_url=request.form.get('image_url', ''),
+                is_featured='is_featured' in request.form
+            )
+            db.session.add(new_alumni)
+            db.session.commit()
+            flash('Alumni testimoni baru berhasil ditambahkan!', 'success')
+            return redirect(url_for('admin.manage_alumni'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Gagal menambahkan alumni: {e}', 'danger')
+    return render_template('admin/edit_alumni.html', title='Tambah Alumni Testimoni', alumni=None)
+
+@admin_bp.route('/alumni/edit/<int:alumni_id>', methods=['GET', 'POST'])
+@login_required
+def edit_alumni(alumni_id):
+    alumni = AlumniTestimoni.query.get_or_404(alumni_id)
+    
+    if request.method == 'POST':
+        try:
+            tahun_lulus_str = request.form.get('tahun_lulus')
+            alumni.nama = request.form['nama']
+            alumni.tahun_lulus = int(tahun_lulus_str) if tahun_lulus_str else None
+            alumni.testimoni = request.form['testimoni']
+            alumni.status_saat_ini = request.form['status_saat_ini']
+            alumni.image_url = request.form.get('image_url', '')
+            alumni.is_featured = 'is_featured' in request.form
+            db.session.commit()
+            flash('Data alumni berhasil diperbarui!', 'success')
+            return redirect(url_for('admin.manage_alumni'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Gagal memperbarui data alumni: {e}', 'danger')
+
+    return render_template('admin/edit_alumni.html', title=f'Edit Alumni: {alumni.nama}', alumni=alumni)
+
+@admin_bp.route('/alumni/delete/<int:alumni_id>', methods=['POST'])
+@login_required
+def delete_alumni(alumni_id):
+    alumni = AlumniTestimoni.query.get_or_404(alumni_id)
+    try:
+        db.session.delete(alumni)
+        db.session.commit()
+        flash(f'Alumni "{alumni.nama}" berhasil dihapus.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Gagal menghapus alumni: {e}', 'danger')
+    return redirect(url_for('admin.manage_alumni'))

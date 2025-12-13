@@ -50,6 +50,16 @@
             <h2 style="margin: 0; font-size: 2.5em;">{{ stats.total_ekstrakurikuler }}</h2>
             <p style="margin: 10px 0 0 0; font-size: 1em;">Ekstrakurikuler</p>
         </div>
+        <div
+            style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;">
+            <h2 style="margin: 0; font-size: 2.5em;">{{ stats.total_prestasi }}</h2>
+            <p style="margin: 10px 0 0 0; font-size: 1em;">Total Prestasi</p>
+        </div>
+        <div
+            style="background: linear-gradient(135deg, #6610f2 0%, #5a0fc7 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;">
+            <h2 style="margin: 0; font-size: 2.5em;">{{ stats.total_alumni }}</h2>
+            <p style="margin: 10px 0 0 0; font-size: 1em;">Alumni Testimoni</p>
+        </div>
     </div>
 
     <h2 style="margin-bottom: 20px; color: #0D2A4C;">Kelola Konten</h2>
@@ -135,6 +145,24 @@
             <a href="{{ url_for('admin.manage_profil_sekolah') }}"
                 style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #0D2A4C; color: white; text-decoration: none; border-radius: 5px;">
                 Kelola Profil Sekolah
+            </a>
+        </div>
+
+        <div style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: white;">
+            <h3 style="margin-top: 0; color: #0D2A4C;">🏆 Prestasi</h3>
+            <p style="color: #6c757d;">Kelola data prestasi sekolah yang ditampilkan di beranda.</p>
+            <a href="{{ url_for('admin.manage_prestasi') }}"
+                style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #0D2A4C; color: white; text-decoration: none; border-radius: 5px;">
+                Kelola Prestasi
+            </a>
+        </div>
+
+        <div style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: white;">
+            <h3 style="margin-top: 0; color: #0D2A4C;">🎓 Alumni Testimoni</h3>
+            <p style="color: #6c757d;">Kelola testimoni alumni yang ditampilkan di beranda.</p>
+            <a href="{{ url_for('admin.manage_alumni') }}"
+                style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #0D2A4C; color: white; text-decoration: none; border-radius: 5px;">
+                Kelola Alumni
             </a>
         </div>
 

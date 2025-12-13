@@ -11,7 +11,7 @@ def create_app(config_class=Config):
     db.init_app(app)
 
     from app.routes.public import public_bp
-    from app.routes.admin import admin_bp
+    from app.routes.admin import admin_bp  # Now imports from admin package
     from app.routes.auth import auth_bp
 
     app.register_blueprint(public_bp)

@@ -44,8 +44,8 @@ def organisasi():
 
 @public_bp.route('/berita-terbaru')
 def berita_terbaru():
-    all_berita = Berita.query.order_by(Berita.tanggal.desc()).all()
-    return render_template('berita_terbaru.html', title='Berita Terbaru', all_berita=all_berita)
+    berita_list = Berita.query.order_by(Berita.tanggal.desc()).all()
+    return render_template('berita_terbaru.html', title='Berita Terbaru', berita_list=berita_list)
 
 @public_bp.route('/info-sekolah')
 def info_sekolah():
@@ -54,13 +54,10 @@ def info_sekolah():
 
 @public_bp.route('/agenda')
 def agenda():
-    all_agenda = Agenda.query.order_by(Agenda.tanggal).all()
-    past, today, future = categorize_agenda(all_agenda)
+    agenda_list = Agenda.query.order_by(Agenda.tanggal.desc()).all()
     return render_template('agenda.html', 
                            title='Agenda Sekolah',
-                           past_agenda=past,
-                           today_agenda=today,
-                           future_agenda=future)
+                           agenda_list=agenda_list)
 
 @public_bp.route('/galeri')
 def galeri():

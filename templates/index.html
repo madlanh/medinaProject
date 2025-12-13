@@ -5,7 +5,33 @@
 {% block content %}
 <!-- Hero Banner Slider (Modern + Auto Slide) -->
 <div class="slider-container" style="position: relative; height: 500px; overflow: hidden; margin-bottom: 30px;">
-    <!-- Slide 1 -->
+    {% if banners %}
+    <!-- Dynamic Slides from Database -->
+    {% set gradient_colors = [
+    'rgba(13,42,76,0.9), rgba(23,162,184,0.8)',
+    'rgba(40,167,69,0.9), rgba(32,201,151,0.8)',
+    'rgba(102,16,242,0.9), rgba(90,15,199,0.8)',
+    'rgba(220,53,69,0.9), rgba(253,126,20,0.8)',
+    'rgba(0,123,255,0.9), rgba(0,199,255,0.8)'
+    ] %}
+    {% for banner in banners %}
+    <div class="slide fade"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, {{ gradient_colors[loop.index0 % gradient_colors|length] }}), url('{{ banner.image_url if banner.image_url and banner.image_url.startswith('http') else url_for('static', filename='images/sch-pic' ~ ((loop.index0 % 3) + 1) ~ '.jpg') }}') center/cover; display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
+                <h1
+                    style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">
+                    {{ banner.judul }}</h1>
+                <p
+                    style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">
+                    {{ banner.subjudul }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <!-- Default Slide if No Banners in Database -->
     <div class="slide fade"
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
         <div
@@ -17,53 +43,10 @@
                 <p
                     style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">
                     Sekolah Menengah Atas Swasta di Jantung Kota Bandung</p>
-                <a href="{{ url_for('public.index', _anchor='prestasi') }}"
-                    style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(255,193,7,0.4); transition: all 0.3s ease; animation: fadeInUp 1.4s ease;">
-                    🏆 Lihat Prestasi
-                </a>
             </div>
         </div>
     </div>
-
-    <!-- Slide 2 -->
-    <div class="slide fade"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
-        <div
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(40,167,69,0.9), rgba(32,201,151,0.8)), url('{{ url_for('static', filename='images/sch-pic2.jpg') }}') center/cover; display: flex; align-items: center; justify-content: center;">
-            <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
-                <h1
-                    style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">
-                    Penerimaan Siswa Baru</h1>
-                <p
-                    style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">
-                    Pendaftaran untuk tahun ajaran baru telah dibuka. Bergabunglah dengan kami!</p>
-                <a href="{{ url_for('public.index', _anchor='kontak') }}"
-                    style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #28a745, #20c997); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(40,167,69,0.4); transition: all 0.3s ease; animation: fadeInUp 1.4s ease;">
-                    📝 Info Pendaftaran
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="slide fade"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
-        <div
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(102,16,242,0.9), rgba(90,15,199,0.8)), url('{{ url_for('static', filename='images/sch-pic3.jpg') }}') center/cover; display: flex; align-items: center; justify-content: center;">
-            <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
-                <h1
-                    style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">
-                    Membentuk Generasi Unggul</h1>
-                <p
-                    style="font-size: 1.3em; margin: 0 0 30px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); animation: fadeInUp 1.2s ease;">
-                    Berakhlak Mulia dan Berprestasi</p>
-                <a href="{{ url_for('public.sejarah') }}"
-                    style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(102,16,242,0.4); transition: all 0.3s ease; animation: fadeInUp 1.4s ease;">
-                    📖 Kenali Kami
-                </a>
-            </div>
-        </div>
-    </div>
+    {% endif %}
 
     <!-- Navigation Arrows -->
     <a class="prev" onclick="plusSlides(-1)"
@@ -75,15 +58,16 @@
         &#10095;
     </a>
 
-    <!-- Dots Indicator -->
+    <!-- Dots Indicator (Dynamic) -->
     <div
         style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100;">
+        {% for banner in banners %}
+        <span class="dot" onclick="currentSlide({{ loop.index }})"
+            style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
+        {% else %}
         <span class="dot" onclick="currentSlide(1)"
             style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
-        <span class="dot" onclick="currentSlide(2)"
-            style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
-        <span class="dot" onclick="currentSlide(3)"
-            style="height: 15px; width: 15px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease;"></span>
+        {% endfor %}
     </div>
 </div>
 
@@ -180,7 +164,8 @@
                 <div class="prestasi-card"
                     style="min-width: 350px; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #ffc107; flex-shrink: 0;">
                     <div style="font-size: 3em; margin-bottom: 15px; text-align: center;">🏆</div>
-                    <h4 style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.3em; text-align: center;">{{ item.nama
+                    <h4 style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.3em; text-align: center;">{{
+                        item.nama_prestasi
                         }}</h4>
                     <div style="text-align: center; margin-bottom: 10px;">
                         <span
@@ -231,7 +216,8 @@
                     <div style="text-align: center; padding-top: 15px; border-top: 2px solid #f0f0f0;">
                         <p style="margin: 0; color: #0D2A4C; font-weight: bold; font-size: 1.1em;">{{ alumni_item.nama
                             }}</p>
-                        <p style="margin: 5px 0 0 0; color: #6610f2; font-size: 0.9em;">{{ alumni_item.status }}</p>
+                        <p style="margin: 5px 0 0 0; color: #6610f2; font-size: 0.9em;">{{ alumni_item.status_saat_ini
+                            }}</p>
                     </div>
                 </div>
                 {% endfor %}

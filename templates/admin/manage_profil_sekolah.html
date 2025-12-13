@@ -107,11 +107,26 @@
                 </span>
             </div>
 
-            <style>
-                /* Hover effects */
-                div[style*="border-left: 5px solid"]:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-                }
-            </style>
-            {% endblock %}
+            <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.4em;">Struktur Organisasi</h3>
+
+            <p style="color: #666; margin-bottom: 25px; line-height: 1.6; font-size: 0.95em; min-height: 50px;">
+                Kelola data struktur organisasi dan personil sekolah.
+            </p>
+
+            <a href="{{ url_for('admin.manage_organisasi') }}"
+                style="display: block; text-align: center; padding: 14px 0; background: linear-gradient(135deg, #17a2b8, #138496); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(23,162,184,0.3);">
+                ✏️ Kelola Organisasi
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    /* Hover effects */
+    div[style*="border-left: 5px solid"]:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
+{% endblock %}

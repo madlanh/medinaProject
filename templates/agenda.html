@@ -7,8 +7,11 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">📅 Agenda Sekolah</h1>
-        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #007bff, #0056b3); margin: 0 auto 15px; border-radius: 2px;"></div>
-        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Jadwal kegiatan dan acara penting SMA Medina Bandung</p>
+        <div
+            style="width: 100px; height: 4px; background: linear-gradient(90deg, #007bff, #0056b3); margin: 0 auto 15px; border-radius: 2px;">
+        </div>
+        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Jadwal kegiatan dan acara penting
+            SMA Medina Bandung</p>
     </div>
 
     {% if agenda_list %}
@@ -32,11 +35,11 @@
                     </div>
 
                     <h3 class="agenda-title">{{ agenda.judul }}</h3>
-                    
+
                     <div class="agenda-meta">
                         <div class="meta-item">
                             <span class="meta-icon">🕐</span>
-                            <span>{{ agenda.waktu }}</span>
+                            <span>{{ agenda.waktu_display }}</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-icon">📍</span>
@@ -97,7 +100,7 @@
         border: 4px solid white;
         border-radius: 50%;
         transform: translateX(-50%);
-        box-shadow: 0 0 0 4px rgba(0,123,255,0.2);
+        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
         z-index: 10;
         animation: pulse 2s infinite;
     }
@@ -121,7 +124,7 @@
         background: white;
         border-radius: 20px;
         padding: 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         transition: all 0.4s ease;
     }
 
@@ -140,7 +143,7 @@
         padding: 15px 20px;
         border-radius: 15px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
     }
 
     .badge-day {
@@ -218,6 +221,7 @@
             opacity: 0;
             transform: translateY(-30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -225,18 +229,24 @@
     }
 
     @keyframes pulse {
-        0%, 100% {
-            box-shadow: 0 0 0 4px rgba(0,123,255,0.2);
+
+        0%,
+        100% {
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
         }
+
         50% {
-            box-shadow: 0 0 0 8px rgba(0,123,255,0.4);
+            box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.4);
         }
     }
 
     @keyframes bounce {
-        0%, 100% {
+
+        0%,
+        100% {
             transform: translateY(0);
         }
+
         50% {
             transform: translateY(-20px);
         }
@@ -245,7 +255,7 @@
     /* Hover Effects */
     .agenda-card:hover {
         transform: scale(1.03);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     /* Responsive */
@@ -253,11 +263,11 @@
         .timeline-line {
             left: 20px;
         }
-        
+
         .timeline-dot {
             left: 20px;
         }
-        
+
         .timeline-content {
             width: calc(100% - 60px);
             margin-left: 60px;
