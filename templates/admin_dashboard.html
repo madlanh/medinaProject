@@ -170,11 +170,17 @@
 
     <hr style="margin-top: 40px; margin-bottom: 20px;">
 
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <a href="{{ url_for('public.index') }}"
-            style="padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px;">
-            ← Lihat Situs Publik
-        </a>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; gap: 10px;">
+            <a href="{{ url_for('public.index') }}"
+                style="padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px;">
+                ← Lihat Situs Publik
+            </a>
+            <a href="{{ url_for('admin.api_docs') }}"
+                style="padding: 10px 20px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 5px;">
+                📚 API Docs
+            </a>
+        </div>
         <a href="{{ url_for('auth.logout') }}"
             style="padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px;">
             Logout Admin

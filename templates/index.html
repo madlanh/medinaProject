@@ -18,7 +18,7 @@
     <div class="slide fade"
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
         <div
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, {{ gradient_colors[loop.index0 % gradient_colors|length] }}), url('{{ banner.image_url if banner.image_url and banner.image_url.startswith('http') else url_for('static', filename='images/sch-pic' ~ ((loop.index0 % 3) + 1) ~ '.jpg') }}') center/cover; display: flex; align-items: center; justify-content: center;">
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, {{ gradient_colors[loop.index0 % gradient_colors|length] }}), url('{{ banner.image_url if banner.image_url else url_for('static', filename='images/sch-pic' ~ ((loop.index0 % 3) + 1) ~ '.jpg') }}') center/cover; display: flex; align-items: center; justify-content: center;">
             <div style="text-align: center; color: white; padding: 20px; max-width: 800px; z-index: 10;">
                 <h1
                     style="font-size: 3em; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 1s ease;">
@@ -117,10 +117,12 @@
                         📅 {{ item.tanggal.strftime('%d %B %Y') if item.tanggal is defined and item.tanggal.strftime
                         else item.tanggal }}
                     </div>
-                    <h3 style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.3em; line-height: 1.4; height: 65px; overflow: hidden;">
-                            <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}" style="text-decoration: none; color: inherit;">
-                                {{ item.judul }}
-                            </a>
+                    <h3
+                        style="margin: 0 0 15px 0; color: #0D2A4C; font-size: 1.3em; line-height: 1.4; height: 65px; overflow: hidden;">
+                        <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ item.judul }}
+                        </a>
                     </h3>
                     <p
                         style="color: #666; margin: 0; line-height: 1.6; font-size: 0.95em; height: 75px; overflow: hidden;">
@@ -251,19 +253,21 @@
                     <div style="font-size: 2.5em; margin-bottom: 10px;">📍</div>
                     <h4 style="margin: 0 0 10px 0; color: #0D2A4C;">Alamat</h4>
                     <p style="color: #666; margin: 0; line-height: 1.6; font-size: 0.95em;">
-                        Jl. KH. Ahmad Dahlan / Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung, Jawa Barat
-                        40262
+                        {{ sekolah_info.alamat if sekolah_info and sekolah_info.alamat else 'Jl. KH. Ahmad Dahlan /
+                        Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung, Jawa Barat 40262' }}
                     </p>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 2.5em; margin-bottom: 10px;">📞</div>
                     <h4 style="margin: 0 0 10px 0; color: #0D2A4C;">Telepon</h4>
-                    <p style="color: #666; margin: 0; font-size: 1.1em; font-weight: bold;">(022) 7322207</p>
+                    <p style="color: #666; margin: 0; font-size: 1.1em; font-weight: bold;">{{ sekolah_info.telepon if
+                        sekolah_info and sekolah_info.telepon else '(022) 7322207' }}</p>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 2.5em; margin-bottom: 10px;">✉️</div>
                     <h4 style="margin: 0 0 10px 0; color: #0D2A4C;">Email</h4>
-                    <p style="color: #666; margin: 0; font-size: 1.1em; font-weight: bold;">smamedinabdg@gmail.com</p>
+                    <p style="color: #666; margin: 0; font-size: 1.1em; font-weight: bold;">{{ sekolah_info.email if
+                        sekolah_info and sekolah_info.email else 'smamedinabdg@gmail.com' }}</p>
                 </div>
             </div>
         </div>

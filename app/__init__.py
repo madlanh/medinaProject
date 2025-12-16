@@ -13,9 +13,14 @@ def create_app(config_class=Config):
     from app.routes.public import public_bp
     from app.routes.admin import admin_bp  # Now imports from admin package
     from app.routes.auth import auth_bp
+    from app.routes.admin.api_docs import get_swagger_blueprint
 
     app.register_blueprint(public_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    
+    # Register Swagger UI blueprint
+    swagger_bp = get_swagger_blueprint()
+    app.register_blueprint(swagger_bp)
 
     return app

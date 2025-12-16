@@ -27,6 +27,8 @@ class SekolahInfo(db.Model):
     visi = db.Column(db.Text)
     misi = db.Column(db.Text)
     sambutan_kepsek = db.Column(db.Text)
+    foto_kepala_sekolah = db.Column(db.String(255))  # URL foto kepala sekolah
+    nama_kepala_sekolah = db.Column(db.String(100))  # Nama lengkap kepala sekolah
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 class Organisasi(db.Model):
@@ -36,6 +38,8 @@ class Organisasi(db.Model):
     jabatan = db.Column(db.String(100), nullable=False)
     level = db.Column(db.Integer, default=99)
     image_url = db.Column(db.String(255))
+    jumlah = db.Column(db.Integer, default=0)  # Staff count (for staff level)
+    emoji = db.Column(db.String(10), default='👔')  # Icon emoji
 
 class Berita(db.Model):
     __tablename__ = 'berita'

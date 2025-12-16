@@ -40,3 +40,4 @@ from app.routes.admin import profil_sekolah
 from app.routes.admin import organisasi
 from app.routes.admin import prestasi
 from app.routes.admin import alumni
+from app.routes.admin import api_docs

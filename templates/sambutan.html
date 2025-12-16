@@ -7,8 +7,11 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">💬 Sambutan Kepala Sekolah</h1>
-        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #ffc107, #ff9800); margin: 0 auto 15px; border-radius: 2px;"></div>
-        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Pesan dan harapan dari Kepala SMA Medina Bandung</p>
+        <div
+            style="width: 100px; height: 4px; background: linear-gradient(90deg, #ffc107, #ff9800); margin: 0 auto 15px; border-radius: 2px;">
+        </div>
+        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Pesan dan harapan dari Kepala SMA
+            Medina Bandung</p>
     </div>
 
     <!-- Content Box -->
@@ -16,9 +19,14 @@
         <!-- Profile Card -->
         <div class="profile-card">
             <div class="profile-image">
+                {% if info and info.foto_kepala_sekolah %}
+                <img src="{{ info.foto_kepala_sekolah }}" alt="Foto Kepala Sekolah"
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                {% else %}
                 <div class="image-placeholder">👨‍💼</div>
+                {% endif %}
             </div>
-            <h3 class="profile-name">Dr. H. Abdullah Rahman, M.Pd</h3>
+            <h3 class="profile-name">{{ info.nama_kepala_sekolah or 'Kepala Sekolah' }}</h3>
             <p class="profile-title">Kepala Sekolah</p>
             <div class="profile-quote">"Pendidikan adalah investasi terbaik untuk masa depan"</div>
         </div>
@@ -26,29 +34,35 @@
         <!-- Message Content -->
         <div class="message-content">
             <div class="greeting">Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
-            
+
             <div class="message-text">
-                {% if dummy_db and dummy_db.profil_content and dummy_db.profil_content.sambutan %}
-                    {% for paragraph in dummy_db.profil_content.sambutan.split('\n\n') %}
-                        {% if paragraph.strip() %}
-                            <p>{{ paragraph }}</p>
-                        {% endif %}
-                    {% endfor %}
+                {% if info and info.sambutan_kepsek %}
+                {% for paragraph in info.sambutan_kepsek.split('\n\n') %}
+                {% if paragraph.strip() %}
+                <p>{{ paragraph }}</p>
+                {% endif %}
+                {% endfor %}
                 {% else %}
-                    <p>Puji syukur kehadirat Allah SWT atas segala rahmat dan karunia-Nya. Shalawat serta salam semoga tercurah kepada Nabi Muhammad SAW, keluarga, dan para sahabatnya.</p>
+                <p>Puji syukur kehadirat Allah SWT atas segala rahmat dan karunia-Nya. Shalawat serta salam semoga
+                    tercurah kepada Nabi Muhammad SAW, keluarga, dan para sahabatnya.</p>
 
-                    <p>Selamat datang di website resmi SMA Medina Bandung. Sebagai Kepala Sekolah, saya merasa bangga dapat memimpin lembaga pendidikan yang telah memiliki reputasi baik dalam mencetak generasi unggul.</p>
+                <p>Selamat datang di website resmi SMA Medina Bandung. Sebagai Kepala Sekolah, saya merasa bangga dapat
+                    memimpin lembaga pendidikan yang telah memiliki reputasi baik dalam mencetak generasi unggul.</p>
 
-                    <p>SMA Medina tidak hanya fokus pada pencapaian akademik, tetapi juga pada pembentukan karakter dan akhlak mulia siswa. Kami percaya bahwa pendidikan sejati adalah yang mampu menyeimbangkan kecerdasan intelektual, emosional, dan spiritual.</p>
+                <p>SMA Medina tidak hanya fokus pada pencapaian akademik, tetapi juga pada pembentukan karakter dan
+                    akhlak mulia siswa. Kami percaya bahwa pendidikan sejati adalah yang mampu menyeimbangkan kecerdasan
+                    intelektual, emosional, dan spiritual.</p>
 
-                    <p>Kepada seluruh siswa, orang tua, dan masyarakat, mari bersama-sama kita wujudkan visi SMA Medina untuk menjadi sekolah yang unggul dan berkarakter. Semoga Allah SWT senantiasa memberkahi setiap langkah kita.</p>
+                <p>Kepada seluruh siswa, orang tua, dan masyarakat, mari bersama-sama kita wujudkan visi SMA Medina
+                    untuk menjadi sekolah yang unggul dan berkarakter. Semoga Allah SWT senantiasa memberkahi setiap
+                    langkah kita.</p>
                 {% endif %}
             </div>
 
             <div class="closing">
                 <p>Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
                 <div class="signature">
-                    <strong>Dr. H. Abdullah Rahman, M.Pd</strong><br>
+                    <strong>{{ info.nama_kepala_sekolah or 'Kepala Sekolah' }}</strong><br>
                     Kepala SMA Medina Bandung
                 </div>
             </div>
@@ -76,7 +90,7 @@
         background: white;
         padding: 30px;
         border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         text-align: center;
         height: fit-content;
         position: sticky;
@@ -92,7 +106,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 8px 25px rgba(255,193,7,0.3);
+        box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
     }
 
     .image-placeholder {
@@ -126,7 +140,7 @@
         background: white;
         padding: 40px;
         border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
 
     .greeting {
@@ -172,6 +186,7 @@
             opacity: 0;
             transform: translateY(-30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -183,6 +198,7 @@
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);

@@ -9,126 +9,88 @@
 
     <!-- Organization Chart Container -->
     <div class="org-chart">
-        
+
         <!-- Level 1: Kepala Sekolah -->
         <div class="org-level">
+            {% set kepsek = organisasi|selectattr('level', 'equalto', 1)|first %}
             <div class="org-box ceo">
-                <div class="org-icon">👨‍💼</div>
-                <div class="org-title">Kepala Sekolah</div>
-                <div class="org-name">Dr. Ahmad Hidayat, M.Pd</div>
+                <div class="org-icon">{{ kepsek.emoji if kepsek and kepsek.emoji else '👨‍💼' }}</div>
+                <div class="org-title">{{ kepsek.jabatan if kepsek else 'Kepala Sekolah' }}</div>
+                <div class="org-name">{{ kepsek.nama if kepsek else 'Belum Diisi' }}</div>
             </div>
         </div>
 
         <!-- Connector Line -->
         <div class="connector-line vertical"></div>
 
-        <!-- Level 2: Wakil Kepala Sekolah (3 Bidang) -->
+        <!-- Level 2: Wakil Kepala Sekolah -->
+        {% set wakil_list = organisasi|selectattr('level', 'equalto', 2)|list %}
+        {% if wakil_list %}
         <div class="org-level">
             <div class="connector-line horizontal"></div>
             <div class="org-row">
+                {% for wakil in wakil_list %}
                 <div class="org-box-wrapper">
                     <div class="connector-line vertical-short"></div>
                     <div class="org-box wakil">
-                        <div class="org-icon">👔</div>
-                        <div class="org-title">Wakasek Kurikulum</div>
-                        <div class="org-name">Drs. Budi Santoso, M.Pd</div>
+                        <div class="org-icon">{{ wakil.emoji if wakil.emoji else '👔' }}</div>
+                        <div class="org-title">{{ wakil.jabatan }}</div>
+                        <div class="org-name">{{ wakil.nama }}</div>
                     </div>
                 </div>
-
-                <div class="org-box-wrapper">
-                    <div class="connector-line vertical-short"></div>
-                    <div class="org-box wakil">
-                        <div class="org-icon">👔</div>
-                        <div class="org-title">Wakasek Kesiswaan</div>
-                        <div class="org-name">Siti Nurhaliza, S.Pd</div>
-                    </div>
-                </div>
-
-                <div class="org-box-wrapper">
-                    <div class="connector-line vertical-short"></div>
-                    <div class="org-box wakil">
-                        <div class="org-icon">👔</div>
-                        <div class="org-title">Wakasek Humas</div>
-                        <div class="org-name">Andi Wijaya, S.Sos</div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
 
         <!-- Level 3: Koordinator -->
+        {% set koord_list = organisasi|selectattr('level', 'equalto', 3)|list %}
+        {% if koord_list %}
         <div class="org-level">
             <div class="org-row">
-                <!-- Koordinator Akademik -->
+                {% for koord in koord_list %}
                 <div class="org-group">
                     <div class="connector-line vertical-medium"></div>
                     <div class="org-box koordinator">
-                        <div class="org-icon">📚</div>
-                        <div class="org-title">Koordinator Akademik</div>
-                        <div class="org-name">Dewi Lestari, M.Pd</div>
+                        <div class="org-icon">{{ koord.emoji if koord.emoji else '📚' }}</div>
+                        <div class="org-title">{{ koord.jabatan }}</div>
+                        <div class="org-name">{{ koord.nama }}</div>
                     </div>
                 </div>
-
-                <!-- Koordinator Ekstrakurikuler -->
-                <div class="org-group">
-                    <div class="connector-line vertical-medium"></div>
-                    <div class="org-box koordinator">
-                        <div class="org-icon">⚽</div>
-                        <div class="org-title">Koordinator Ekstrakurikuler</div>
-                        <div class="org-name">Rudi Hartono, S.Pd</div>
-                    </div>
-                </div>
-
-                <!-- Koordinator Sarana -->
-                <div class="org-group">
-                    <div class="connector-line vertical-medium"></div>
-                    <div class="org-box koordinator">
-                        <div class="org-icon">🏢</div>
-                        <div class="org-title">Koordinator Sarana</div>
-                        <div class="org-name">Agus Setiawan, S.T</div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
 
         <!-- Level 4: Staff Pendukung -->
+        {% set staff_list = organisasi|selectattr('level', 'equalto', 4)|list %}
+        {% if staff_list %}
         <div class="org-level">
             <div class="org-row staff-row">
+                {% for staff in staff_list %}
                 <div class="org-box staff">
-                    <div class="org-icon">👨‍🏫</div>
-                    <div class="org-title">Guru Mata Pelajaran</div>
-                    <div class="org-count">45 Orang</div>
+                    <div class="org-icon">{{ staff.emoji if staff.emoji else '👨‍🏫' }}</div>
+                    <div class="org-title">{{ staff.nama }}</div>
+                    <div class="org-count">{{ staff.jumlah }} Orang</div>
                 </div>
-
-                <div class="org-box staff">
-                    <div class="org-icon">👨‍💻</div>
-                    <div class="org-title">Staff TU</div>
-                    <div class="org-count">8 Orang</div>
-                </div>
-
-                <div class="org-box staff">
-                    <div class="org-icon">📖</div>
-                    <div class="org-title">Pustakawan</div>
-                    <div class="org-count">2 Orang</div>
-                </div>
-
-                <div class="org-box staff">
-                    <div class="org-icon">🔬</div>
-                    <div class="org-title">Laboran</div>
-                    <div class="org-count">3 Orang</div>
-                </div>
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
 
     </div>
 
     <!-- Info Box -->
-    <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; border-left: 5px solid #17a2b8;">
+    <div
+        style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; border-left: 5px solid #17a2b8;">
         <h3 style="margin-top: 0; color: #0D2A4C;">📋 Informasi Struktur Organisasi</h3>
         <p style="color: #666; line-height: 1.8; margin-bottom: 10px;">
-            Struktur organisasi SMA Medina Bandung dirancang untuk mendukung visi dan misi sekolah dalam menciptakan lingkungan belajar yang kondusif dan profesional.
+            Struktur organisasi SMA Medina Bandung dirancang untuk mendukung visi dan misi sekolah dalam menciptakan
+            lingkungan belajar yang kondusif dan profesional.
         </p>
         <p style="color: #666; line-height: 1.8; margin: 0;">
-            Setiap bagian memiliki tugas dan tanggung jawab yang jelas untuk memastikan terlaksananya proses pendidikan yang berkualitas.
+            Setiap bagian memiliki tugas dan tanggung jawab yang jelas untuk memastikan terlaksananya proses pendidikan
+            yang berkualitas.
         </p>
     </div>
 </div>
@@ -176,7 +138,7 @@
         background: white;
         border-radius: 15px;
         padding: 25px 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         text-align: center;
         min-width: 220px;
         transition: all 0.3s ease;
@@ -185,7 +147,7 @@
 
     .org-box:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     /* Different Levels Colors */

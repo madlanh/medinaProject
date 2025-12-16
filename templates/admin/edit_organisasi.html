@@ -38,6 +38,8 @@
             <input type="text" id="nama" name="nama" required value="{% if org %}{{ org.nama }}{% endif %}"
                 placeholder="Contoh: Dr. Budi Santoso, M.Pd"
                 style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+            <small style="color: #6c757d;">Untuk staff (level 4), ini adalah kategori/nama jabatan. Contoh: "Guru Mata
+                Pelajaran"</small>
         </div>
 
         <div style="margin-bottom: 20px;">
@@ -48,12 +50,37 @@
                 style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
         </div>
 
-        <div style="margin-bottom: 20px;">
-            <label for="level" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Level
-                Urutan (1 = Tertinggi)</label>
-            <input type="number" id="level" name="level" required
-                value="{% if org %}{{ org.level }}{% else %}99{% endif %}" placeholder="1"
-                style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+                <label for="level"
+                    style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Level</label>
+                <select id="level" name="level" required
+                    style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
+                    <option value="1" {% if org and org.level==1 %}selected{% endif %}>1 - Kepala Sekolah</option>
+                    <option value="2" {% if org and org.level==2 %}selected{% endif %}>2 - Wakil Kepala</option>
+                    <option value="3" {% if org and org.level==3 %}selected{% endif %}>3 - Koordinator</option>
+                    <option value="4" {% if org and org.level==4 %}selected{% endif %}>4 - Staff</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="emoji"
+                    style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Emoji/Ikon</label>
+                <input type="text" id="emoji" name="emoji"
+                    value="{% if org and org.emoji %}{{ org.emoji }}{% else %}👔{% endif %}" placeholder="👔"
+                    style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
+                <small style="color: #6c757d;">Emoji untuk tampilan</small>
+            </div>
+
+            <div>
+                <label for="jumlah"
+                    style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Jumlah
+                    (Staff)</label>
+                <input type="number" id="jumlah" name="jumlah"
+                    value="{% if org %}{{ org.jumlah or 0 }}{% else %}0{% endif %}" placeholder="0"
+                    style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
+                <small style="color: #6c757d;">Hanya untuk level Staff (4)</small>
+            </div>
         </div>
 
         <div style="display: flex; gap: 15px; align-items: center;">

@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}API Documentation - SMA Medina{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 30px; margin-bottom: 100px; padding: 0 20px;">
+    <h1 style="color: #343a40;">📚 API Documentation</h1>
+    <p><a href="{{ url_for('admin.dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke
+            Dashboard</a></p>
+    <hr style="margin-bottom: 30px;">
+
+    <!-- Info Box -->
+    <div
+        style="padding: 20px; background: linear-gradient(135deg, #e7f3ff, #d4edfc); border-left: 4px solid #007bff; border-radius: 8px; margin-bottom: 30px;">
+        <h4 style="margin: 0 0 10px 0; color: #0056b3;">ℹ️ Tentang API</h4>
+        <p style="margin: 0; color: #666;">
+            REST API ini digunakan untuk manajemen konten website SMA Medina Bandung.
+            Semua endpoint memerlukan autentikasi (login sebagai admin).
+        </p>
+        <p style="margin: 10px 0 0 0;">
+            <a href="{{ url_for('admin.api_spec') }}" target="_blank"
+                style="color: #007bff; text-decoration: none; font-weight: bold;">
+                📄 Download OpenAPI Spec (JSON)
+            </a>
+        </p>
+    </div>
+
+    <!-- Banner API -->
+    <div
+        style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border-left: 5px solid #007bff;">
+        <h3 style="margin: 0 0 20px 0; color: #007bff;">🖼️ Banner API</h3>
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Method</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Endpoint</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">GET</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">/admin/api/banners
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Mendapatkan semua banner</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #ffc107; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">POST</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">/admin/api/banners
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Membuat banner baru (form-data: gambar,
+                        judul, subjudul)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">GET</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">
+                        /admin/api/banners/{id}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Mendapatkan banner berdasarkan ID</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #17a2b8; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">PUT</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">
+                        /admin/api/banners/{id}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Update banner</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #dc3545; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">DELETE</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">
+                        /admin/api/banners/{id}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Hapus banner</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;"><span
+                            style="background: #ffc107; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">POST</span>
+                    </td>
+                    <td style="padding: 12px; font-family: monospace;">/admin/api/banners/{id}/toggle</td>
+                    <td style="padding: 12px;">Toggle status aktif banner</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Galeri API -->
+    <div
+        style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border-left: 5px solid #ffc107;">
+        <h3 style="margin: 0 0 20px 0; color: #ffc107;">📸 Galeri API</h3>
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Method</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Endpoint</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">GET</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">/admin/api/galeri
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Mendapatkan semua foto galeri</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #ffc107; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">POST</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">/admin/api/galeri
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Tambah foto baru (form-data: foto, judul,
+                        kategori, tanggal, deskripsi)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">GET</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">
+                        /admin/api/galeri/{id}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Mendapatkan foto berdasarkan ID</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #17a2b8; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">PUT</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">
+                        /admin/api/galeri/{id}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Update foto</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;"><span
+                            style="background: #dc3545; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">DELETE</span>
+                    </td>
+                    <td style="padding: 12px; font-family: monospace;">/admin/api/galeri/{id}</td>
+                    <td style="padding: 12px;">Hapus foto</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sambutan API -->
+    <div
+        style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border-left: 5px solid #28a745;">
+        <h3 style="margin: 0 0 20px 0; color: #28a745;">👔 Sambutan Kepala Sekolah API</h3>
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Method</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Endpoint</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><span
+                            style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">GET</span>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-family: monospace;">
+                        /admin/api/sambutan</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">Mendapatkan data sambutan kepala sekolah
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;"><span
+                            style="background: #17a2b8; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">PUT</span>
+                    </td>
+                    <td style="padding: 12px; font-family: monospace;">/admin/api/sambutan</td>
+                    <td style="padding: 12px;">Update sambutan (form-data: foto_kepsek, nama_kepsek, konten)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Response Format -->
+    <div
+        style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #6c757d;">
+        <h3 style="margin: 0 0 20px 0; color: #333;">📋 Response Format</h3>
+
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; overflow-x: auto;">
+            <pre style="margin: 0; font-family: 'Courier New', monospace; font-size: 0.9em; color: #333;"><code>{
+  "success": true,
+  "data": { ... },  // Data response (optional)
+  "message": "..."   // Success message (optional)
+}
+
+// Error response:
+{
+  "success": false,
+  "error": "Error message"
+}</code></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

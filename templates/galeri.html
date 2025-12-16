@@ -7,8 +7,11 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">🖼️ Galeri Foto</h1>
-        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #ffc107, #ff9800); margin: 0 auto 15px; border-radius: 2px;"></div>
-        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Dokumentasi kegiatan dan momen berharga SMA Medina Bandung</p>
+        <div
+            style="width: 100px; height: 4px; background: linear-gradient(90deg, #ffc107, #ff9800); margin: 0 auto 15px; border-radius: 2px;">
+        </div>
+        <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Dokumentasi kegiatan dan momen
+            berharga SMA Medina Bandung</p>
     </div>
 
     <!-- Category Filter -->
@@ -29,7 +32,12 @@
             <div class="gallery-card">
                 <!-- Image Container -->
                 <div class="gallery-image">
+                    {% if item.image_url %}
+                    <img src="{{ item.image_url }}" alt="{{ item.judul }}"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
                     <div class="image-placeholder">🖼️</div>
+                    {% endif %}
                     <div class="gallery-overlay">
                         <div class="overlay-content">
                             <h3>{{ item.judul }}</h3>
@@ -37,32 +45,27 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Info -->
                 <div class="gallery-info">
-                    <span class="gallery-category" 
-                          {% if item.kategori == 'Kegiatan' %}
-                          style="background: #17a2b8;"
-                          {% elif item.kategori == 'Prestasi' %}
-                          style="background: #ffc107;"
-                          {% else %}
-                          style="background: #28a745;"
-                          {% endif %}>
+                    <span class="gallery-category" {% if item.kategori=='Kegiatan' %} style="background: #17a2b8;" {%
+                        elif item.kategori=='Prestasi' %} style="background: #ffc107;" {% else %}
+                        style="background: #28a745;" {% endif %}>
                         {{ item.kategori }}
                     </span>
                     <h3 class="gallery-title">
                         {% if item.judul|length > 40 %}
-                            {{ item.judul[:40] }}...
+                        {{ item.judul[:40] }}...
                         {% else %}
-                            {{ item.judul }}
+                        {{ item.judul }}
                         {% endif %}
                     </h3>
                     <p class="gallery-date">📅 {{ item.tanggal.strftime('%d %B %Y') }}</p>
                     <p class="gallery-desc">
                         {% if item.deskripsi|length > 60 %}
-                            {{ item.deskripsi[:60] }}...
+                        {{ item.deskripsi[:60] }}...
                         {% else %}
-                            {{ item.deskripsi }}
+                        {{ item.deskripsi }}
                         {% endif %}
                     </p>
                 </div>
@@ -112,7 +115,7 @@
         background: linear-gradient(135deg, #ffc107, #ff9800);
         color: white;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255,193,7,0.4);
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
     }
 
     .gallery-grid {
@@ -129,7 +132,7 @@
         background: white;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         transition: all 0.4s ease;
     }
 
@@ -157,7 +160,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.8);
+        background: rgba(0, 0, 0, 0.8);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -248,6 +251,7 @@
             opacity: 0;
             transform: translateY(-30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -259,6 +263,7 @@
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -266,19 +271,31 @@
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 
     @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
     }
 
     /* Hover Effects */
     .gallery-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
 
     .gallery-card:hover .image-placeholder {
@@ -292,12 +309,12 @@
 
 <script>
     // Filter functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const filterBtns = document.querySelectorAll('.filter-btn');
         const galleryItems = document.querySelectorAll('.gallery-item');
 
         filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const category = this.getAttribute('data-category');
 
                 // Update active button

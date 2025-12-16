@@ -24,7 +24,8 @@ def create_organisasi():
                 nama=request.form['nama'],
                 jabatan=request.form['jabatan'],
                 level=int(request.form['level']),
-                image_url=request.form.get('image_num', '1')
+                emoji=request.form.get('emoji', '👔'),
+                jumlah=int(request.form.get('jumlah', 0))
             )
             db.session.add(new_org)
             db.session.commit()
@@ -47,7 +48,8 @@ def edit_organisasi_member(org_id):
             org.nama = request.form['nama']
             org.jabatan = request.form['jabatan']
             org.level = int(request.form['level'])
-            org.image_url = request.form.get('image_num', '1')
+            org.emoji = request.form.get('emoji', '👔')
+            org.jumlah = int(request.form.get('jumlah', 0))
             db.session.commit()
             flash('Data anggota organisasi berhasil diperbarui!', 'success')
             return redirect(url_for('admin.manage_organisasi'))
