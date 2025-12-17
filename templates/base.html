@@ -1,166 +1,138 @@
 <!DOCTYPE html>
 <html lang="id">
-<style>
-    /* HEADER FIX - CRITICAL */
-    header {
-        background: #ffffff !important;
-    }
-    
-    header.scrolled {
-        background: #1a3a52 !important;
-    }
-    
-    .header-brand h1,
-    header nav a,
-    header nav .dropbtn {
-        color: #343a40 !important;
-    }
-    
-    header.scrolled .header-brand h1,
-    header.scrolled nav a,
-    header.scrolled nav .dropbtn {
-        color: #ffffff !important;
-    }
-</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SMA Medina Bandung - Sekolah Menengah Atas terkemuka di Bandung">
-    
     <title>{% block title %}SMA Medina Bandung{% endblock %}</title>
-
-    <!-- Modern Professional Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
+    <style>
+header{background:#f8f9fa!important;position:sticky;top:0;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.08);transition:all 0.3s ease}
+header.scrolled{background:#1a3a52!important;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
+.header-content{max-width:1400px;margin:0 auto;padding:0 30px;display:flex;justify-content:space-between;align-items:center;height:75px}
+.header-brand{display:flex;align-items:center;gap:15px;text-decoration:none}
+.header-logo{height:48px;width:auto}
+.header-brand h1{font-size:1.45em;font-weight:700;color:#1a3a52;transition:color 0.3s}
+header.scrolled .header-brand h1{color:#ffffff}
+nav{display:flex;align-items:center;gap:5px}
+nav a{color:#1a3a52;text-decoration:none;padding:12px 18px;font-weight:500;font-size:0.95em;border-radius:8px;transition:all 0.3s;white-space:nowrap}
+header.scrolled nav a{color:#ffffff}
+nav a:hover{background:rgba(212,165,60,0.2);color:#d4a53c}
+nav a.active{color:#d4a53c;font-weight:600;background:rgba(212,165,60,0.1)}
+.dropdown{position:relative;display:inline-block}
+.dropbtn{background:none;border:none;color:#1a3a52;padding:12px 18px;font-size:0.95em;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.3s;font-family:inherit;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+header.scrolled .dropbtn{color:#ffffff}
+.dropbtn:hover{background:rgba(212,165,60,0.2);color:#d4a53c}
+
+/* CRITICAL: Dropdown content - TEXT ALWAYS VISIBLE */
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:calc(100% + 10px);
+    left:0;
+    background:#ffffff;
+    min-width:320px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    border-radius:14px;
+    padding:15px;
+    z-index:99999;
+    border:1px solid #e0e0e0;
+}
+.dropdown.show .dropdown-content{display:block}
+
+/* CRITICAL: Link styling - TEXT FULLY VISIBLE ALWAYS */
+.dropdown-content a{
+    display:flex!important;
+    align-items:center;
+    gap:15px;
+    color:#1a3a52!important;
+    padding:15px 20px;
+    text-decoration:none;
+    border-radius:10px;
+    transition:all 0.25s;
+    font-weight:500;
+    font-size:0.96em;
+    white-space:nowrap;
+    width:100%;
+    box-sizing:border-box;
+}
+.dropdown-content a:hover{
+    background:linear-gradient(135deg,#f8f9fa,#e9ecef);
+    color:#d4a53c!important;
+    padding-left:25px;
+}
+
+/* CRITICAL: Icon - ALWAYS VISIBLE */
+.dropdown-content a i{
+    width:24px;
+    height:24px;
+    text-align:center;
+    color:#d4a53c!important;
+    font-size:1.1em;
+    flex-shrink:0;
+    display:inline-flex!important;
+    align-items:center;
+    justify-content:center;
+}
+
+footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-align:center;box-shadow:0 -2px 10px rgba(0,0,0,0.1)}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+    </style>
     {% block extra_css %}{% endblock %}
 </head>
-
 <body>
     <header id="mainHeader">
         <div class="header-content">
             <a href="{{ url_for('public.index') }}" class="header-brand">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina" class="header-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina" class="header-logo" onerror="this.style.display='none'">
                 <h1>SMA Medina Bandung</h1>
             </a>
-            
             <nav>
-                <a href="{{ url_for('public.index') }}" class="{% if request.endpoint == 'public.index' %}active{% endif %}">
-                    Beranda
-                </a>
-
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        Profil Sekolah
-                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-                    </button>
+                <a href="{{ url_for('public.index') }}" class="{% if request.endpoint == 'public.index' %}active{% endif %}">Beranda</a>
+                <div class="dropdown" id="dropdown1">
+                    <button class="dropbtn" onclick="toggleDropdown('dropdown1')">Profil Sekolah <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
-                        <a href="{{ url_for('public.sambutan') }}">
-                            <i class="fas fa-user-tie"></i>
-                            Sambutan Kepala Sekolah
-                        </a>
-                        <a href="{{ url_for('public.sejarah') }}">
-                            <i class="fas fa-landmark"></i>
-                            Sejarah
-                        </a>
-                        <a href="{{ url_for('public.visi_misi') }}">
-                            <i class="fas fa-bullseye"></i>
-                            Visi & Misi
-                        </a>
-                        <a href="{{ url_for('public.organisasi') }}">
-                            <i class="fas fa-sitemap"></i>
-                            Struktur Organisasi
-                        </a>
+                        <a href="{{ url_for('public.sambutan') }}"><i class="fas fa-user-tie"></i>Sambutan Kepala Sekolah</a>
+                        <a href="{{ url_for('public.sejarah') }}"><i class="fas fa-landmark"></i>Sejarah</a>
+                        <a href="{{ url_for('public.visi_misi') }}"><i class="fas fa-bullseye"></i>Visi & Misi</a>
+                        <a href="{{ url_for('public.organisasi') }}"><i class="fas fa-sitemap"></i>Struktur Organisasi</a>
                     </div>
                 </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        Berita
-                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-                    </button>
+                <div class="dropdown" id="dropdown2">
+                    <button class="dropbtn" onclick="toggleDropdown('dropdown2')">Berita <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
-                        <a href="{{ url_for('public.berita_terbaru') }}">
-                            <i class="fas fa-newspaper"></i>
-                            Berita Terbaru
-                        </a>
-                        <a href="{{ url_for('public.info_sekolah') }}">
-                            <i class="fas fa-info-circle"></i>
-                            Info Sekolah
-                        </a>
-                        <a href="{{ url_for('public.agenda') }}">
-                            <i class="fas fa-calendar-alt"></i>
-                            Agenda
-                        </a>
-                        <a href="{{ url_for('public.galeri') }}">
-                            <i class="fas fa-images"></i>
-                            Galeri
-                        </a>
+                        <a href="{{ url_for('public.berita_terbaru') }}"><i class="fas fa-newspaper"></i>Berita Terbaru</a>
+                        <a href="{{ url_for('public.info_sekolah') }}"><i class="fas fa-info-circle"></i>Info Sekolah</a>
+                        <a href="{{ url_for('public.agenda') }}"><i class="fas fa-calendar-alt"></i>Agenda</a>
+                        <a href="{{ url_for('public.galeri') }}"><i class="fas fa-images"></i>Galeri</a>
                     </div>
                 </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        Layanan
-                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-                    </button>
+                <div class="dropdown" id="dropdown3">
+                    <button class="dropbtn" onclick="toggleDropdown('dropdown3')">Layanan <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
-                        <a href="{{ url_for('public.ekstrakurikuler') }}">
-                            <i class="fas fa-running"></i>
-                            Ekstrakurikuler
-                        </a>
-                        <a href="{{ url_for('public.laboratorium') }}">
-                            <i class="fas fa-flask"></i>
-                            Laboratorium
-                        </a>
-                        <a href="{{ url_for('public.perpustakaan') }}">
-                            <i class="fas fa-book"></i>
-                            Perpustakaan
-                        </a>
+                        <a href="{{ url_for('public.ekstrakurikuler') }}"><i class="fas fa-running"></i>Ekstrakurikuler</a>
+                        <a href="{{ url_for('public.laboratorium') }}"><i class="fas fa-flask"></i>Laboratorium</a>
+                        <a href="{{ url_for('public.perpustakaan') }}"><i class="fas fa-book"></i>Perpustakaan</a>
                     </div>
                 </div>
-
                 <a href="{{ url_for('public.index', _anchor='prestasi') }}">Prestasi</a>
                 <a href="{{ url_for('public.index', _anchor='profil-alumni') }}">Profil Alumni</a>
                 <a href="{{ url_for('public.index', _anchor='kontak') }}">Kontak</a>
             </nav>
         </div>
     </header>
-
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 SMA Medina Bandung. Semua Hak Dilindungi.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
+    <main>{% block content %}{% endblock %}</main>
+    <footer><div class="container"><p>&copy; 2024 SMA Medina Bandung. Semua Hak Dilindungi.</p></div></footer>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    
-    <!-- Header Scroll Effect -->
     <script>
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('mainHeader');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+window.addEventListener('scroll',function(){var h=document.getElementById('mainHeader');h.classList.toggle('scrolled',window.scrollY>50)});
+function toggleDropdown(id){var d=document.getElementById(id);var all=document.querySelectorAll('.dropdown');all.forEach(function(drop){if(drop.id!==id)drop.classList.remove('show')});d.classList.toggle('show')}
+document.addEventListener('click',function(e){if(!e.target.closest('.dropdown')){document.querySelectorAll('.dropdown').forEach(function(d){d.classList.remove('show')})}});
     </script>
-    
     {% block extra_js %}{% endblock %}
 </body>
-
 </html>
