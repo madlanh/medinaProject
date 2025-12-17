@@ -1,160 +1,72 @@
 {% extends "base.html" %}
-
 {% block title %}{{ title }}{% endblock %}
-
 {% block content %}
 <div class="container" style="max-width: 900px; margin: 50px auto 100px; padding: 0 15px;">
     <h1 style="color: #343a40;">{{ title }}</h1>
-    <p><a href="{{ url_for('admin.manage_profil_sekolah') }}" style="color: #007bff; text-decoration: none;">← Kembali
-            ke Profil Sekolah</a></p>
+    <p><a href="{{ url_for('admin.manage_profil_sekolah') }}" style="color: #007bff; text-decoration: none;"><i class="fas fa-arrow-left"></i> Kembali ke Profil Sekolah</a></p>
     <hr style="margin-bottom: 30px;">
-
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    {% if category == 'success' %}
-    <div
-        style="padding: 15px; margin-bottom: 20px; border-radius: 8px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
-        ✅ {{ message }}
-    </div>
-    {% else %}
-    <div
-        style="padding: 15px; margin-bottom: 20px; border-radius: 8px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
-        ❌ {{ message }}
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    <form method="POST" enctype="multipart/form-data"
-        style="background: white; padding: 35px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dee2e6;">
-
-        <!-- Section: Foto Kepala Sekolah -->
-        <h3 style="margin-top: 0; color: #ffc107; margin-bottom: 25px;">👔 Foto Kepala Sekolah</h3>
-
+    {% if messages %}{% for category, message in messages %}
+    {% if category == 'success' %}<div style="padding: 15px; margin-bottom: 20px; border-radius: 8px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;"><i class="fas fa-check-circle"></i> {{ message }}</div>
+    {% else %}<div style="padding: 15px; margin-bottom: 20px; border-radius: 8px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;"><i class="fas fa-times-circle"></i> {{ message }}</div>
+    {% endif %}{% endfor %}{% endif %}{% endwith %}
+    <form method="POST" enctype="multipart/form-data" style="background: white; padding: 35px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dee2e6;">
+        <h3 style="margin-top: 0; color: #ffc107; margin-bottom: 25px;"><i class="fas fa-user-tie"></i> Foto Kepala Sekolah</h3>
         <div style="display: grid; grid-template-columns: 200px 1fr; gap: 30px; margin-bottom: 30px;">
-            <!-- Current Photo Preview -->
             <div>
-                <div
-                    style="width: 180px; height: 220px; border-radius: 15px; overflow: hidden; background: linear-gradient(135deg, #ffc107, #ff9800); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    {% if info.foto_kepala_sekolah %}
-                    <img src="{{ info.foto_kepala_sekolah }}" alt="Foto Kepala Sekolah"
-                        style="width: 100%; height: 100%; object-fit: cover;">
-                    {% else %}
-                    <span style="font-size: 5em; color: white;">👨‍💼</span>
-                    {% endif %}
+                <div style="width: 180px; height: 220px; border-radius: 15px; overflow: hidden; background: linear-gradient(135deg, #ffc107, #ff9800); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    {% if info.foto_kepala_sekolah %}<img src="{{ info.foto_kepala_sekolah }}" alt="Foto Kepala Sekolah" style="width: 100%; height: 100%; object-fit: cover;">{% else %}<i class="fas fa-user-tie" style="font-size: 5em; color: white;"></i>{% endif %}
                 </div>
                 <p style="margin: 10px 0 0 0; font-size: 0.85em; color: #6c757d; text-align: center;">Foto saat ini</p>
             </div>
-
-            <!-- Upload Form -->
             <div>
                 <div style="margin-bottom: 20px;">
-                    <label for="nama_kepsek"
-                        style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">
-                        Nama Kepala Sekolah
-                    </label>
-                    <input type="text" id="nama_kepsek" name="nama_kepsek" value="{{ info.nama_kepala_sekolah or '' }}"
-                        placeholder="Contoh: Dr. H. Abdullah Rahman, M.Pd"
-                        style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
+                    <label for="nama_kepsek" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Nama Kepala Sekolah</label>
+                    <input type="text" id="nama_kepsek" name="nama_kepsek" value="{{ info.nama_kepala_sekolah or '' }}" placeholder="Contoh: Dr. H. Abdullah Rahman, M.Pd" style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
                 </div>
-
                 <div>
-                    <label for="foto_kepsek"
-                        style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">
-                        Upload Foto Baru
-                        <span style="color: #6c757d; font-weight: normal; font-size: 0.9em;">(JPG, PNG - max 5MB)</span>
-                    </label>
-                    <input type="file" id="foto_kepsek" name="foto_kepsek"
-                        accept="image/jpeg,image/png,image/jpg,image/webp"
-                        style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; cursor: pointer;">
-                    <small style="display: block; margin-top: 8px; color: #6c757d;">
-                        💡 Biarkan kosong jika tidak ingin mengganti foto
-                    </small>
-
-                    <!-- Image Preview -->
+                    <label for="foto_kepsek" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Upload Foto Baru <span style="color: #6c757d; font-weight: normal; font-size: 0.9em;">(JPG, PNG - max 5MB)</span></label>
+                    <input type="file" id="foto_kepsek" name="foto_kepsek" accept="image/jpeg,image/png,image/jpg,image/webp" style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; cursor: pointer;">
+                    <small style="display: block; margin-top: 8px; color: #6c757d;">Biarkan kosong jika tidak ingin mengganti foto</small>
                     <div id="imagePreview" style="margin-top: 15px; display: none;">
-                        <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #28a745; font-weight: bold;">✅ Preview
-                            Foto Baru:</p>
-                        <img id="previewImg" src="" alt="Preview"
-                            style="max-width: 150px; max-height: 180px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #28a745; font-weight: bold;"><i class="fas fa-check"></i> Preview Foto Baru:</p>
+                        <img id="previewImg" src="" alt="Preview" style="max-width: 150px; max-height: 180px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Section: Sambutan Text -->
-        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #ffc107;">💬 Isi Sambutan</h3>
-
+        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #ffc107;"><i class="fas fa-comment"></i> Isi Sambutan</h3>
         <div style="margin-bottom: 25px;">
-            <label for="konten" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">
-                Konten Sambutan
-            </label>
-            <textarea id="konten" name="konten" rows="12" placeholder="Tulis sambutan kepala sekolah di sini..."
-                style="width: 100%; padding: 15px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; line-height: 1.7; resize: vertical;">{{ info.sambutan_kepsek or '' }}</textarea>
-            <small style="display: block; margin-top: 8px; color: #6c757d;">
-                💡 Tips: Gunakan paragraf terpisah untuk memudahkan pembacaan
-            </small>
+            <label for="konten" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Konten Sambutan</label>
+            <textarea id="konten" name="konten" rows="12" placeholder="Tulis sambutan kepala sekolah di sini..." style="width: 100%; padding: 15px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; line-height: 1.7; resize: vertical;">{{ info.sambutan_kepsek or '' }}</textarea>
+            <small style="display: block; margin-top: 8px; color: #6c757d;">Tips: Gunakan paragraf terpisah untuk memudahkan pembacaan</small>
         </div>
-
         <div style="display: flex; gap: 15px; align-items: center; margin-top: 30px;">
-            <button type="submit"
-                style="padding: 14px 35px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(255,193,7,0.3); transition: all 0.3s ease;">
-                💾 Simpan Perubahan
-            </button>
-
-            <a href="{{ url_for('admin.manage_profil_sekolah') }}"
-                style="padding: 14px 35px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
-                ❌ Batal
-            </a>
+            <button type="submit" style="padding: 14px 35px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(255,193,7,0.3); transition: all 0.3s ease;"><i class="fas fa-save"></i> Simpan Perubahan</button>
+            <a href="{{ url_for('admin.manage_profil_sekolah') }}" style="padding: 14px 35px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;"><i class="fas fa-times"></i> Batal</a>
         </div>
     </form>
 </div>
-
 <style>
-    input:focus,
-    textarea:focus {
-        outline: none;
-        border-color: #ffc107 !important;
-        box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
-    }
-
-    button[type="submit"]:hover {
-        background: linear-gradient(135deg, #ff9800, #f57c00) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4) !important;
-    }
-
-    input[type="file"]::-webkit-file-upload-button {
-        padding: 8px 15px;
-        background: linear-gradient(135deg, #007bff, #0056b3);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-        margin-right: 10px;
-    }
+input:focus,textarea:focus{outline:none;border-color:#ffc107!important;box-shadow:0 0 0 3px rgba(255,193,7,0.1)}
+button[type="submit"]:hover{background:linear-gradient(135deg,#ff9800,#f57c00)!important;transform:translateY(-2px);box-shadow:0 6px 16px rgba(255,193,7,0.4)!important}
+input[type="file"]::-webkit-file-upload-button{padding:8px 15px;background:linear-gradient(135deg,#007bff,#0056b3);color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;margin-right:10px}
 </style>
-
 <script>
-    // Image preview on file select
-    document.getElementById('foto_kepsek').addEventListener('change', function (e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById('imagePreview');
-        const previewImg = document.getElementById('previewImg');
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImg.src = e.target.result;
-                preview.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        } else {
-            preview.style.display = 'none';
-        }
-    });
+document.getElementById('foto_kepsek').addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    var preview = document.getElementById('imagePreview');
+    var previewImg = document.getElementById('previewImg');
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+});
 </script>
 {% endblock %}

@@ -7,20 +7,17 @@
     <h1 style="text-align: center; color: #0D2A4C; margin-bottom: 10px;">Struktur Organisasi</h1>
     <p style="text-align: center; color: #6c757d; margin-bottom: 50px; font-size: 1.1em;">SMA Medina Bandung</p>
 
-    <!-- Organization Chart Container -->
     <div class="org-chart">
-
         <!-- Level 1: Kepala Sekolah -->
         <div class="org-level">
             {% set kepsek = organisasi|selectattr('level', 'equalto', 1)|first %}
             <div class="org-box ceo">
-                <div class="org-icon">{{ kepsek.emoji if kepsek and kepsek.emoji else '👨‍💼' }}</div>
+                <div class="org-icon"><i class="fas fa-user-tie"></i></div>
                 <div class="org-title">{{ kepsek.jabatan if kepsek else 'Kepala Sekolah' }}</div>
                 <div class="org-name">{{ kepsek.nama if kepsek else 'Belum Diisi' }}</div>
             </div>
         </div>
 
-        <!-- Connector Line -->
         <div class="connector-line vertical"></div>
 
         <!-- Level 2: Wakil Kepala Sekolah -->
@@ -33,7 +30,7 @@
                 <div class="org-box-wrapper">
                     <div class="connector-line vertical-short"></div>
                     <div class="org-box wakil">
-                        <div class="org-icon">{{ wakil.emoji if wakil.emoji else '👔' }}</div>
+                        <div class="org-icon"><i class="fas fa-user-graduate"></i></div>
                         <div class="org-title">{{ wakil.jabatan }}</div>
                         <div class="org-name">{{ wakil.nama }}</div>
                     </div>
@@ -52,7 +49,7 @@
                 <div class="org-group">
                     <div class="connector-line vertical-medium"></div>
                     <div class="org-box koordinator">
-                        <div class="org-icon">{{ koord.emoji if koord.emoji else '📚' }}</div>
+                        <div class="org-icon"><i class="fas fa-book"></i></div>
                         <div class="org-title">{{ koord.jabatan }}</div>
                         <div class="org-name">{{ koord.nama }}</div>
                     </div>
@@ -69,7 +66,7 @@
             <div class="org-row staff-row">
                 {% for staff in staff_list %}
                 <div class="org-box staff">
-                    <div class="org-icon">{{ staff.emoji if staff.emoji else '👨‍🏫' }}</div>
+                    <div class="org-icon"><i class="fas fa-users"></i></div>
                     <div class="org-title">{{ staff.nama }}</div>
                     <div class="org-count">{{ staff.jumlah }} Orang</div>
                 </div>
@@ -77,13 +74,11 @@
             </div>
         </div>
         {% endif %}
-
     </div>
 
-    <!-- Info Box -->
     <div
         style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; border-left: 5px solid #17a2b8;">
-        <h3 style="margin-top: 0; color: #0D2A4C;">📋 Informasi Struktur Organisasi</h3>
+        <h3 style="margin-top: 0; color: #0D2A4C;"><i class="fas fa-info-circle" style="color: #17a2b8; margin-right: 10px;"></i> Informasi Struktur Organisasi</h3>
         <p style="color: #666; line-height: 1.8; margin-bottom: 10px;">
             Struktur organisasi SMA Medina Bandung dirancang untuk mendukung visi dan misi sekolah dalam menciptakan
             lingkungan belajar yang kondusif dan profesional.
@@ -96,7 +91,6 @@
 </div>
 
 <style>
-    /* Organization Chart Styles */
     .org-chart {
         max-width: 1200px;
         margin: 0 auto;
@@ -133,7 +127,6 @@
         align-items: center;
     }
 
-    /* Box Styles */
     .org-box {
         background: white;
         border-radius: 15px;
@@ -150,7 +143,6 @@
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
-    /* Different Levels Colors */
     .org-box.ceo {
         border-color: #dc3545;
         background: linear-gradient(135deg, #fff, #ffe5e5);
@@ -175,17 +167,28 @@
         padding: 20px;
     }
 
-    /* Icon */
     .org-icon {
         font-size: 2.5em;
         margin-bottom: 10px;
     }
 
-    .org-box.staff .org-icon {
-        font-size: 2em;
+    .org-box.ceo .org-icon {
+        color: #dc3545;
     }
 
-    /* Title */
+    .org-box.wakil .org-icon {
+        color: #007bff;
+    }
+
+    .org-box.koordinator .org-icon {
+        color: #28a745;
+    }
+
+    .org-box.staff .org-icon {
+        font-size: 2em;
+        color: #ffc107;
+    }
+
     .org-title {
         font-weight: bold;
         font-size: 1em;
@@ -197,14 +200,12 @@
         font-size: 0.9em;
     }
 
-    /* Name */
     .org-name {
         color: #666;
         font-size: 0.95em;
         font-weight: 500;
     }
 
-    /* Count for Staff */
     .org-count {
         color: #ffc107;
         font-size: 0.9em;
@@ -212,7 +213,6 @@
         margin-top: 5px;
     }
 
-    /* Connector Lines */
     .connector-line {
         background-color: #cbd5e0;
     }
@@ -244,7 +244,6 @@
         transform: translateX(-50%);
     }
 
-    /* Responsive */
     @media (max-width: 1024px) {
         .org-row {
             gap: 20px;

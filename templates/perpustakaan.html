@@ -4,9 +4,8 @@
 
 {% block content %}
 <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
-    <!-- Page Header -->
     <div class="page-header">
-        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">📚 Perpustakaan</h1>
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">Perpustakaan</h1>
         <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #fd7e14, #e8590c); margin: 0 auto 15px; border-radius: 2px;"></div>
         <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Pusat sumber belajar dengan koleksi lengkap dan fasilitas modern</p>
     </div>
@@ -14,15 +13,17 @@
     {% if perpustakaan %}
     <!-- Jam Buka -->
     <div class="info-box" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); border-left: 5px solid #fd7e14; padding: 30px; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-        <h2 style="color: #fd7e14; margin: 0 0 20px 0; font-size: 1.8em;">🕐 Jam Operasional</h2>
+        <h2 style="color: #fd7e14; margin: 0 0 20px 0; font-size: 1.8em;">
+            <i class="fas fa-clock"></i> Jam Operasional
+        </h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
-                <div style="font-size: 2em; margin-bottom: 10px;">📅</div>
+                <div style="font-size: 2em; margin-bottom: 10px; color: #fd7e14;"><i class="fas fa-calendar-week"></i></div>
                 <h3 style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.2em;">Senin - Jumat</h3>
                 <p style="margin: 0; color: #fd7e14; font-size: 1.3em; font-weight: bold;">{{ perpustakaan.jam_buka.senin_jumat }}</p>
             </div>
             <div style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
-                <div style="font-size: 2em; margin-bottom: 10px;">📅</div>
+                <div style="font-size: 2em; margin-bottom: 10px; color: #fd7e14;"><i class="fas fa-calendar-day"></i></div>
                 <h3 style="margin: 0 0 10px 0; color: #0D2A4C; font-size: 1.2em;">Sabtu</h3>
                 <p style="margin: 0; color: #fd7e14; font-size: 1.3em; font-weight: bold;">{{ perpustakaan.jam_buka.sabtu }}</p>
             </div>
@@ -31,30 +32,32 @@
 
     <!-- Koleksi -->
     <div class="info-box" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-left: 5px solid #2196f3; padding: 30px; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-        <h2 style="color: #2196f3; margin: 0 0 25px 0; font-size: 1.8em;">📖 Koleksi Perpustakaan</h2>
+        <h2 style="color: #2196f3; margin: 0 0 25px 0; font-size: 1.8em;">
+            <i class="fas fa-book-open"></i> Koleksi Perpustakaan
+        </h2>
         <div class="collection-grid">
             <div class="collection-item">
-                <div class="collection-icon">📚</div>
+                <div class="collection-icon"><i class="fas fa-book"></i></div>
                 <div class="collection-number">{{ perpustakaan.koleksi.buku_pelajaran }}</div>
                 <div class="collection-label">Buku Pelajaran</div>
             </div>
             <div class="collection-item">
-                <div class="collection-icon">📕</div>
+                <div class="collection-icon"><i class="fas fa-book-reader"></i></div>
                 <div class="collection-number">{{ perpustakaan.koleksi.buku_fiksi }}</div>
                 <div class="collection-label">Buku Fiksi</div>
             </div>
             <div class="collection-item">
-                <div class="collection-icon">📘</div>
+                <div class="collection-icon"><i class="fas fa-bookmark"></i></div>
                 <div class="collection-number">{{ perpustakaan.koleksi.buku_referensi }}</div>
                 <div class="collection-label">Buku Referensi</div>
             </div>
             <div class="collection-item">
-                <div class="collection-icon">📰</div>
+                <div class="collection-icon"><i class="fas fa-newspaper"></i></div>
                 <div class="collection-number">{{ perpustakaan.koleksi.majalah_jurnal }}</div>
                 <div class="collection-label">Majalah & Jurnal</div>
             </div>
             <div class="collection-item">
-                <div class="collection-icon">💻</div>
+                <div class="collection-icon"><i class="fas fa-laptop"></i></div>
                 <div class="collection-number">{{ perpustakaan.koleksi.e_book }}</div>
                 <div class="collection-label">E-Book</div>
             </div>
@@ -63,10 +66,9 @@
 
     <!-- Fasilitas & Layanan -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-        <!-- Fasilitas -->
         <div class="service-box">
             <div class="service-header">
-                <div class="service-icon">🏢</div>
+                <div class="service-icon"><i class="fas fa-building"></i></div>
                 <h2>Fasilitas</h2>
             </div>
             <ul class="service-list">
@@ -76,10 +78,9 @@
             </ul>
         </div>
 
-        <!-- Layanan -->
         <div class="service-box">
             <div class="service-header">
-                <div class="service-icon">🎯</div>
+                <div class="service-icon"><i class="fas fa-hands-helping"></i></div>
                 <h2>Layanan</h2>
             </div>
             <ul class="service-list">
@@ -91,7 +92,7 @@
     </div>
     {% else %}
     <div class="empty-state">
-        <div class="empty-icon">📚</div>
+        <div class="empty-icon"><i class="fas fa-book" style="font-size: 5em; color: #dee2e6;"></i></div>
         <h3>Data Tidak Tersedia</h3>
         <p>Informasi perpustakaan akan segera ditambahkan</p>
     </div>
@@ -122,6 +123,7 @@
     .collection-icon {
         font-size: 2.5em;
         margin-bottom: 10px;
+        color: #2196f3;
     }
 
     .collection-number {
@@ -152,6 +154,7 @@
     .service-icon {
         font-size: 3em;
         margin-bottom: 10px;
+        color: #fd7e14;
     }
 
     .service-header h2 {
@@ -185,9 +188,7 @@
     }
 
     .empty-icon {
-        font-size: 5em;
         margin-bottom: 20px;
-        animation: bounce 2s infinite;
     }
 
     .empty-state h3 {
@@ -200,7 +201,6 @@
         margin: 0;
     }
 
-    /* Animations */
     @keyframes fadeInDown {
         from {
             opacity: 0;
@@ -212,12 +212,6 @@
         }
     }
 
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-
-    /* Hover Effects */
     .collection-item:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(33,150,243,0.2);

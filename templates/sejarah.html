@@ -4,17 +4,15 @@
 
 {% block content %}
 <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
-    <!-- Page Header -->
     <div class="page-header">
-        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">📜 Sejarah Sekolah</h1>
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">Sejarah Sekolah</h1>
         <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #007bff, #0056b3); margin: 0 auto 15px; border-radius: 2px;"></div>
         <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Perjalanan dan perkembangan SMA Medina Bandung</p>
     </div>
 
-    <!-- Content Box -->
     <div class="content-box">
         <div class="timeline-badge">
-            <div class="badge-icon">🏛️</div>
+            <div class="badge-icon"><i class="fas fa-landmark"></i></div>
             <div class="badge-text">Sejak 1995</div>
         </div>
 
@@ -32,9 +30,10 @@
             {% endif %}
         </div>
 
-        <!-- Info Box -->
         <div class="milestone-box">
-            <h3 style="color: #007bff; margin: 0 0 20px 0; font-size: 1.5em; text-align: center;">🎯 Tonggak Sejarah</h3>
+            <h3 style="color: #007bff; margin: 0 0 20px 0; font-size: 1.5em; text-align: center;">
+                <i class="fas fa-history"></i> Tonggak Sejarah
+            </h3>
             <div class="milestone-grid">
                 <div class="milestone-item">
                     <div class="milestone-year">1995</div>
@@ -137,7 +136,6 @@
         font-size: 0.9em;
     }
 
-    /* Animations */
     @keyframes fadeInDown {
         from {
             opacity: 0;
@@ -160,7 +158,6 @@
         }
     }
 
-    /* Hover Effects */
     .milestone-item:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0,123,255,0.2);

@@ -1,105 +1,41 @@
 {% extends "base.html" %}
-
 {% block title %}Kelola Prestasi{% endblock %}
-
 {% block content %}
 <div class="container" style="margin-top: 30px; margin-bottom: 100px; padding: 0 20px;">
-    <h1 style="color: #343a40;">🏆 Kelola Prestasi</h1>
-    <p><a href="{{ url_for('admin.dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke
-            Dashboard</a></p>
-    <hr style="margin-bottom: 30px;">
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    {% if category == 'success' %}
-    <div
-        style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
-        {{ message }}
-    </div>
-    {% else %}
-    <div
-        style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
-        {{ message }}
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    <div style="margin-bottom: 30px;">
-        <a href="{{ url_for('admin.create_prestasi') }}"
-            style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; box-shadow: 0 2px 8px rgba(255,193,7,0.3); transition: all 0.3s ease;">
-            ➕ Tambah Prestasi Baru
-        </a>
-    </div>
-
-    {% if prestasi_list %}
-    <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-        <table style="width: 100%; border-collapse: collapse;">
-            <thead>
-                <tr style="background: linear-gradient(135deg, #ffc107, #ff9800); color: white;">
-                    <th style="padding: 15px; text-align: left;">Nama Prestasi</th>
-                    <th style="padding: 15px; text-align: left;">Skala</th>
-                    <th style="padding: 15px; text-align: left;">Tanggal</th>
-                    <th style="padding: 15px; text-align: left;">Penyelenggara</th>
-                    <th style="padding: 15px; text-align: center;">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for prestasi in prestasi_list %}
-                <tr style="border-bottom: 1px solid #eee; transition: background-color 0.2s ease;">
-                    <td style="padding: 15px; color: #333; font-weight: bold;">{{ prestasi.nama_prestasi }}</td>
-                    <td style="padding: 15px; color: #666;">
-                        <span style="background-color: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 12px; font-size: 0.85em;">
-                            {{ prestasi.skala or '-' }}
-                        </span>
-                    </td>
-                    <td style="padding: 15px; color: #666;">{{ prestasi.tanggal.strftime('%d %B %Y') if prestasi.tanggal else '-' }}</td>
-                    <td style="padding: 15px; color: #666;">{{ prestasi.penyelenggara or '-' }}</td>
-                    <td style="padding: 15px; text-align: center;">
-                        <a href="{{ url_for('admin.edit_prestasi', prestasi_id=prestasi.id) }}"
-                            style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px; font-size: 0.9em;">
-                            ✏️ Edit
-                        </a>
-                        <form action="{{ url_for('admin.delete_prestasi', prestasi_id=prestasi.id) }}" method="POST"
-                            style="display: inline;"
-                            onsubmit="return confirm('Yakin ingin menghapus prestasi ini?');">
-                            <button type="submit"
-                                style="padding: 8px 15px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em;">
-                                🗑️ Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% else %}
-    <div
-        style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
-        <div style="font-size: 4em; margin-bottom: 20px;">🏆</div>
-        <p style="color: #6c757d; margin: 0 0 20px 0; font-size: 1.2em;">Belum ada data prestasi.</p>
-        <a href="{{ url_for('admin.create_prestasi') }}"
-            style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 25px; font-weight: bold;">
-            ➕ Tambah Prestasi Pertama
-        </a>
-    </div>
-    {% endif %}
+<h1 style="color: #343a40;"><i class="fas fa-trophy"></i> Kelola Prestasi</h1>
+<p><a href="{{ url_for('admin.dashboard') }}" style="color: #007bff; text-decoration: none;"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard</a></p><hr style="margin-bottom: 30px;">
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}{% if category == 'success' %}<div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">{{ message }}</div>{% else %}<div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">{{ message }}</div>{% endif %}{% endfor %}{% endif %}{% endwith %}
+<div style="margin-bottom: 30px;"><a href="{{ url_for('admin.create_prestasi') }}" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; box-shadow: 0 2px 8px rgba(255,193,7,0.3); transition: all 0.3s ease;"><i class="fas fa-plus"></i> Tambah Prestasi Baru</a></div>
+{% if prestasi_list %}
+<div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+<table style="width: 100%; border-collapse: collapse;">
+<thead><tr style="background: linear-gradient(135deg, #ffc107, #ff9800); color: white;">
+<th style="padding: 15px; text-align: left;">Nama Prestasi</th>
+<th style="padding: 15px; text-align: left;">Skala</th>
+<th style="padding: 15px; text-align: left;">Tanggal</th>
+<th style="padding: 15px; text-align: left;">Penyelenggara</th>
+<th style="padding: 15px; text-align: center;">Aksi</th>
+</tr></thead>
+<tbody>
+{% for prestasi in prestasi_list %}
+<tr style="border-bottom: 1px solid #eee; transition: background-color 0.2s ease;">
+<td style="padding: 15px; color: #333; font-weight: bold;">{{ prestasi.nama_prestasi }}</td>
+<td style="padding: 15px; color: #666;"><span style="background-color: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 12px; font-size: 0.85em;">{{ prestasi.skala or '-' }}</span></td>
+<td style="padding: 15px; color: #666;">{{ prestasi.tanggal.strftime('%d %B %Y') if prestasi.tanggal else '-' }}</td>
+<td style="padding: 15px; color: #666;">{{ prestasi.penyelenggara or '-' }}</td>
+<td style="padding: 15px; text-align: center;">
+<a href="{{ url_for('admin.edit_prestasi', prestasi_id=prestasi.id) }}" style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px; font-size: 0.9em;"><i class="fas fa-edit"></i> Edit</a>
+<form action="{{ url_for('admin.delete_prestasi', prestasi_id=prestasi.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Yakin ingin menghapus prestasi ini?');"><button type="submit" style="padding: 8px 15px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em;"><i class="fas fa-trash"></i> Hapus</button></form>
+</td>
+</tr>{% endfor %}
+</tbody>
+</table>
 </div>
-
-<style>
-    tbody tr:hover {
-        background-color: #f8f9fa !important;
-    }
-
-    a[style*="background-color: #007bff"]:hover {
-        background-color: #0056b3 !important;
-    }
-
-    button[style*="background-color: #dc3545"]:hover {
-        background-color: #c82333 !important;
-    }
-</style>
+{% else %}
+<div style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
+<div style="font-size: 4em; margin-bottom: 20px;"><i class="fas fa-trophy" style="color: #dee2e6;"></i></div>
+<p style="color: #6c757d; margin: 0 0 20px 0; font-size: 1.2em;">Belum ada data prestasi.</p>
+<a href="{{ url_for('admin.create_prestasi') }}" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #ffc107, #ff9800); color: white; text-decoration: none; border-radius: 25px; font-weight: bold;"><i class="fas fa-plus"></i> Tambah Prestasi Pertama</a>
+</div>{% endif %}</div>
+<style>tbody tr:hover{background-color:#f8f9fa!important}a[style*="background-color: #007bff"]:hover{background-color:#0056b3!important}button[style*="background-color: #dc3545"]:hover{background-color:#c82333!important}</style>
 {% endblock %}

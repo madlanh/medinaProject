@@ -6,7 +6,7 @@
 <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
     <!-- Page Header -->
     <div class="page-header">
-        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">📅 Agenda Sekolah</h1>
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">Agenda Sekolah</h1>
         <div
             style="width: 100px; height: 4px; background: linear-gradient(90deg, #007bff, #0056b3); margin: 0 auto 15px; border-radius: 2px;">
         </div>
@@ -38,11 +38,11 @@
 
                     <div class="agenda-meta">
                         <div class="meta-item">
-                            <span class="meta-icon">🕐</span>
+                            <i class="fas fa-clock" style="color: #007bff;"></i>
                             <span>{{ agenda.waktu_display }}</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-icon">📍</span>
+                            <i class="fas fa-map-marker-alt" style="color: #007bff;"></i>
                             <span>{{ agenda.lokasi }}</span>
                         </div>
                     </div>
@@ -55,7 +55,9 @@
     </div>
     {% else %}
     <div class="empty-state">
-        <div class="empty-icon">📅</div>
+        <div class="empty-icon">
+            <i class="fas fa-calendar-alt" style="font-size: 5em; color: #dee2e6;"></i>
+        </div>
         <h3>Belum Ada Agenda</h3>
         <p>Agenda akan segera ditambahkan</p>
     </div>
@@ -180,10 +182,6 @@
         flex-direction: row-reverse;
     }
 
-    .meta-icon {
-        font-size: 1.2em;
-    }
-
     .agenda-description {
         color: #666;
         margin: 0;
@@ -200,9 +198,7 @@
     }
 
     .empty-icon {
-        font-size: 5em;
         margin-bottom: 20px;
-        animation: bounce 2s infinite;
     }
 
     .empty-state h3 {
@@ -237,18 +233,6 @@
 
         50% {
             box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.4);
-        }
-    }
-
-    @keyframes bounce {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-20px);
         }
     }
 

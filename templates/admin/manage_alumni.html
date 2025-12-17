@@ -1,39 +1,16 @@
 {% extends "base.html" %}
-
 {% block title %}Kelola Alumni Testimoni{% endblock %}
-
 {% block content %}
 <div class="container" style="margin-top: 30px; margin-bottom: 100px; padding: 0 20px;">
-    <h1 style="color: #343a40;">🎓 Kelola Alumni Testimoni</h1>
-    <p><a href="{{ url_for('admin.dashboard') }}" style="color: #007bff; text-decoration: none;">← Kembali ke
-            Dashboard</a></p>
+    <h1 style="color: #343a40;"><i class="fas fa-graduation-cap"></i> Kelola Alumni Testimoni</h1>
+    <p><a href="{{ url_for('admin.dashboard') }}" style="color: #007bff; text-decoration: none;"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard</a></p>
     <hr style="margin-bottom: 30px;">
-
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    {% if category == 'success' %}
-    <div
-        style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
-        {{ message }}
-    </div>
-    {% else %}
-    <div
-        style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
-        {{ message }}
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    <div style="margin-bottom: 30px;">
-        <a href="{{ url_for('admin.create_alumni') }}"
-            style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; box-shadow: 0 2px 8px rgba(102,16,242,0.3); transition: all 0.3s ease;">
-            ➕ Tambah Alumni Baru
-        </a>
-    </div>
-
+    {% if messages %}{% for category, message in messages %}
+    {% if category == 'success' %}<div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">{{ message }}</div>
+    {% else %}<div style="padding: 10px; margin-bottom: 15px; border-radius: 4px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">{{ message }}</div>
+    {% endif %}{% endfor %}{% endif %}{% endwith %}
+    <div style="margin-bottom: 30px;"><a href="{{ url_for('admin.create_alumni') }}" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; box-shadow: 0 2px 8px rgba(102,16,242,0.3); transition: all 0.3s ease;"><i class="fas fa-plus"></i> Tambah Alumni Baru</a></div>
     {% if alumni_list %}
     <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
         <table style="width: 100%; border-collapse: collapse;">
@@ -54,29 +31,15 @@
                     <td style="padding: 15px; color: #666;">{{ alumni.status_saat_ini or '-' }}</td>
                     <td style="padding: 15px; text-align: center;">
                         {% if alumni.is_featured %}
-                        <span
-                            style="background-color: #d4edda; color: #155724; padding: 4px 10px; border-radius: 12px; font-size: 0.85em;">
-                            ⭐ Ya
-                        </span>
+                        <span style="background-color: #d4edda; color: #155724; padding: 4px 10px; border-radius: 12px; font-size: 0.85em;"><i class="fas fa-star"></i> Ya</span>
                         {% else %}
-                        <span
-                            style="background-color: #e9ecef; color: #6c757d; padding: 4px 10px; border-radius: 12px; font-size: 0.85em;">
-                            Tidak
-                        </span>
+                        <span style="background-color: #e9ecef; color: #6c757d; padding: 4px 10px; border-radius: 12px; font-size: 0.85em;">Tidak</span>
                         {% endif %}
                     </td>
                     <td style="padding: 15px; text-align: center;">
-                        <a href="{{ url_for('admin.edit_alumni', alumni_id=alumni.id) }}"
-                            style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px; font-size: 0.9em;">
-                            ✏️ Edit
-                        </a>
-                        <form action="{{ url_for('admin.delete_alumni', alumni_id=alumni.id) }}" method="POST"
-                            style="display: inline;"
-                            onsubmit="return confirm('Yakin ingin menghapus data alumni ini?');">
-                            <button type="submit"
-                                style="padding: 8px 15px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em;">
-                                🗑️ Hapus
-                            </button>
+                        <a href="{{ url_for('admin.edit_alumni', alumni_id=alumni.id) }}" style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px; font-size: 0.9em;"><i class="fas fa-edit"></i> Edit</a>
+                        <form action="{{ url_for('admin.delete_alumni', alumni_id=alumni.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Yakin ingin menghapus data alumni ini?');">
+                            <button type="submit" style="padding: 8px 15px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em;"><i class="fas fa-trash"></i> Hapus</button>
                         </form>
                     </td>
                 </tr>
@@ -85,29 +48,12 @@
         </table>
     </div>
     {% else %}
-    <div
-        style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
-        <div style="font-size: 4em; margin-bottom: 20px;">🎓</div>
+    <div style="padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; text-align: center; border: 2px dashed #dee2e6;">
+        <div style="font-size: 4em; margin-bottom: 20px;"><i class="fas fa-graduation-cap" style="color: #dee2e6;"></i></div>
         <p style="color: #6c757d; margin: 0 0 20px 0; font-size: 1.2em;">Belum ada data alumni testimoni.</p>
-        <a href="{{ url_for('admin.create_alumni') }}"
-            style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; text-decoration: none; border-radius: 25px; font-weight: bold;">
-            ➕ Tambah Alumni Pertama
-        </a>
+        <a href="{{ url_for('admin.create_alumni') }}" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #6610f2, #5a0fc7); color: white; text-decoration: none; border-radius: 25px; font-weight: bold;"><i class="fas fa-plus"></i> Tambah Alumni Pertama</a>
     </div>
     {% endif %}
 </div>
-
-<style>
-    tbody tr:hover {
-        background-color: #f8f9fa !important;
-    }
-
-    a[style*="background-color: #007bff"]:hover {
-        background-color: #0056b3 !important;
-    }
-
-    button[style*="background-color: #dc3545"]:hover {
-        background-color: #c82333 !important;
-    }
-</style>
+<style>tbody tr:hover{background-color:#f8f9fa!important}a[style*="background-color: #007bff"]:hover{background-color:#0056b3!important}button[style*="background-color: #dc3545"]:hover{background-color:#c82333!important}</style>
 {% endblock %}

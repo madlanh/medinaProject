@@ -1,80 +1,143 @@
 <!DOCTYPE html>
 <html lang="id">
-
+<style>
+    /* HEADER FIX - CRITICAL */
+    header {
+        background: #ffffff !important;
+    }
+    
+    header.scrolled {
+        background: #1a3a52 !important;
+    }
+    
+    .header-brand h1,
+    header nav a,
+    header nav .dropbtn {
+        color: #343a40 !important;
+    }
+    
+    header.scrolled .header-brand h1,
+    header.scrolled nav a,
+    header.scrolled nav .dropbtn {
+        color: #ffffff !important;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="SMA Medina Bandung - Sekolah Menengah Atas terkemuka di Bandung">
+    
     <title>{% block title %}SMA Medina Bandung{% endblock %}</title>
 
+    <!-- Modern Professional Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-    <header>
-        <div class="container header-content">
-            <h1>
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina"
-                    class="header-logo">
-                SMA Medina Bandung
-            </h1>
+    <header id="mainHeader">
+        <div class="header-content">
+            <a href="{{ url_for('public.index') }}" class="header-brand">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina" class="header-logo">
+                <h1>SMA Medina Bandung</h1>
+            </a>
+            
             <nav>
-                <a href="{{ url_for('public.index') }}">Beranda</a>
+                <a href="{{ url_for('public.index') }}" class="{% if request.endpoint == 'public.index' %}active{% endif %}">
+                    Beranda
+                </a>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Profil Sekolah
-                        <i class="fa fa-caret-down"></i>
+                    <button class="dropbtn">
+                        Profil Sekolah
+                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{{ url_for('public.sambutan') }}">Sambutan Kepala Sekolah</a>
-                        <a href="{{ url_for('public.sejarah') }}">Sejarah</a>
-                        <a href="{{ url_for('public.visi_misi') }}">Visi & Misi</a>
-                        <a href="{{ url_for('public.organisasi') }}">Struktur Organisasi</a>
+                        <a href="{{ url_for('public.sambutan') }}">
+                            <i class="fas fa-user-tie"></i>
+                            Sambutan Kepala Sekolah
+                        </a>
+                        <a href="{{ url_for('public.sejarah') }}">
+                            <i class="fas fa-landmark"></i>
+                            Sejarah
+                        </a>
+                        <a href="{{ url_for('public.visi_misi') }}">
+                            <i class="fas fa-bullseye"></i>
+                            Visi & Misi
+                        </a>
+                        <a href="{{ url_for('public.organisasi') }}">
+                            <i class="fas fa-sitemap"></i>
+                            Struktur Organisasi
+                        </a>
                     </div>
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Berita
-                        <i class="fa fa-caret-down"></i>
+                    <button class="dropbtn">
+                        Berita
+                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{{ url_for('public.berita_terbaru') }}">Berita Terbaru</a>
-                        <a href="{{ url_for('public.info_sekolah') }}">Info Sekolah</a>
-                        <a href="{{ url_for('public.agenda') }}">Agenda</a>
-                        <a href="{{ url_for('public.galeri') }}">Galeri</a>
+                        <a href="{{ url_for('public.berita_terbaru') }}">
+                            <i class="fas fa-newspaper"></i>
+                            Berita Terbaru
+                        </a>
+                        <a href="{{ url_for('public.info_sekolah') }}">
+                            <i class="fas fa-info-circle"></i>
+                            Info Sekolah
+                        </a>
+                        <a href="{{ url_for('public.agenda') }}">
+                            <i class="fas fa-calendar-alt"></i>
+                            Agenda
+                        </a>
+                        <a href="{{ url_for('public.galeri') }}">
+                            <i class="fas fa-images"></i>
+                            Galeri
+                        </a>
                     </div>
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Layanan
-                        <i class="fa fa-caret-down"></i>
+                    <button class="dropbtn">
+                        Layanan
+                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{{ url_for('public.ekstrakurikuler') }}">Ekstrakurikuler</a>
-                        <a href="{{ url_for('public.laboratorium') }}">Laboratorium</a>
-                        <a href="{{ url_for('public.perpustakaan') }}">Perpustakaan</a>
+                        <a href="{{ url_for('public.ekstrakurikuler') }}">
+                            <i class="fas fa-running"></i>
+                            Ekstrakurikuler
+                        </a>
+                        <a href="{{ url_for('public.laboratorium') }}">
+                            <i class="fas fa-flask"></i>
+                            Laboratorium
+                        </a>
+                        <a href="{{ url_for('public.perpustakaan') }}">
+                            <i class="fas fa-book"></i>
+                            Perpustakaan
+                        </a>
                     </div>
                 </div>
 
                 <a href="{{ url_for('public.index', _anchor='prestasi') }}">Prestasi</a>
                 <a href="{{ url_for('public.index', _anchor='profil-alumni') }}">Profil Alumni</a>
                 <a href="{{ url_for('public.index', _anchor='kontak') }}">Kontak</a>
-
             </nav>
         </div>
     </header>
 
-    <div style="height: 130px;"></div>
-
-    {% block content %}
-    {% endblock %}
-
-    <!-- Spacer untuk footer fixed -->
-    <div style="height: 80px;"></div>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
     <footer>
         <div class="container">
@@ -82,7 +145,22 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <!-- Header Scroll Effect -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
 </body>
 
 </html>

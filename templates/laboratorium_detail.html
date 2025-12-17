@@ -4,12 +4,14 @@
 
 {% block content %}
 <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
-    <p><a href="{{ url_for('public.laboratorium') }}" style="text-decoration: none; color: #6610f2;">← Kembali ke Daftar Lab</a></p>
+    <p><a href="{{ url_for('public.laboratorium') }}" style="text-decoration: none; color: #6610f2;">
+        <i class="fas fa-arrow-left"></i> Kembali ke Daftar Lab
+    </a></p>
 
     <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
         <div style="height: 300px; background: linear-gradient(135deg, #6610f2, #5a0fc7); display: flex; align-items: center; justify-content: center; position: relative;">
             <div style="text-align: center; color: white; z-index: 2;">
-                <div style="font-size: 4em; margin-bottom: 10px;">🔬</div>
+                <div style="font-size: 4em; margin-bottom: 10px;"><i class="fas fa-flask"></i></div>
                 <h1 style="margin: 0; font-size: 2.5em;">{{ lab.nama }}</h1>
             </div>
             <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.1;"></div>
@@ -22,18 +24,22 @@
                     {{ lab.deskripsi }}
                 </p>
 
-                <h3 style="color: #0D2A4C; margin-bottom: 20px;">📋 Fasilitas & Alat Tersedia</h3>
+                <h3 style="color: #0D2A4C; margin-bottom: 20px;">
+                    <i class="fas fa-list-ul" style="color: #6610f2;"></i> Fasilitas & Alat Tersedia
+                </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
                     {% for fasilitas in lab.fasilitas %}
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #6610f2; display: flex; align-items: center; gap: 10px;">
-                        <span style="color: #6610f2;">✔</span>
+                        <i class="fas fa-check" style="color: #6610f2;"></i>
                         <span style="font-weight: 500; color: #444;">{{ fasilitas.nama_fasilitas if fasilitas.nama_fasilitas else fasilitas }}</span>
                     </div>
                     {% endfor %}
                 </div>
 
                 <div style="margin-top: 50px; padding: 25px; background: #fff3cd; border-radius: 15px; border: 1px solid #ffeeba; text-align: center;">
-                    <h4 style="margin: 0 0 10px 0; color: #856404;">⚠️ Tata Tertib Penggunaan</h4>
+                    <h4 style="margin: 0 0 10px 0; color: #856404;">
+                        <i class="fas fa-exclamation-triangle"></i> Tata Tertib Penggunaan
+                    </h4>
                     <p style="margin: 0; color: #856404;">Wajib menggunakan jas laboratorium, tidak membawa makanan/minuman, dan menjaga kebersihan alat setelah praktik.</p>
                 </div>
             </div>

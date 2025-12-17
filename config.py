@@ -9,7 +9,7 @@ class Config:
         f"mysql+mysqlconnector://{os.environ.get('DB_USERNAME', 'root')}:"
         f"{os.environ.get('DB_PASSWORD', '')}@"
         f"{os.environ.get('DB_HOST', 'localhost')}:"
-        f"{os.environ.get('DB_PORT', '3307')}/"
+        f"{os.environ.get('DB_PORT', '3306')}/"
         f"{os.environ.get('DB_NAME', 'medinadb')}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False

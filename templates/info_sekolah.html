@@ -6,7 +6,7 @@
 <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
     <!-- Page Header -->
     <div class="page-header">
-        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">ℹ️ Informasi Sekolah</h1>
+        <h1 style="color: #0D2A4C; font-size: 2.8em; margin: 0 0 15px 0;">Informasi Sekolah</h1>
         <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #20c997, #17a2b8); margin: 0 auto 15px; border-radius: 2px;"></div>
         <p style="color: #666; font-size: 1.1em; max-width: 600px; margin: 0 auto;">Data lengkap dan informasi kontak SMA Medina Bandung</p>
     </div>
@@ -14,7 +14,7 @@
     {% if info %}
     <!-- Identitas Sekolah -->
     <div class="info-section">
-        <h2 class="section-title">🏫 Identitas Sekolah</h2>
+        <h2 class="section-title"><i class="fas fa-school" style="color: #20c997; margin-right: 10px;"></i> Identitas Sekolah</h2>
         <div class="info-grid">
             <div class="info-item">
                 <div class="info-label">Nama Sekolah</div>
@@ -37,25 +37,25 @@
 
     <!-- Kontak -->
     <div class="info-section">
-        <h2 class="section-title">📞 Kontak</h2>
+        <h2 class="section-title"><i class="fas fa-phone" style="color: #20c997; margin-right: 10px;"></i> Kontak</h2>
         <div class="contact-grid">
             <div class="contact-card">
-                <div class="contact-icon">📍</div>
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="contact-label">Alamat</div>
                 <div class="contact-value">{{ info.alamat }}</div>
             </div>
             <div class="contact-card">
-                <div class="contact-icon">📞</div>
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
                 <div class="contact-label">Telepon</div>
                 <div class="contact-value">{{ info.telepon }}</div>
             </div>
             <div class="contact-card">
-                <div class="contact-icon">✉️</div>
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                 <div class="contact-label">Email</div>
                 <div class="contact-value">{{ info.email }}</div>
             </div>
             <div class="contact-card">
-                <div class="contact-icon">🌐</div>
+                <div class="contact-icon"><i class="fas fa-globe"></i></div>
                 <div class="contact-label">Website</div>
                 <div class="contact-value">{{ info.website }}</div>
             </div>
@@ -64,29 +64,29 @@
 
     <!-- Kepala Sekolah -->
     <div class="info-section">
-        <h2 class="section-title">👨‍💼 Kepala Sekolah</h2>
+        <h2 class="section-title"><i class="fas fa-user-tie" style="color: #20c997; margin-right: 10px;"></i> Kepala Sekolah</h2>
         <div class="kepala-sekolah-card">
-            <div class="kepala-icon">👨‍💼</div>
+            <div class="kepala-icon"><i class="fas fa-user-tie"></i></div>
             <div class="kepala-name">{{ info.kepala_sekolah }}</div>
         </div>
     </div>
 
     <!-- Statistik -->
     <div class="info-section">
-        <h2 class="section-title">📊 Statistik Sekolah</h2>
+        <h2 class="section-title"><i class="fas fa-chart-bar" style="color: #20c997; margin-right: 10px;"></i> Statistik Sekolah</h2>
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon">🎓</div>
+                <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
                 <div class="stat-number">{{ info.jumlah_siswa }}</div>
                 <div class="stat-label">Jumlah Siswa</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">👨‍🏫</div>
+                <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                 <div class="stat-number">{{ info.jumlah_guru }}</div>
                 <div class="stat-label">Tenaga Pendidik</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">🏢</div>
+                <div class="stat-icon"><i class="fas fa-door-open"></i></div>
                 <div class="stat-number">{{ info.jumlah_kelas }}</div>
                 <div class="stat-label">Ruang Kelas</div>
             </div>
@@ -94,7 +94,7 @@
     </div>
     {% else %}
     <div class="empty-state">
-        <div class="empty-icon">ℹ️</div>
+        <div class="empty-icon"><i class="fas fa-info-circle" style="font-size: 5em; color: #dee2e6;"></i></div>
         <h3>Data Tidak Tersedia</h3>
         <p>Informasi sekolah akan segera ditambahkan</p>
     </div>
@@ -119,6 +119,8 @@
         margin: 0 0 25px 0;
         padding-bottom: 15px;
         border-bottom: 3px solid #20c997;
+        display: flex;
+        align-items: center;
     }
 
     .info-grid {
@@ -173,6 +175,7 @@
     .contact-icon {
         font-size: 3em;
         margin-bottom: 15px;
+        color: #20c997;
     }
 
     .contact-label {
@@ -225,6 +228,7 @@
     .stat-icon {
         font-size: 3em;
         margin-bottom: 15px;
+        color: #20c997;
     }
 
     .stat-number {
@@ -248,9 +252,7 @@
     }
 
     .empty-icon {
-        font-size: 5em;
         margin-bottom: 20px;
-        animation: bounce 2s infinite;
     }
 
     .empty-state h3 {
@@ -263,7 +265,6 @@
         margin: 0;
     }
 
-    /* Animations */
     @keyframes fadeInDown {
         from {
             opacity: 0;
@@ -286,12 +287,6 @@
         }
     }
 
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-
-    /* Hover Effects */
     .info-item:hover,
     .contact-card:hover,
     .stat-card:hover {
