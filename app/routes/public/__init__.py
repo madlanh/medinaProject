@@ -2,7 +2,7 @@
 # This package contains modular public route handlers
 
 from flask import Blueprint
-# JANGAN IMPORT MODEL DI SINI
+from app.models.models import SekolahInfo
 
 # Create main public blueprint
 public_bp = Blueprint('public', __name__)
@@ -10,13 +10,7 @@ public_bp = Blueprint('public', __name__)
 @public_bp.context_processor
 def inject_sekolah_info():
     """Inject school info into all public templates."""
-    # PINDAHKAN IMPORT KE SINI (Lazy Import)
-    from app.models.models import SekolahInfo
-    
-    try:
-        info = SekolahInfo.query.first()
-    except:
-        info = None
+    info = SekolahInfo.query.first()
     return dict(sekolah_info=info)
 
 # Import and register all sub-modules
