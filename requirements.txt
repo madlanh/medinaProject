@@ -1,5 +1,4 @@
-flask
-flask-sqlalchemy
-mysql-connector-python
+Flask
+Flask-SQLAlchemy
 python-dotenv
-flask-swagger-ui
+psycopg2-binary
