@@ -4,8 +4,8 @@
 from flask import Blueprint
 from app import db
 from app.models.models import (
-    Berita, Agenda, Galeri, Ekstrakurikuler, Laboratorium, 
-    Banner, Prestasi, AlumniTestimoni
+    berita, agenda, galeri, ekstrakurikuler, laboratorium, 
+    banner, prestasi, alumnitestimoni
 )
 from app.utils.decorators import login_required
 from flask import render_template
