@@ -112,7 +112,7 @@ body{font-family:'Inter',sans-serif;background:#f5f5f5}
         <div class="hero-content">
             <h1>Selamat Datang di SMA Medina Bandung</h1>
             <p>Mencetak Generasi Berakhlak Mulia, Berprestasi, dan Berwawasan Global</p>
-            <a href="{{ url_for('public.visi_misi') }}" class="hero-cta">Pelajari Lebih Lanjut</a>
+            <a href="{{ url_for('site.visi_misi') }}" class="hero-cta">Pelajari Lebih Lanjut</a>
         </div>
         <div class="slider-controls" id="sliderDots"></div>
     </div>
@@ -125,7 +125,7 @@ body{font-family:'Inter',sans-serif;background:#f5f5f5}
                 <h2>Pendidikan Berkualitas <span>Berbasis Nilai Islam</span></h2>
                 <p>SMA Medina Bandung telah berdiri sejak 1985 dan terus berkomitmen memberikan pendidikan yang mengintegrasikan ilmu pengetahuan modern dengan nilai-nilai keislaman yang kuat.</p>
                 <p>Kami fokus pada pengembangan karakter siswa melalui pembelajaran inovatif, kegiatan ekstrakurikuler beragam, dan pembinaan akhlak berkelanjutan.</p>
-                <a href="{{ url_for('public.visi_misi') }}" class="intro-link">Pelajari Visi & Misi Kami <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ url_for('site.visi_misi') }}" class="intro-link">Pelajari Visi & Misi Kami <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-num">{{ sekolah_info.jumlah_siswa if sekolah_info else '720' }}</div><div class="stat-label">SISWA AKTIF</div></div>
@@ -147,13 +147,13 @@ body{font-family:'Inter',sans-serif;background:#f5f5f5}
                 <div class="news-thumb"><i class="fas fa-newspaper"></i></div>
                 <div class="news-body">
                     <div class="news-meta"><i class="fas fa-calendar"></i> {{ item.tanggal.strftime('%d %B %Y') if item.tanggal is defined and item.tanggal.strftime else item.tanggal }}</div>
-                    <h3 class="news-title"><a href="{{ url_for('public.berita_detail',berita_id=item.id) }}">{{ item.judul }}</a></h3>
+                    <h3 class="news-title"><a href="{{ url_for('site.berita_detail',berita_id=item.id) }}">{{ item.judul }}</a></h3>
                     <p class="news-excerpt">{{ item.ringkasan }}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <div style="text-align:center;margin-top:50px"><a href="{{ url_for('public.berita_terbaru') }}" class="hero-cta">Lihat Semua Berita</a></div>
+        <div style="text-align:center;margin-top:50px"><a href="{{ url_for('site.berita_terbaru') }}" class="hero-cta">Lihat Semua Berita</a></div>
     </div>
 </section>
 {% endif %}
@@ -230,7 +230,7 @@ body{font-family:'Inter',sans-serif;background:#f5f5f5}
     <div class="container">
         <h3>Tertarik Bergabung dengan SMA Medina?</h3>
         <p>Daftarkan putra-putri Anda dan bergabunglah dengan keluarga besar SMA Medina Bandung</p>
-        <a href="{{ url_for('public.info_sekolah') }}" class="cta-btn">Informasi Pendaftaran</a>
+        <a href="{{ url_for('site.info_sekolah') }}" class="cta-btn">Informasi Pendaftaran</a>
     </div>
 </section>
 
