@@ -10,7 +10,8 @@ def create_app(config_class=Config):
 
     db.init_app(app)
 
-    from app.routes.public import public_bp
+    # from app.routes.public import public_bp
+    from app.routes.site import site_bp as public_bp
     from app.routes.admin import admin_bp  # Now imports from admin package
     from app.routes.auth import auth_bp
     from app.routes.admin.api_docs import get_swagger_blueprint
