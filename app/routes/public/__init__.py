@@ -2,7 +2,7 @@
 # This package contains modular public route handlers
 
 from flask import Blueprint
-from app.models.models import SekolahInfo
+from .models.models import SekolahInfo
 
 # Create main public blueprint
 public_bp = Blueprint('public', __name__)
@@ -14,9 +14,9 @@ def inject_sekolah_info():
     return dict(sekolah_info=info)
 
 # Import and register all sub-modules
-from app.routes.public import beranda
-from app.routes.public import profil
-from app.routes.public import berita
-from app.routes.public import agenda
-from app.routes.public import galeri
-from app.routes.public import fasilitas
+from .routes.public import beranda
+from .routes.public import profil
+from .routes.public import berita
+from .routes.public import agenda
+from .routes.public import galeri
+from .routes.public import fasilitas
