@@ -92,7 +92,7 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
                 <h1>SMA Medina Bandung</h1>
             </a>
             <nav>
-                <a href="{{ url_for('public.index') }}" class="{% if request.endpoint == 'public.index' %}active{% endif %}">Beranda</a>
+                <a href="{{ url_for('site.index') }}" class="{% if request.endpoint == 'site.index' %}active{% endif %}">Beranda</a>
                 <div class="dropdown" id="dropdown1">
                     <button class="dropbtn" onclick="toggleDropdown('dropdown1')">Profil Sekolah <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
