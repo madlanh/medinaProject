@@ -43,7 +43,7 @@
                     <span class="news-date">
                         <i class="fas fa-calendar-alt"></i> {{ item.tanggal.strftime('%d %B %Y') }}
                     </span>
-                    <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}" class="read-more-link">
+                    <a href="{{ url_for('site.berita_detail', berita_id=item.id) }}" class="read-more-link">
                         Baca Selengkapnya <span class="arrow">→</span>
                     </a>
                 </div>
