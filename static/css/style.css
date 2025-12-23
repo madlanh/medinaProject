@@ -1468,3 +1468,142 @@ footer p {
 .mobile-menu-btn {
     display: none;
 }
+
+/* =================================================================
+   GAYA KHUSUS BERANDA (PINDAHAN DARI INDEX.HTML) & PERBAIKAN MOBILE
+   ================================================================= */
+
+/* 1. Reset Dasar & Hero Section */
+.hero {
+    position: relative;
+    /* Ubah height jadi min-height agar fleksibel di HP */
+    min-height: 600px;
+    height: auto;
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5f7e 100%);
+    overflow: hidden;
+}
+.hero-slider { position: relative; width: 100%; height: 100%; min-height: 600px; }
+.slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s; }
+.slide.active { opacity: 1; }
+.slide-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 10;
+    width: 90%; /* Agar tidak nempel pinggir di HP */
+    max-width: 850px;
+}
+
+/* Font Responsif untuk Hero */
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3.5em); /* Otomatis mengecil di HP */
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 3vw, 1.3em);
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+.hero-cta {
+    display: inline-block;
+    padding: 16px 45px;
+    background: #d4a53c;
+    color: #1a3a52;
+    font-weight: 700;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+/* 2. Intro & Stats */
+.intro { padding: 80px 0; background: #fff; }
+.intro-wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+/* 3. News Grid (Item Berita) */
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+.news-item { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.news-thumb { height: 220px; background: linear-gradient(135deg,#1a3a52,#d4a53c); display: flex; align-items: center; justify-content: center; }
+.news-thumb i { font-size: 4em; color: rgba(255,255,255,0.9); }
+.news-body { padding: 28px; }
+
+/* 4. Alumni Grid */
+.alumni-section { background: #f8f9fa; padding: 80px 0; }
+.alumni-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; }
+
+/* 5. Tabel Prestasi (PENTING: Agar bisa di-scroll) */
+.prestasi-section { background: #fff; padding: 80px 0; }
+.prestasi-table-wrap {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    overflow-x: auto; /* Izinkan scroll horizontal */
+    width: 100%;
+}
+.prestasi-table {
+    width: 100%;
+    min-width: 600px; /* Pastikan tabel tidak gepeng */
+    border-collapse: collapse;
+}
+.prestasi-table th, .prestasi-table td {
+    padding: 18px 20px;
+    text-align: left;
+    white-space: nowrap; /* Teks tidak turun baris agar rapi */
+}
+
+/* 6. Contact Grid */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; text-align: center; }
+
+/* =========================================
+   MEDIA QUERY: PERBAIKAN TAMPILAN HP (MOBILE)
+   ========================================= */
+@media (max-width: 968px) {
+    /* Reset Grid jadi 1 Kolom */
+    .intro-wrap, 
+    .stats-grid, 
+    .news-grid, 
+    .alumni-grid, 
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+
+    /* Perbaikan Padding Container */
+    .container {
+        padding: 0 20px !important;
+        width: 100%;
+    }
+
+    /* Perbaikan Hero Section di HP */
+    .hero { min-height: auto; padding-bottom: 40px; }
+    .hero-slider { min-height: 400px; }
+    .hero-content { width: 100%; padding: 0 15px; }
+    .hero-cta { padding: 12px 30px; font-size: 0.9em; }
+
+    /* Perbaikan Font Size Judul */
+    .section-title h2 { font-size: 1.8em; }
+    .intro-text h2 { font-size: 1.8em; }
+    
+    /* Perbaikan Kartu agar tidak melebar */
+    .stat-card, .news-item, .alumni-card {
+        min-width: 0; /* Reset min-width */
+        width: 100%;
+    }
+    
+    /* Perbaikan Tabel Prestasi */
+    .prestasi-table th, .prestasi-table td {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+    
+    /* Sembunyikan elemen dekoratif yang mengganggu di HP */
+    .slide-dot { width: 10px; height: 10px; }
+}
