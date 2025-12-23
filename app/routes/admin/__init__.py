@@ -3,11 +3,11 @@
 
 from flask import Blueprint
 from app import db
-from .models.models import (
+from app.models.models import (
     Berita, Agenda, Galeri, Ekstrakurikuler, Laboratorium, 
     Banner, Prestasi, AlumniTestimoni
 )
-from .utils.decorators import login_required
+from app.utils.decorators import login_required
 from flask import render_template
 
 # Create main admin blueprint
@@ -28,16 +28,16 @@ def dashboard():
     return render_template('admin_dashboard.html', stats=stats)
 
 # Import and register all sub-modules
-from .routes.admin import berita
-from .routes.admin import agenda
-from .routes.admin import galeri
-from .routes.admin import ekstrakurikuler
-from .routes.admin import laboratorium
-from .routes.admin import banner
-from .routes.admin import info_sekolah
-from .routes.admin import perpustakaan
-from .routes.admin import profil_sekolah
-from .routes.admin import organisasi
-from .routes.admin import prestasi
-from .routes.admin import alumni
-from .routes.admin import api_docs
+from app.routes.admin import berita
+from app.routes.admin import agenda
+from app.routes.admin import galeri
+from app.routes.admin import ekstrakurikuler
+from app.routes.admin import laboratorium
+from app.routes.admin import banner
+from app.routes.admin import info_sekolah
+from app.routes.admin import perpustakaan
+from app.routes.admin import profil_sekolah
+from app.routes.admin import organisasi
+from app.routes.admin import prestasi
+from app.routes.admin import alumni
+from app.routes.admin import api_docs
