@@ -1437,3 +1437,267 @@ footer p {
         margin: 0 !important;
     }
 }
+
+/* =======================================================================
+   RESTORASI GAYA BERANDA (YANG SEBELUMNYA DIHAPUS DARI INDEX.HTML)
+   Paste kode ini di baris paling bawah file static/css/style.css
+   ======================================================================= */
+
+/* 1. HERO SECTION (Banner Utama) */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 600px; /* Tinggi default desktop */
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5f7e 100%); /* Warna cadangan jika gambar gagal */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slider Background */
+.hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5; /* Gelapkan gambar agar teks terbaca */
+}
+
+/* Konten Teks Hero */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero-cta {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #d4a53c; /* Warna Emas */
+    color: #1a3a52;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.hero-cta:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+}
+
+/* 2. SECTION LAYOUTS (Grid System Desktop) */
+.intro { padding: 80px 0; background: #fff; }
+.intro-wrap { 
+    display: grid; 
+    grid-template-columns: 1.2fr 1fr; /* Kiri lebih lebar */
+    gap: 50px; 
+    align-items: center; 
+}
+
+.intro-text h2 { 
+    font-size: 2.5rem; 
+    color: #1a3a52; 
+    margin-bottom: 20px; 
+}
+
+.stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #d4a53c;
+    display: block;
+}
+
+/* 3. BERITA GRID */
+.news-section { padding: 80px 0; background: #f8f9fa; }
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Kolom di Desktop */
+    gap: 30px;
+}
+
+.news-item {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+}
+
+.news-thumb {
+    height: 200px;
+    background: #ccc;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-body {
+    padding: 25px;
+}
+
+.news-date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.news-body h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #1a3a52;
+}
+
+.btn-news {
+    color: #d4a53c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* 4. ALUMNI & KONTAK GRID */
+.alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.contact-item i {
+    font-size: 2.5rem;
+    color: #d4a53c;
+    margin-bottom: 20px;
+}
+
+/* 5. TABEL PRESTASI */
+.prestasi-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.prestasi-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prestasi-table th {
+    background: #1a3a52;
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+}
+
+.prestasi-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* =======================================================
+   RESPONSIVE OVERRIDES (MOBILE FIXES)
+   Bagian ini menimpa gaya di atas saat dibuka di HP
+   ======================================================= */
+@media screen and (max-width: 768px) {
+    /* Layout Reset jadi 1 Kolom */
+    .intro-wrap, 
+    .stats-grid, 
+    .news-grid, 
+    .alumni-grid, 
+    .contact-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    /* Text & Spacing */
+    .hero { min-height: auto !important; padding: 100px 0 50px; }
+    .hero-content h1 { font-size: 2rem !important; }
+    .container { padding: 0 20px !important; }
+    
+    /* Tabel Scroll */
+    .prestasi-table { min-width: 600px; }
+    .prestasi-table-wrap { overflow-x: scroll; }
+
+    /* Navigasi Sederhana */
+    .header-content {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+    header nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+}
