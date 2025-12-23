@@ -1337,3 +1337,103 @@ footer p {
         border: 1px solid var(--gray-200);
     }
 }
+
+/* =======================================================
+   TAMBAHAN KODE RESPONSIF (MOBILE FRIENDLY)
+   Copy-paste kode ini di bagian PALING BAWAH file style.css
+   ======================================================= */
+
+/* 1. Perbaikan Hero Section (Banner Utama) */
+.hero {
+    min-height: auto !important; /* Jangan dipaksa tinggi */
+    height: auto !important;
+    padding-bottom: 50px;
+}
+
+.hero-content h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem) !important; /* Ukuran huruf menyesuaikan layar */
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: clamp(0.9rem, 3vw, 1.2rem) !important;
+    padding: 0 15px;
+}
+
+/* 2. Membuat Semua Grid Menjadi 1 Kolom di HP */
+@media screen and (max-width: 768px) {
+    
+    /* Reset Layout Grid agar turun ke bawah (Stacking) */
+    .intro-wrap, 
+    .stats-grid, 
+    .news-grid, 
+    .alumni-grid, 
+    .contact-grid,
+    .gallery-grid,
+    .fasilitas-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+
+    /* Perbaikan Lebar Container */
+    .container {
+        width: 100% !important;
+        padding: 0 20px !important;
+        box-sizing: border-box;
+    }
+
+    /* 3. Perbaikan Header / Menu Navigasi di HP */
+    /* Kita buat menu tampil berjejer ke bawah agar tidak ribet pakai JS */
+    .header-content {
+        flex-direction: column !important;
+        height: auto !important;
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    .header-brand {
+        margin-bottom: 15px;
+        justify-content: center;
+    }
+
+    header nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    header nav a {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+        display: inline-block;
+    }
+
+    /* 4. Perbaikan Tabel Agar Bisa Digeser (Scroll) */
+    .prestasi-table-wrap, 
+    .table-responsive {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important; /* Munculkan scroll samping */
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 20px;
+    }
+    
+    .prestasi-table {
+        min-width: 600px !important; /* Tabel tetap lebar agar tulisan tidak hancur */
+    }
+
+    /* 5. Perbaikan Gambar Agar Tidak Melebar */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Perbaikan Kartu Berita/Alumni */
+    .news-item, .alumni-card {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
