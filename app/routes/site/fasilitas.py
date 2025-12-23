@@ -4,7 +4,8 @@ from app.models.models import (
     Ekstrakurikuler, Laboratorium, 
     PerpustakaanInfo, PerpustakaanFasilitas, PerpustakaanLayanan
 )
-from app.routes.public import public_bp
+# from app.routes.public import public_bp
+from app.routes.site import site_bp as public_bp
 
 
 @public_bp.route('/ekstrakurikuler')
