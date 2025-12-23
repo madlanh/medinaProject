@@ -1,7 +1,8 @@
 # Beranda (Homepage) Route
 from flask import render_template
 from app.models.models import Berita, Banner, Prestasi, AlumniTestimoni
-from app.routes.public import public_bp
+# from app.routes.public import public_bp
+from app.routes.site import site_bp as public_bp
 
 
 @public_bp.route('/')
