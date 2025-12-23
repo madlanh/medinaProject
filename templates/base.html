@@ -91,10 +91,7 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina" class="header-logo" onerror="this.style.display='none'">
                 <h1>SMA Medina Bandung</h1>
             </a>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="mainNav">
+            <nav>
                 <a href="{{ url_for('site.index') }}" class="{% if request.endpoint == 'site.index' %}active{% endif %}">Beranda</a>
                 <div class="dropdown" id="dropdown1">
                     <button class="dropbtn" onclick="toggleDropdown('dropdown1')">Profil Sekolah <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
@@ -137,21 +134,5 @@ function toggleDropdown(id){var d=document.getElementById(id);var all=document.q
 document.addEventListener('click',function(e){if(!e.target.closest('.dropdown')){document.querySelectorAll('.dropdown').forEach(function(d){d.classList.remove('show')})}});
     </script>
     {% block extra_js %}{% endblock %}
-    <script>
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('nav-active');
-        }
-
-        // (Kode scroll header kamu yang lama tetap di sini)
-        window.addEventListener('scroll', function(){ ... });
-    
-        // (Kode dropdown kamu yang lama tetap di sini, tapi pastikan ini:)
-        function toggleDropdown(id) {
-            // Logika agar di HP dropdown bisa toggle click
-            var d = document.getElementById(id);
-            d.classList.toggle('show');
-        }
-    </script>
 </body>
 </html>
