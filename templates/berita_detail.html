@@ -28,7 +28,7 @@
             </div>
             
             <hr style="margin: 40px 0;">
-            <a href="{{ url_for('public.berita_terbaru') }}" style="text-decoration: none; font-weight: bold; color: #28a745;">
+            <a href="{{ url_for('site.berita_terbaru') }}" style="text-decoration: none; font-weight: bold; color: #28a745;">
                 <i class="fas fa-arrow-left"></i> Kembali ke Daftar Berita
             </a>
         </div>
@@ -38,7 +38,7 @@
             <div class="sidebar-list">
                 {% for item in berita_lain %}
                 <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd;">
-                    <a href="{{ url_for('public.berita_detail', berita_id=item.id) }}" style="text-decoration: none; color: #333; font-weight: bold; display: block; margin-bottom: 5px; transition: color 0.3s;">
+                    <a href="{{ url_for('site.berita_detail', berita_id=item.id) }}" style="text-decoration: none; color: #333; font-weight: bold; display: block; margin-bottom: 5px; transition: color 0.3s;">
                         {{ item.judul }}
                     </a>
                     <small style="color: #888;">{{ item.tanggal.strftime('%d %b %Y') }}</small>
@@ -48,4 +48,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
