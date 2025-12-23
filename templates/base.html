@@ -135,6 +135,9 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
 window.addEventListener('scroll',function(){var h=document.getElementById('mainHeader');h.classList.toggle('scrolled',window.scrollY>50)});
 function toggleDropdown(id){var d=document.getElementById(id);var all=document.querySelectorAll('.dropdown');all.forEach(function(drop){if(drop.id!==id)drop.classList.remove('show')});d.classList.toggle('show')}
 document.addEventListener('click',function(e){if(!e.target.closest('.dropdown')){document.querySelectorAll('.dropdown').forEach(function(d){d.classList.remove('show')})}});
+    </script>
+    {% block extra_js %}{% endblock %}
+    <script>
         function toggleMobileMenu() {
             const nav = document.getElementById('mainNav');
             nav.classList.toggle('nav-active');
@@ -150,6 +153,5 @@ document.addEventListener('click',function(e){if(!e.target.closest('.dropdown'))
             d.classList.toggle('show');
         }
     </script>
-    {% block extra_js %}{% endblock %}
 </body>
 </html>
