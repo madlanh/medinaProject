@@ -1337,3 +1337,134 @@ footer p {
         border: 1px solid var(--gray-200);
     }
 }
+
+/* =========================================
+   RESPONSIVE MOBILE STYLES (Max Width 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Container & Spacing */
+    .container {
+        padding: 0 15px; /* Kurangi padding agar konten lebih luas */
+    }
+    
+    section {
+        padding: 2rem 1rem; /* Kurangi padding section */
+    }
+
+    /* 2. Header & Navigasi (Hamburger Style) */
+    .header-content {
+        height: auto;
+        padding: 15px;
+        flex-wrap: wrap; /* Biarkan konten turun ke bawah */
+        position: relative;
+    }
+    
+    /* Tombol Hamburger (Kita buat via CSS dulu, nanti HTML menyusul) */
+    .mobile-menu-btn {
+        display: block !important; /* Munculkan di HP */
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--primary-dark);
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    /* Menu Navigasi disembunyikan default-nya di HP */
+    header nav {
+        display: none; /* Sembunyi dulu */
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 20px;
+        background: var(--white);
+        border-top: 1px solid var(--gray-100);
+    }
+
+    /* Class ini akan kita toggle pakai JS nanti */
+    header nav.nav-active {
+        display: flex; /* Munculkan saat tombol diklik */
+    }
+
+    header nav a, 
+    header nav .dropbtn {
+        width: 100%; /* Full width */
+        padding: 15px 0;
+        border-bottom: 1px solid var(--gray-50);
+    }
+    
+    /* Dropdown di HP: Tampil statis di bawah menu induknya */
+    .dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-content {
+        position: static; /* Tidak melayang lagi */
+        box-shadow: none;
+        border: none;
+        padding-left: 20px; /* Indentasi ke dalam */
+        transform: none;
+        visibility: visible;
+        opacity: 1;
+        display: none; /* Hidden default, click to show */
+        background: var(--gray-50);
+        min-width: 100%;
+    }
+    
+    /* Tampilkan dropdown saat class .show aktif (sudah ada di JS kamu) */
+    .dropdown.show .dropdown-content {
+        display: block;
+    }
+
+    /* 3. Hero Slider */
+    .hero {
+        height: auto; /* Jangan dipaksa 600px */
+        min-height: 400px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem; /* Kecilkan font judul */
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* 4. Grid System (Ubah 3 kolom jadi 1 kolom) */
+    .news-grid, 
+    .stats-grid, 
+    .alumni-grid, 
+    .contact-grid,
+    .intro-wrap,
+    .card-grid {
+        grid-template-columns: 1fr !important; /* Paksa jadi 1 kolom ke bawah */
+        gap: 30px;
+    }
+    
+    /* Layout Berita Spesifik */
+    .news-layout {
+        grid-template-columns: 1fr; /* Sidebar turun ke bawah */
+    }
+    
+    .sambutan-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 5. Tabel Responsif (Scroll ke samping) */
+    .prestasi-table-wrap {
+        overflow-x: auto; /* Munculkan scrollbar horizontal jika tabel kepotong */
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .prestasi-table {
+        min-width: 600px; /* Pastikan tabel tidak gepeng, biarkan user scroll */
+    }
+}
+
+/* Sembunyikan tombol hamburger di Desktop */
+.mobile-menu-btn {
+    display: none;
+}
