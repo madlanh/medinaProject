@@ -10,10 +10,10 @@ def create_app(config_class=Config):
 
     db.init_app(app)
 
-    from .routes.public import public_bp
-    from .routes.admin import admin_bp  # Now imports from admin package
-    from .routes.auth import auth_bp
-    from .routes.admin.api_docs import get_swagger_blueprint
+    from app.routes.public import public_bp
+    from app.routes.admin import admin_bp  # Now imports from admin package
+    from app.routes.auth import auth_bp
+    from app.routes.admin.api_docs import get_swagger_blueprint
 
     app.register_blueprint(public_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
