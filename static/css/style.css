@@ -1792,24 +1792,3 @@ footer p {
 
 /* Perbaikan Text Center Class */
 .text-center { text-align: center !important; }
-
-/* =========================================
-   PERBAIKAN SPACING ALUMNI (DESKTOP)
-   Paste kode ini di baris paling bawah style.css
-   ========================================= */
-
-@media (min-width: 768px) {
-    /* Khusus di layar Laptop/PC: Paksa jadi 2 kolom agar lega */
-    .alumni-section .card-grid {
-        grid-template-columns: repeat(2, 1fr) !important; 
-        gap: 50px !important; /* Perbesar jarak antar kartu */
-        padding: 0 40px; /* Tambah jarak kiri-kanan container */
-    }
-    
-    /* Buat kartu sedikit lebih ramping agar enak dibaca */
-    .alumni-card {
-        max-width: 550px;
-        margin: 0 auto; /* Tengah-kan kartu jika kolom lebar */
-        padding: 40px !important; /* Perbesar ruang di dalam kartu */
-    }
-}
