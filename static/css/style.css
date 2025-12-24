@@ -497,7 +497,7 @@ section h2::after {
 
 .news-card-image {
     height: 200px;
-    background: linear-gradient(90deg, #28a745, #20c997)
+    background: linear-gradient(90deg, #28a745, #20c997);
     display: flex;
     align-items: center;
     justify-content: center;
