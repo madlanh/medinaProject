@@ -122,27 +122,56 @@
     </div>
 </section>
 
-<section style="background-color: var(--primary-light);">
-    <div class="container">
-        <h2>Kata Alumni</h2>
-        {% if alumni %}
-        <div class="card-grid">
-            {% for item in alumni %}
-            <div class="alumni-card">
-                <div class="alumni-icon">
-                    <span style="font-size:1.5rem; font-weight:bold;">{{ item.nama[0] if item.nama else 'A' }}</span>
-                </div>
-                <h4>{{ item.nama }}</h4>
-                <p class="text-muted" style="font-size:0.9rem; margin-bottom:1rem;">{{ item.status_saat_ini }}</p>
-                <div class="alumni-details">
-                    "{{ item.testimoni }}"
-                </div>
-            </div>
-            {% endfor %}
+<section style="background-color: var(--primary-light); overflow: hidden;">
+    <div class="container" style="max-width: 100%; padding: 0;">
+        <div class="text-center" style="margin-bottom: 2rem; padding: 0 1rem;">
+            <h2>Kata Alumni</h2>
+            <p class="text-muted">Apa kata mereka tentang SMA Medina Bandung</p>
         </div>
-        {% else %}
-        <div class="text-center text-muted">Belum ada testimoni alumni.</div>
-        {% endif %}
+
+        <div class="alumni-marquee">
+            <div class="marquee-track">
+                
+                {% if alumni %}
+                    {% for item in alumni %}
+                    <div class="alumni-card-ticker">
+                        <div class="alumni-header">
+                            <div class="alumni-icon">
+                                {{ item.nama[0] if item.nama else 'A' }}
+                            </div>
+                            <div class="alumni-info">
+                                <h4>{{ item.nama }}</h4>
+                                <span class="alumni-status">{{ item.status_saat_ini }}</span>
+                            </div>
+                        </div>
+                        <div class="alumni-body">
+                            "{{ item.testimoni }}"
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if alumni %}
+                    {% for item in alumni %}
+                    <div class="alumni-card-ticker">
+                        <div class="alumni-header">
+                            <div class="alumni-icon">
+                                {{ item.nama[0] if item.nama else 'A' }}
+                            </div>
+                            <div class="alumni-info">
+                                <h4>{{ item.nama }}</h4>
+                                <span class="alumni-status">{{ item.status_saat_ini }}</span>
+                            </div>
+                        </div>
+                        <div class="alumni-body">
+                            "{{ item.testimoni }}"
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
     </div>
 </section>
 
