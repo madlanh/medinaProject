@@ -11,76 +11,109 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-header{background:#f8f9fa!important;position:sticky;top:0;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.08);transition:all 0.3s ease}
-header.scrolled{background:#1a3a52!important;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
-.header-content{max-width:1400px;margin:0 auto;padding:0 30px;display:flex;justify-content:space-between;align-items:center;height:75px}
-.header-brand{display:flex;align-items:center;gap:15px;text-decoration:none}
-.header-logo{height:48px;width:auto}
-.header-brand h1{font-size:1.45em;font-weight:700;color:#1a3a52;transition:color 0.3s}
-header.scrolled .header-brand h1{color:#ffffff}
-nav{display:flex;align-items:center;gap:5px}
-nav a{color:#1a3a52;text-decoration:none;padding:12px 18px;font-weight:500;font-size:0.95em;border-radius:8px;transition:all 0.3s;white-space:nowrap}
-header.scrolled nav a{color:#ffffff}
-nav a:hover{background:rgba(212,165,60,0.2);color:#d4a53c}
-nav a.active{color:#d4a53c;font-weight:600;background:rgba(212,165,60,0.1)}
-.dropdown{position:relative;display:inline-block}
-.dropbtn{background:none;border:none;color:#1a3a52;padding:12px 18px;font-size:0.95em;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.3s;font-family:inherit;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-header.scrolled .dropbtn{color:#ffffff}
-.dropbtn:hover{background:rgba(212,165,60,0.2);color:#d4a53c}
+        /* === BASE STYLES === */
+        header { background: #f8f9fa!important; position: sticky; top: 0; z-index: 9999; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s ease; }
+        header.scrolled { background: #1a3a52!important; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        
+        .header-content { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; height: 75px; position: relative; }
+        
+        .header-brand { display: flex; align-items: center; gap: 15px; text-decoration: none; z-index: 1001; }
+        .header-logo { height: 40px; width: auto; }
+        .header-brand h1 { font-size: 1.25em; font-weight: 700; color: #1a3a52; transition: color 0.3s; margin: 0; }
+        header.scrolled .header-brand h1 { color: #ffffff; }
 
-/* CRITICAL: Dropdown content - TEXT ALWAYS VISIBLE */
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:calc(100% + 10px);
-    left:0;
-    background:#ffffff;
-    min-width:320px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.2);
-    border-radius:14px;
-    padding:15px;
-    z-index:99999;
-    border:1px solid #e0e0e0;
-}
-.dropdown.show .dropdown-content{display:block}
+        /* === NAVIGATION (DESKTOP) === */
+        nav { display: flex; align-items: center; gap: 5px; }
+        nav a { color: #1a3a52; text-decoration: none; padding: 10px 15px; font-weight: 500; font-size: 0.95em; border-radius: 8px; transition: all 0.3s; white-space: nowrap; }
+        header.scrolled nav a { color: #ffffff; }
+        nav a:hover { background: rgba(212,165,60,0.2); color: #d4a53c; }
+        nav a.active { color: #d4a53c; font-weight: 600; background: rgba(212,165,60,0.1); }
 
-/* CRITICAL: Link styling - TEXT FULLY VISIBLE ALWAYS */
-.dropdown-content a{
-    display:flex!important;
-    align-items:center;
-    gap:15px;
-    color:#1a3a52!important;
-    padding:15px 20px;
-    text-decoration:none;
-    border-radius:10px;
-    transition:all 0.25s;
-    font-weight:500;
-    font-size:0.96em;
-    white-space:nowrap;
-    width:100%;
-    box-sizing:border-box;
-}
-.dropdown-content a:hover{
-    background:linear-gradient(135deg,#f8f9fa,#e9ecef);
-    color:#d4a53c!important;
-    padding-left:25px;
-}
+        /* Dropdown Buttons */
+        .dropdown { position: relative; display: inline-block; }
+        .dropbtn { background: none; border: none; color: #1a3a52; padding: 10px 15px; font-size: 0.95em; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.3s; font-family: inherit; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+        header.scrolled .dropbtn { color: #ffffff; }
+        .dropbtn:hover { background: rgba(212,165,60,0.2); color: #d4a53c; }
 
-/* CRITICAL: Icon - ALWAYS VISIBLE */
-.dropdown-content a i{
-    width:24px;
-    height:24px;
-    text-align:center;
-    color:#d4a53c!important;
-    font-size:1.1em;
-    flex-shrink:0;
-    display:inline-flex!important;
-    align-items:center;
-    justify-content:center;
-}
+        /* Dropdown Content */
+        .dropdown-content { display: none; position: absolute; top: calc(100% + 10px); left: 0; background: #ffffff; min-width: 280px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-radius: 14px; padding: 15px; z-index: 99999; border: 1px solid #e0e0e0; }
+        .dropdown.show .dropdown-content { display: block; animation: fadeIn 0.2s ease; }
 
-footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-align:center;box-shadow:0 -2px 10px rgba(0,0,0,0.1)}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
+        .dropdown-content a { display: flex!important; align-items: center; gap: 12px; color: #1a3a52!important; padding: 12px 15px; text-decoration: none; border-radius: 10px; transition: all 0.25s; font-weight: 500; font-size: 0.95em; width: 100%; box-sizing: border-box; }
+        .dropdown-content a:hover { background: linear-gradient(135deg,#f8f9fa,#e9ecef); color: #d4a53c!important; padding-left: 20px; }
+        .dropdown-content a i { width: 20px; text-align: center; color: #d4a53c!important; }
+
+        /* === HAMBURGER MENU (HIDDEN ON DESKTOP) === */
+        .hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #1a3a52; z-index: 1001; }
+        header.scrolled .hamburger { color: #fff; }
+
+        /* === RESPONSIVE STYLES (MOBILE/TABLET) === */
+        @media (max-width: 992px) {
+            .header-logo { height: 35px; } /* Logo sedikit lebih kecil di HP */
+            .header-brand h1 { font-size: 1.1em; }
+            
+            /* Tampilkan Hamburger */
+            .hamburger { display: block; }
+
+            /* Ubah Navigasi menjadi Menu Samping/Vertikal */
+            nav {
+                position: absolute;
+                top: 75px; /* Sesuaikan tinggi header */
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0;
+                max-height: 0; /* Animasi buka tutup */
+                overflow: hidden; 
+                transition: max-height 0.4s ease-in-out, box-shadow 0.3s;
+                box-shadow: none;
+            }
+
+            /* Kelas ini ditambahkan via JS saat hamburger diklik */
+            nav.nav-active {
+                max-height: 100vh; /* Tinggi menu maksimal */
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                padding-bottom: 20px;
+                overflow-y: auto;
+            }
+
+            /* Styling item menu di HP */
+            nav a, .dropbtn {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 15px 25px;
+                border-bottom: 1px solid #f0f0f0;
+                color: #1a3a52 !important; /* Paksa warna gelap di menu mobile */
+                border-radius: 0;
+            }
+            
+            /* Perbaiki Dropdown di HP */
+            .dropdown { width: 100%; display: block; }
+            .dropbtn { justify-content: space-between; width: 100%; }
+            
+            /* Dropdown Content di HP (Static position agar mendorong konten ke bawah) */
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                background: #f8f9fa;
+                width: 100%;
+                min-width: 100%;
+            }
+            
+            .dropdown-content a {
+                padding-left: 40px; /* Indentasi submenu */
+                font-size: 0.9em;
+            }
+        }
+
+        footer { background: #1a3a52; color: #ecf0f1; padding: 35px 0; margin-top: 60px; text-align: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -89,10 +122,16 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
         <div class="header-content">
             <a href="{{ url_for('site.index') }}" class="header-brand">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo SMA Medina" class="header-logo" onerror="this.style.display='none'">
-                <h1>SMA Medina Bandung</h1>
+                <h1>SMA Medina</h1>
             </a>
-            <nav>
+
+            <button class="hamburger" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
                 <a href="{{ url_for('site.index') }}" class="{% if request.endpoint == 'site.index' %}active{% endif %}">Beranda</a>
+                
                 <div class="dropdown" id="dropdown1">
                     <button class="dropbtn" onclick="toggleDropdown('dropdown1')">Profil Sekolah <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
@@ -102,6 +141,7 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
                         <a href="{{ url_for('site.organisasi') }}"><i class="fas fa-sitemap"></i>Struktur Organisasi</a>
                     </div>
                 </div>
+
                 <div class="dropdown" id="dropdown2">
                     <button class="dropbtn" onclick="toggleDropdown('dropdown2')">Berita <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
@@ -111,6 +151,7 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
                         <a href="{{ url_for('site.galeri') }}"><i class="fas fa-images"></i>Galeri</a>
                     </div>
                 </div>
+
                 <div class="dropdown" id="dropdown3">
                     <button class="dropbtn" onclick="toggleDropdown('dropdown3')">Layanan <i class="fas fa-chevron-down" style="font-size:0.75em"></i></button>
                     <div class="dropdown-content">
@@ -119,19 +160,66 @@ footer{background:#1a3a52;color:#ecf0f1;padding:35px 0;margin-top:60px;text-alig
                         <a href="{{ url_for('site.perpustakaan') }}"><i class="fas fa-book"></i>Perpustakaan</a>
                     </div>
                 </div>
+
                 <a href="{{ url_for('site.index', _anchor='prestasi') }}">Prestasi</a>
                 <a href="{{ url_for('site.index', _anchor='profil-alumni') }}">Profil Alumni</a>
                 <a href="{{ url_for('site.index', _anchor='kontak') }}">Kontak</a>
             </nav>
         </div>
     </header>
+
     <main>{% block content %}{% endblock %}</main>
-    <footer><div class="container"><p>&copy; 2024 SMA Medina Bandung. Semua Hak Dilindungi.</p></div></footer>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SMA Medina Bandung. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-window.addEventListener('scroll',function(){var h=document.getElementById('mainHeader');h.classList.toggle('scrolled',window.scrollY>50)});
-function toggleDropdown(id){var d=document.getElementById(id);var all=document.querySelectorAll('.dropdown');all.forEach(function(drop){if(drop.id!==id)drop.classList.remove('show')});d.classList.toggle('show')}
-document.addEventListener('click',function(e){if(!e.target.closest('.dropdown')){document.querySelectorAll('.dropdown').forEach(function(d){d.classList.remove('show')})}});
+        // Scroll Effect Header
+        window.addEventListener('scroll', function(){
+            var h = document.getElementById('mainHeader');
+            h.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Toggle Mobile Menu (NEW Function)
+        function toggleMobileMenu() {
+            var nav = document.getElementById('mainNav');
+            nav.classList.toggle('nav-active');
+        }
+
+        // Toggle Dropdown (Updated)
+        function toggleDropdown(id) {
+            var d = document.getElementById(id);
+            
+            // Tutup dropdown lain jika di desktop (opsional, biar rapi)
+            // Di HP sebaiknya biarkan user menutup sendiri atau tutup otomatis saat klik lain
+            var all = document.querySelectorAll('.dropdown');
+            all.forEach(function(drop){
+                if(drop.id !== id) drop.classList.remove('show');
+            });
+            
+            d.classList.toggle('show');
+        }
+
+        // Close Dropdown/Menu when clicking outside
+        document.addEventListener('click', function(e) {
+            // Close dropdowns
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(function(d){
+                    d.classList.remove('show');
+                });
+            }
+            // Opsional: Tutup mobile menu jika klik di luar header (konten utama)
+            if (!e.target.closest('header')) {
+                var nav = document.getElementById('mainNav');
+                if (nav.classList.contains('nav-active')) {
+                    nav.classList.remove('nav-active');
+                }
+            }
+        });
     </script>
     {% block extra_js %}{% endblock %}
 </body>
