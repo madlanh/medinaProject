@@ -6,10 +6,13 @@
     {% if banners %}
         {% for banner in banners %}
         <div class="slide fade {% if loop.first %}active{% endif %}">
-            <div class="slide-background" style="background-image: url('{{ banner.image_url if banner.image_url else url_for('static', filename='images/sch-pic1.jpg') }}');"></div>
+            <div class="slide-background" 
+                 style="background-image: url('{{ banner.image_url if banner.image_url else url_for('static', filename='images/sch-pic1.jpg') }}');">
+            </div>
+            
             <div class="slide-content">
                 <h2>{{ banner.judul }}</h2>
-                <p>{{ banner.deskripsi }}</p>
+                <p>{{ banner.deskripsi }}</p> 
                 <a href="{{ url_for('site.visi_misi') }}" class="slide-btn">Pelajari Lebih Lanjut</a>
             </div>
         </div>
@@ -23,15 +26,28 @@
                 <a href="{{ url_for('site.visi_misi') }}" class="slide-btn">Pelajari Lebih Lanjut</a>
             </div>
         </div>
+        <div class="slide fade">
+            <div class="slide-background" style="background-image: url('{{ url_for('static', filename='images/sch-pic2.jpg') }}');"></div>
+            <div class="slide-content">
+                <h2>Pendaftaran Siswa Baru</h2>
+                <p>Bergabunglah bersama kami untuk masa depan yang gemilang.</p>
+                <a href="{{ url_for('site.info_sekolah') }}" class="slide-btn">Daftar Sekarang</a>
+            </div>
+        </div>
     {% endif %}
 
-    <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-    <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
     
     <div style="position:absolute; bottom:20px; width:100%; text-align:center; z-index:4;">
-        <span class="dot active" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
+        {% if banners %}
+            {% for banner in banners %}
+            <span class="dot {% if loop.first %}active{% endif %}" onclick="currentSlide({{ loop.index }})"></span>
+            {% endfor %}
+        {% else %}
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        {% endif %}
     </div>
 </div>
 
@@ -206,42 +222,60 @@
 
 <script>
     let slideIndex = 1;
-    showSlides(slideIndex);
+    let slideTimer;
     
-    // Auto slide every 5 seconds
-    let slideInterval = setInterval(() => { plusSlides(1) }, 5000);
+    // Inisialisasi slider
+    showSlides(slideIndex);
+    startAutoSlide();
 
+    // Fungsi Navigasi Next/Prev
     function plusSlides(n) {
+        clearTimeout(slideTimer); // Reset timer saat user klik manual
         showSlides(slideIndex += n);
-        resetTimer();
+        startAutoSlide(); // Mulai timer lagi
     }
 
+    // Fungsi Navigasi Dot
     function currentSlide(n) {
+        clearTimeout(slideTimer);
         showSlides(slideIndex = n);
-        resetTimer();
+        startAutoSlide();
     }
 
-    function resetTimer() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(() => { plusSlides(1) }, 5000);
-    }
-
+    // Fungsi Utama Slider
     function showSlides(n) {
         let i;
         let slides = document.getElementsByClassName("slide");
         let dots = document.getElementsByClassName("dot");
+        
         if (n > slides.length) {slideIndex = 1}    
         if (n < 1) {slideIndex = slides.length}
+        
+        // Sembunyikan semua slide
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";  
+            slides[i].classList.remove("active");
         }
+        
+        // Matikan semua dots
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
-        if (slides.length > 0) {
-            slides[slideIndex-1].style.display = "block";  
-            if(dots.length > 0) dots[slideIndex-1].className += " active";
+        
+        // Tampilkan slide aktif
+        slides[slideIndex-1].style.display = "block";  
+        slides[slideIndex-1].classList.add("active");
+        
+        if (dots.length > 0) {
+            dots[slideIndex-1].className += " active";
         }
+    }
+
+    // Timer Otomatis (5 detik)
+    function startAutoSlide() {
+        slideTimer = setTimeout(function() {
+            plusSlides(1);
+        }, 5000); 
     }
 </script>
 {% endblock %}
