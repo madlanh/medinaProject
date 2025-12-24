@@ -680,7 +680,7 @@ section h2::after {
 }
 
 .btn-accent {
-    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
+    background: background: linear-gradient(90deg, #28a745, #20c997);
     color: var(--white);
     box-shadow: var(--shadow-md);
 }
