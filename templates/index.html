@@ -1,149 +1,218 @@
 {% extends "base.html" %}
 {% block title %}Beranda - SMA Medina Bandung{% endblock %}
+
 {% block content %}
-<div class="hero">
-    <div class="hero-slider">
-        {% if banners %}{% for banner in banners %}
-        <div class="slide {% if loop.first %}active{% endif %}">
-            <img src="{{ banner.image_url if banner.image_url else url_for('static',filename='images/sch-pic1.jpg') }}" class="slide-img" alt="{{ banner.judul }}">
+<div class="slider-container">
+    {% if banners %}
+        {% for banner in banners %}
+        <div class="slide fade {% if loop.first %}active{% endif %}">
+            <div class="slide-background" style="background-image: url('{{ banner.image_url if banner.image_url else url_for('static', filename='images/sch-pic1.jpg') }}');"></div>
+            <div class="slide-content">
+                <h2>{{ banner.judul }}</h2>
+                <p>{{ banner.deskripsi }}</p>
+                <a href="{{ url_for('site.visi_misi') }}" class="slide-btn">Pelajari Lebih Lanjut</a>
+            </div>
         </div>
-        {% endfor %}{% else %}
-        <div class="slide active">
-            <img src="{{ url_for('static',filename='images/sch-pic1.jpg') }}" class="slide-img" alt="SMA Medina">
+        {% endfor %}
+    {% else %}
+        <div class="slide fade active">
+            <div class="slide-background" style="background-image: url('{{ url_for('static', filename='images/sch-pic1.jpg') }}');"></div>
+            <div class="slide-content">
+                <h2>Selamat Datang di SMA Medina Bandung</h2>
+                <p>Mencetak Generasi Berakhlak Mulia, Berprestasi, dan Berwawasan Global</p>
+                <a href="{{ url_for('site.visi_misi') }}" class="slide-btn">Pelajari Lebih Lanjut</a>
+            </div>
         </div>
-        {% endif %}
-        <div class="hero-content">
-            <h1>Selamat Datang di SMA Medina Bandung</h1>
-            <p>Mencetak Generasi Berakhlak Mulia, Berprestasi, dan Berwawasan Global</p>
-            <a href="{{ url_for('site.visi_misi') }}" class="hero-cta">Pelajari Lebih Lanjut</a>
-        </div>
-        <div class="slider-controls" id="sliderDots"></div>
+    {% endif %}
+
+    <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+    <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    
+    <div style="position:absolute; bottom:20px; width:100%; text-align:center; z-index:4;">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
     </div>
 </div>
 
-<section class="intro">
+<section class="intro-section">
     <div class="container">
-        <div class="intro-wrap">
-            <div class="intro-text">
-                <h2>Pendidikan Berkualitas <span>Berbasis Nilai Islam</span></h2>
+        <div class="intro-grid">
+            <div class="intro-content">
+                <h2>Pendidikan Berkualitas <br><span style="color:var(--accent-gold)">Berbasis Nilai Islam</span></h2>
                 <p>SMA Medina Bandung telah berdiri sejak 1985 dan terus berkomitmen memberikan pendidikan yang mengintegrasikan ilmu pengetahuan modern dengan nilai-nilai keislaman yang kuat.</p>
-                <p>Kami fokus pada pengembangan karakter siswa melalui pembelajaran inovatif, kegiatan ekstrakurikuler beragam, dan pembinaan akhlak berkelanjutan.</p>
-                <a href="{{ url_for('site.visi_misi') }}" class="intro-link">Pelajari Visi & Misi Kami <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ url_for('site.visi_misi') }}" class="btn btn-primary">Pelajari Visi & Misi <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-num">{{ sekolah_info.jumlah_siswa if sekolah_info else '720' }}</div><div class="stat-label">SISWA AKTIF</div></div>
-                <div class="stat-card"><div class="stat-num">{{ sekolah_info.jumlah_guru if sekolah_info else '58' }}</div><div class="stat-label">GURU PROFESIONAL</div></div>
-                <div class="stat-card"><div class="stat-num">{{ sekolah_info.jumlah_kelas if sekolah_info else '24' }}</div><div class="stat-label">RUANG KELAS</div></div>
-                <div class="stat-card"><div class="stat-num">A</div><div class="stat-label">AKREDITASI</div></div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ sekolah_info.jumlah_siswa if sekolah_info else '720' }}</div>
+                    <div class="stat-label">Siswa Aktif</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ sekolah_info.jumlah_guru if sekolah_info else '58' }}</div>
+                    <div class="stat-label">Guru Profesional</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ sekolah_info.jumlah_kelas if sekolah_info else '24' }}</div>
+                    <div class="stat-label">Ruang Kelas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">A</div>
+                    <div class="stat-label">Akreditasi</div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 {% if berita %}
-<section class="section section-dark">
+<section>
     <div class="container">
-        <div class="section-title"><h2>Berita Terkini</h2></div>
-        <div class="news-grid">
+        <h2>Berita Terkini</h2>
+        <div class="card-grid">
             {% for item in berita %}
-            <div class="news-item">
-                <div class="news-thumb"><i class="fas fa-newspaper"></i></div>
-                <div class="news-body">
-                    <div class="news-meta"><i class="fas fa-calendar"></i> {{ item.tanggal.strftime('%d %B %Y') if item.tanggal is defined and item.tanggal.strftime else item.tanggal }}</div>
-                    <h3 class="news-title"><a href="{{ url_for('site.berita_detail',berita_id=item.id) }}">{{ item.judul }}</a></h3>
-                    <p class="news-excerpt">{{ item.ringkasan }}</p>
+            <article class="news-card">
+                <div class="news-card-image">
+                    <i class="fas fa-newspaper news-card-icon"></i>
                 </div>
-            </div>
+                <div class="news-card-content">
+                    <div class="news-card-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        {{ item.tanggal.strftime('%d %b %Y') if item.tanggal is defined and item.tanggal.strftime else item.tanggal }}
+                    </div>
+                    <h3 class="news-card-title">
+                        <a href="{{ url_for('site.berita_detail', berita_id=item.id) }}">{{ item.judul }}</a>
+                    </h3>
+                    <p class="news-card-summary">{{ item.ringkasan }}</p>
+                </div>
+            </article>
             {% endfor %}
         </div>
-        <div style="text-align:center;margin-top:50px"><a href="{{ url_for('site.berita_terbaru') }}" class="hero-cta">Lihat Semua Berita</a></div>
+        <div class="text-center" style="margin-top: var(--spacing-lg);">
+            <a href="{{ url_for('site.berita_terbaru') }}" class="btn btn-accent">Lihat Semua Berita</a>
+        </div>
     </div>
 </section>
 {% endif %}
 
-<section class="prestasi-section" id="prestasi">
+<section>
     <div class="container">
-        <div class="section-title"><h2>Prestasi Terbaru</h2></div>
+        <h2>Prestasi Terbaru</h2>
         {% if prestasi %}
-        <div class="prestasi-table-wrap">
-            <table class="prestasi-table">
-                <thead>
-                    <tr>
-                        <th><i class="fas fa-trophy prestasi-icon"></i>Nama Prestasi</th>
-                        <th><i class="fas fa-layer-group prestasi-icon"></i>Skala</th>
-                        <th><i class="fas fa-calendar prestasi-icon"></i>Tanggal</th>
-                        <th><i class="fas fa-building prestasi-icon"></i>Penyelenggara</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in prestasi %}
-                    <tr>
-                        <td><strong>{{ item.nama_prestasi }}</strong></td>
-                        <td><span class="prestasi-badge">{{ item.skala }}</span></td>
-                        <td>{{ item.tanggal }}</td>
-                        <td>{{ item.penyelenggara }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-        <div class="empty-state"><div class="empty-icon"><i class="fas fa-trophy"></i></div><p class="empty-text">Belum ada data prestasi saat ini</p></div>
-        {% endif %}
-    </div>
-</section>
-
-<section class="alumni-section" id="profil-alumni">
-    <div class="container">
-        <div class="section-title"><h2>Profil Alumni</h2></div>
-        {% if alumni %}
-        <div class="alumni-grid">
-            {% for item in alumni %}
-            <div class="alumni-card">
-                <div class="alumni-header">
-                    <div class="alumni-avatar">{{ item.nama[0] if item.nama else 'A' }}</div>
-                    <div class="alumni-info">
-                        <h4>{{ item.nama }}</h4>
-                        <div class="alumni-status">{{ item.status_saat_ini }}</div>
-                        <div class="alumni-graduation"><i class="fas fa-graduation-cap"></i> Alumni SMA Medina</div>
-                    </div>
+        <div class="card-grid">
+            {% for item in prestasi %}
+            <div class="prestasi-card">
+                <div class="prestasi-icon">
+                    <i class="fas fa-trophy"></i>
                 </div>
-                <p class="alumni-quote">{{ item.testimoni }}</p>
+                <h4>{{ item.nama_prestasi }}</h4>
+                <div class="text-center">
+                    <span class="prestasi-badge">{{ item.skala }}</span>
+                </div>
+                <div class="prestasi-details" style="margin-top: 1rem;">
+                    <span><i class="fas fa-calendar"></i> {{ item.tanggal }}</span>
+                    <span><i class="fas fa-building"></i> {{ item.penyelenggara }}</span>
+                </div>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="empty-state"><div class="empty-icon"><i class="fas fa-user-graduate"></i></div><p class="empty-text">Belum ada testimoni alumni saat ini</p></div>
+        <div class="text-center text-muted">Belum ada data prestasi saat ini.</div>
         {% endif %}
     </div>
 </section>
 
-<section class="contact" id="kontak">
+<section style="background-color: var(--primary-light);">
     <div class="container">
-        <div class="section-title"><h2 style="color:#fff">Hubungi Kami</h2></div>
-        <div class="contact-grid">
-            <div><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><h4 class="contact-title">Alamat</h4><p class="contact-info">{{ sekolah_info.alamat if sekolah_info and sekolah_info.alamat else 'Jl. KH. Ahmad Dahlan / Banteng No. 13-15, Burangrang, Kec. Lengkong, Kota Bandung' }}</p></div>
-            <div><div class="contact-icon"><i class="fas fa-phone"></i></div><h4 class="contact-title">Telepon</h4><p class="contact-info">{{ sekolah_info.telepon if sekolah_info and sekolah_info.telepon else '(022) 7322207' }}</p></div>
-            <div><div class="contact-icon"><i class="fas fa-envelope"></i></div><h4 class="contact-title">Email</h4><p class="contact-info">{{ sekolah_info.email if sekolah_info and sekolah_info.email else 'smamedinabdg@gmail.com' }}</p></div>
+        <h2>Kata Alumni</h2>
+        {% if alumni %}
+        <div class="card-grid">
+            {% for item in alumni %}
+            <div class="alumni-card">
+                <div class="alumni-icon">
+                    <span style="font-size:1.5rem; font-weight:bold;">{{ item.nama[0] if item.nama else 'A' }}</span>
+                </div>
+                <h4>{{ item.nama }}</h4>
+                <p class="text-muted" style="font-size:0.9rem; margin-bottom:1rem;">{{ item.status_saat_ini }}</p>
+                <div class="alumni-details">
+                    "{{ item.testimoni }}"
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center text-muted">Belum ada testimoni alumni.</div>
+        {% endif %}
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2>Hubungi Kami</h2>
+        <div class="contact-info">
+            <div class="contact-info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <strong>Alamat</strong>
+                    <p>{{ sekolah_info.alamat if sekolah_info else 'Jl. KH. Ahmad Dahlan No. 13-15, Bandung' }}</p>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <strong>Telepon</strong>
+                    <p>{{ sekolah_info.telepon if sekolah_info else '(022) 7322207' }}</p>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <strong>Email</strong>
+                    <p>{{ sekolah_info.email if sekolah_info else 'info@smamedina.sch.id' }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="cta">
-    <div class="container">
-        <h3>Tertarik Bergabung dengan SMA Medina?</h3>
-        <p>Daftarkan putra-putri Anda dan bergabunglah dengan keluarga besar SMA Medina Bandung</p>
-        <a href="{{ url_for('site.info_sekolah') }}" class="cta-btn">Informasi Pendaftaran</a>
-    </div>
-</section>
-
 <script>
-var slideIndex=0;var slides=document.querySelectorAll('.slide');var autoTimer;
-function showSlide(){slides.forEach(function(s){s.classList.remove('active')});var dots=document.querySelectorAll('.slide-dot');dots.forEach(function(d){d.classList.remove('active')});slides[slideIndex].classList.add('active');if(dots[slideIndex])dots[slideIndex].classList.add('active')}
-function nextSlide(){slideIndex++;if(slideIndex>=slides.length)slideIndex=0;showSlide()}
-function startAuto(){autoTimer=setInterval(nextSlide,5000)}
-var dotsContainer=document.getElementById('sliderDots');
-for(var i=0;i<slides.length;i++){(function(idx){var dot=document.createElement('div');dot.className='slide-dot';if(idx===0)dot.classList.add('active');dot.onclick=function(){clearInterval(autoTimer);slideIndex=idx;showSlide();startAuto()};dotsContainer.appendChild(dot)})(i)}
-startAuto();document.querySelector('.hero').addEventListener('mouseenter',function(){clearInterval(autoTimer)});document.querySelector('.hero').addEventListener('mouseleave',startAuto);
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    // Auto slide every 5 seconds
+    let slideInterval = setInterval(() => { plusSlides(1) }, 5000);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+        resetTimer();
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+        resetTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => { plusSlides(1) }, 5000);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        if (slides.length > 0) {
+            slides[slideIndex-1].style.display = "block";  
+            if(dots.length > 0) dots[slideIndex-1].className += " active";
+        }
+    }
 </script>
 {% endblock %}
