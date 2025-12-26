@@ -1,9 +1,7 @@
 # Banner CRUD Routes with REST API
 """
 Banner Management CRUD Routes.
-
 Provides endpoints for managing hero banners on the homepage.
-Includes file upload, toggle active status, and display order management.
 """
 from flask import render_template, request, flash, redirect, url_for, jsonify
 from app import db
@@ -11,7 +9,6 @@ from app.models.models import Banner
 from app.utils.decorators import login_required
 from app.utils.file_upload import save_uploaded_file, delete_file
 from app.routes.admin import admin_bp
-
 
 # ============================================================================
 # WEB ROUTES (HTML)
@@ -24,33 +21,28 @@ def manage_banner():
     banners = Banner.query.order_by(Banner.display_order, Banner.id.desc()).all()
     return render_template('admin/manage_banner.html', banners=banners)
 
-
 @admin_bp.route('/banner/create', methods=['GET', 'POST'])
 @login_required
 def create_banner():
     """Create new banner with image upload."""
     if request.method == 'POST':
         try:
-            # Handle file upload
             image_url = None
             
-            # PERBAIKAN: Menggunakan 'image_file' sesuai name di HTML
-            if 'image_file' in request.files:
-                file = request.files['image_file']
-                if file and file.filename:
-                    image_url = save_uploaded_file(file, 'banners')
+            # --- BAGIAN INI YANG DIPERBAIKI ---
+            # Kita cek apakah ada 'image_file' (dari HTML) ATAU 'gambar' (jaga-jaga)
+            file_upload = request.files.get('image_file') or request.files.get('gambar')
             
-            # Fallback check jika nama input di API masih 'gambar'
-            elif 'gambar' in request.files:
-                file = request.files['gambar']
-                if file and file.filename:
-                    image_url = save_uploaded_file(file, 'banners')
+            if file_upload and file_upload.filename:
+                # Proses upload
+                image_url = save_uploaded_file(file_upload, 'banners')
             
+            # Jika image_url masih kosong setelah dicoba upload
             if not image_url:
-                flash('Gambar wajib diupload!', 'danger')
+                flash('Gambar wajib diupload atau gagal terupload!', 'danger')
                 return render_template('admin/edit_banner.html', title='Tambah Banner', banner=None)
             
-            # Get max display_order for auto numbering
+            # Simpan ke Database
             max_order = db.session.query(db.func.max(Banner.display_order)).scalar() or 0
             
             new_banner = Banner(
@@ -64,14 +56,15 @@ def create_banner():
             db.session.commit()
             flash('Banner baru berhasil ditambahkan!', 'success')
             return redirect(url_for('admin.manage_banner'))
+            
         except ValueError as e:
             flash(str(e), 'danger')
         except Exception as e:
             db.session.rollback()
             flash(f'Gagal menambahkan banner: {e}', 'danger')
+            print(f"Error Create Banner: {e}") # Print error ke log untuk debugging
     
     return render_template('admin/edit_banner.html', title='Tambah Banner', banner=None)
-
 
 @admin_bp.route('/banner/edit/<int:banner_id>', methods=['GET', 'POST'])
 @login_required
@@ -81,16 +74,15 @@ def edit_banner(banner_id):
     
     if request.method == 'POST':
         try:
-            # Handle file upload (optional for edit)
-            # PERBAIKAN: Cek 'image_file' dulu
-            file = request.files.get('image_file') or request.files.get('gambar')
+            # --- BAGIAN INI JUGA DIPERBAIKI ---
+            file_upload = request.files.get('image_file') or request.files.get('gambar')
             
-            if file and file.filename:
-                # Delete old image
+            if file_upload and file_upload.filename:
+                # Hapus gambar lama dulu
                 if banner.image_url:
                     delete_file(banner.image_url)
-                # Save new image
-                new_url = save_uploaded_file(file, 'banners')
+                # Upload gambar baru
+                new_url = save_uploaded_file(file_upload, 'banners')
                 if new_url:
                     banner.image_url = new_url
             
@@ -110,14 +102,12 @@ def edit_banner(banner_id):
     
     return render_template('admin/edit_banner.html', title=f'Edit Banner', banner=banner)
 
-
 @admin_bp.route('/banner/delete/<int:banner_id>', methods=['POST'])
 @login_required
 def delete_banner(banner_id):
     """Delete banner and its image file."""
     banner = Banner.query.get_or_404(banner_id)
     try:
-        # Delete image file
         if banner.image_url:
             delete_file(banner.image_url)
         
@@ -128,7 +118,6 @@ def delete_banner(banner_id):
         db.session.rollback()
         flash(f'Gagal menghapus banner: {e}', 'danger')
     return redirect(url_for('admin.manage_banner'))
-
 
 @admin_bp.route('/banner/toggle/<int:banner_id>', methods=['POST'])
 @login_required
@@ -144,7 +133,6 @@ def toggle_banner(banner_id):
         db.session.rollback()
         flash(f'Gagal mengubah status banner: {e}', 'danger')
     return redirect(url_for('admin.manage_banner'))
-
 
 # ============================================================================
 # REST API ROUTES (JSON)
