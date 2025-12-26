@@ -73,7 +73,8 @@ def save_uploaded_file(file, category: str = 'general') -> str:
         return public_url
 
     except Exception as e:
-        current_app.logger.error(f"🔥 Error Upload ke Supabase: {e}")
+        print(f"🔥 GAGAL UPLOAD KE SUPABASE: {str(e)}") 
+        print(f"Detail: Bucket={bucket_name}, Path={file_path}")
         return None
 
 def delete_file(file_url: str) -> bool:
