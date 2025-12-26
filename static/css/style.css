@@ -269,7 +269,7 @@ header nav a.active::after {
 /* =============== MAIN CONTENT =============== */
 main {
     padding: 0 0 var(--spacing-2xl) 0;
-    margin-top: 70px;
+    margin-top: 60px;
     min-height: calc(100vh - 70px - 80px);
 }
 
