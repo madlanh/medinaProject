@@ -69,11 +69,11 @@
                     <div class="stat-label">Guru Profesional</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">{{ sekolah_info.akreditasi if sekolah_info and sekolah_info.akreditasi else 'C' }}</div>
+                    <div class="stat-number">{{ sekolah_info.jumlah_kelas if sekolah_info else '24' }}</div>
                     <div class="stat-label">Ruang Kelas</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">A</div>
+                    <div class="stat-number">{{ sekolah_info.akreditasi if sekolah_info and sekolah_info.akreditasi else 'C' }}</div>
                     <div class="stat-label">Akreditasi</div>
                 </div>
             </div>
