@@ -1899,3 +1899,89 @@ footer p {
         animation-duration: 20s; /* Sedikit lebih cepat di HP */
     }
 }
+
+/* =========================================
+   PERBAIKAN HERO SLIDER (Agar Gambar Muncul)
+   ========================================= */
+
+/* 1. Pastikan Container Slider Punya Warna Dasar (Saat Loading) */
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #1a3a52; /* Fallback color */
+}
+
+/* 2. Reset Style Slide */
+.slide {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background: none !important; /* HAPUS warna background slide yang menutupi gambar */
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* 3. Style Utama Gambar Background */
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;      /* Gambar memenuhi area */
+    background-position: center; /* Gambar rata tengah */
+    background-repeat: no-repeat;
+    z-index: 1; /* Paling belakang */
+}
+
+/* 4. Overlay Transparan (PENTING: Gunakan RGBA agar gambar terlihat!) */
+/* Ini membuat gambar agak gelap agar tulisan putih bisa dibaca */
+.slide-background::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    /* Gradien Biru Transparan (0.8 dan 0.6 adalah tingkat transparansi) */
+    background: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 95, 126, 0.65) 100%);
+    z-index: 2; /* Di atas gambar */
+}
+
+/* 5. Pastikan Konten Teks Muncul di Atas Segalanya */
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Paling depan */
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    color: #ffffff;
+}
+
+/* Style Judul & Teks */
+.slide-content h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    line-height: 1.2;
+}
+
+.slide-content p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    margin-bottom: 35px;
+    font-weight: 400;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    opacity: 0.95;
+}
