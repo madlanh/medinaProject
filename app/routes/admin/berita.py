@@ -22,11 +22,18 @@ def create_berita():
     """Create new berita."""
     if request.method == 'POST':
         try:
+            image_url = None
+            file = request.files.get('gambar')
+            
+            if file and file.filename:
+                image_url = save_uploaded_file(file, 'berita')
+            
             new_berita = Berita(
                 judul=request.form['judul'],
                 tanggal=datetime.strptime(request.form['tanggal'], '%Y-%m-%d').date(),
                 ringkasan=request.form['ringkasan'],
-                konten_lengkap=request.form['konten_lengkap']
+                konten_lengkap=request.form['konten_lengkap'],
+                image_url=image_url
             )
             db.session.add(new_berita)
             db.session.commit()
@@ -50,6 +57,13 @@ def edit_berita(berita_id):
             berita.tanggal = datetime.strptime(request.form['tanggal'], '%Y-%m-%d').date()
             berita.ringkasan = request.form['ringkasan']
             berita.konten_lengkap = request.form['konten_lengkap']
+            file = request.files.get('gambar')
+            if file and file.filename:
+                if berita.image_url:
+                    delete_file(berita.image_url)
+                new_url = save_uploaded_file(file, 'berita')
+                if new_url:
+                    berita.image_url = new_url
             db.session.commit()
             flash('Berita berhasil diperbarui!', 'success')
             return redirect(url_for('admin.manage_berita'))
