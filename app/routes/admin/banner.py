@@ -49,6 +49,7 @@ def create_banner():
                 judul=request.form.get('judul', ''),
                 subjudul=request.form.get('subjudul', ''),
                 image_url=image_url,
+                link_url=request.form.get('link_url', '#'),
                 is_active=request.form.get('is_active') == 'on',
                 display_order=max_order + 1
             )
