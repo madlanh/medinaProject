@@ -89,6 +89,7 @@ def edit_banner(banner_id):
             
             banner.judul = request.form.get('judul', '')
             banner.subjudul = request.form.get('subjudul', '')
+            banner.link_url = request.form.get('link_url', '#')
             banner.is_active = request.form.get('is_active') == 'on'
             banner.display_order = int(request.form.get('display_order', 0))
             
