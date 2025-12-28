@@ -83,6 +83,7 @@ class Banner(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     display_order = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    link_url = db.Column(db.String(255), nullable=True, default='#')
 
 class Ekstrakurikuler(db.Model):
     __tablename__ = 'ekstrakurikuler'
