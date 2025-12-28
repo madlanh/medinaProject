@@ -31,7 +31,7 @@
                     {% for fasilitas in lab.fasilitas %}
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #6610f2; display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-check" style="color: #6610f2;"></i>
-                        <span style="font-weight: 500; color: #444;">{{ fasilitas.nama_fasilitas if fasilitas.nama_fasilitas else fasilitas }}</span>
+                        <span style="font-weight: 500; color: #444;">{{ fasilitas.nama_fasilitas }}</span>
                     </div>
                     {% endfor %}
                 </div>
@@ -48,3 +48,4 @@
 </div>
 
 {% endblock %}
+
