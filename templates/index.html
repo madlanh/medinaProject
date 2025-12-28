@@ -13,7 +13,9 @@
             <div class="slide-content">
                 <h2>{{ banner.judul }}</h2>
                 <p>{{ banner.deskripsi }}</p> 
-                <a href="{{ url_for('site.visi_misi') }}" class="slide-btn">Pelajari Lebih Lanjut</a>
+                <a href="{{ banner.link_url if banner.link_url else '#' }}" class="btn btn-primary">
+                    Pelajari Lebih Lanjut
+                </a>
             </div>
         </div>
         {% endfor %}
@@ -23,7 +25,9 @@
             <div class="slide-content">
                 <h2>Selamat Datang<br>di SMA Medina Bandung</h2>
                 <p>Mencetak Generasi Berakhlak Mulia, Berprestasi, dan Berwawasan Global</p>
-                <a href="{{ url_for('site.visi_misi') }}" class="slide-btn">Pelajari Lebih Lanjut</a>
+                <a href="{{ banner.link_url if banner.link_url else '#' }}" class="btn btn-primary">
+                    Pelajari Lebih Lanjut
+                </a>
             </div>
         </div>
         <div class="slide fade">
@@ -31,7 +35,9 @@
             <div class="slide-content">
                 <h2>Pendaftaran Siswa Baru</h2>
                 <p>Bergabunglah bersama kami untuk masa depan yang gemilang.</p>
-                <a href="{{ url_for('site.info_sekolah') }}" class="slide-btn">Daftar Sekarang</a>
+                <a href="{{ banner.link_url if banner.link_url else '#' }}" class="btn btn-primary">
+                    Pelajari Lebih Lanjut
+                </a>
             </div>
         </div>
     {% endif %}
