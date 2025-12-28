@@ -22,7 +22,7 @@
         </div>
         <div style="margin-bottom: 25px;">
             <label for="fasilitas" style="display: block; margin-bottom: 8px; font-weight: bold; color: #343a40;">Fasilitas</label>
-            <textarea id="fasilitas" name="fasilitas" required rows="6" placeholder="Tulis setiap fasilitas di baris baru, contoh:&#10;Mikroskop digital&#10;Set alat praktikum lengkap&#10;Komputer untuk analisis data" style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if lab %}{{ lab.fasilitas | join('\n') }}{% endif %}</textarea>
+            <textarea id="fasilitas" name="fasilitas" required rows="6" placeholder="Tulis setiap fasilitas di baris baru, contoh:&#10;Mikroskop digital&#10;Set alat praktikum lengkap&#10;Komputer untuk analisis data" style="width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; resize: vertical;">{% if lab %}{{ lab.fasilitas | map(attribute='nama_fasilitas') | join('\n') }}{% endif %}</textarea>
             <small style="color: #6c757d; display: block; margin-top: 8px;">Tulis setiap fasilitas di baris baru (Enter)</small>
         </div>
         <div style="display: flex; gap: 15px; align-items: center;">
