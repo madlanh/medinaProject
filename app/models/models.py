@@ -108,6 +108,8 @@ class LaboratoriumFasilitas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     laboratorium_id = db.Column(db.Integer, db.ForeignKey('laboratorium.id'), nullable=False)
     nama_fasilitas = db.Column(db.String(200), nullable=False)
+    def __str__(self):
+        return self.nama_fasilitas
 
 class PerpustakaanInfo(db.Model):
     __tablename__ = 'perpustakaan_info'
